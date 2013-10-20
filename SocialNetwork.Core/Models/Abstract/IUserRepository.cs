@@ -13,6 +13,7 @@ namespace SocialNetwork.Core.Models.Abstract
         IEnumerable<User> GetAll();
         void Add(User document);
         void Update(User document);
+        void Delete(User role);
         void Delete(int id);
     }
 }
