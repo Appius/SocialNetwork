@@ -13,9 +13,10 @@ namespace SocialNetwork.Core.Models.Repos
     /// <summary>
     ///     Класс репозитория по работе с пользователями
     /// </summary>
-    internal class UserRepository : RepositoryBase, IUserRepository
+    public class UserRepository : RepositoryBase, IUserRepository
     {
-        public UserRepository(SocialNetworkContext db) : base(db)
+        public UserRepository(SocialNetworkContext db)
+            : base(db)
         {
         }
 

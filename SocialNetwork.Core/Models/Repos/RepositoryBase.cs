@@ -6,14 +6,15 @@ using System;
 
 namespace SocialNetwork.Core.Models.Repos
 {
-    internal class RepositoryBase
+    public class RepositoryBase
     {
         public RepositoryBase(SocialNetworkContext db)
         {
             Db = db;
         }
 
-        public RepositoryBase() : this(new SocialNetworkContext())
+        public RepositoryBase()
+            : this(new SocialNetworkContext())
         {
         }
 

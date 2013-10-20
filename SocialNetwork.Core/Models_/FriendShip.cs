@@ -1,16 +1,12 @@
-#region
-
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
-
-#endregion
+using System.Collections.Generic;
 
 namespace SocialNetwork.Core.Models
 {
     /// <summary>
     ///     Класс, который связывает пользователей "узами дружбы"
     /// </summary>
-    public class FriendShip
+    public partial class FriendShip
     {
         /// <summary>
         ///     Уникальный идентификатор
@@ -29,13 +25,11 @@ namespace SocialNetwork.Core.Models
         /// <summary>
         ///     Пользователь, который сделал запрос на дружбу
         /// </summary>
-        [ForeignKey("User1Id")]
-        public virtual User FromUser { get; set; }
+        public virtual User User { get; set; }
 
         /// <summary>
         ///     Пользователь, который принимает запрос на дружбу
         /// </summary>
-        [ForeignKey("User2Id")]
-        public virtual User ToUser { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

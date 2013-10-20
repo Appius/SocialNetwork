@@ -1,17 +1,13 @@
-#region
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
-#endregion
 
 namespace SocialNetwork.Core.Models
 {
     /// <summary>
     ///      ласс, который предоставл€ет список ролей
     /// </summary>
-    public class Role
+    public partial class Role
     {
         /// <summary>
         ///      онструктор по-умолч€анию (создает пустой список пользователей)

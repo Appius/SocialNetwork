@@ -11,7 +11,7 @@ namespace SocialNetwork.Core.Models
     /// <summary>
     ///     Класс пользователя
     /// </summary>
-    public class User
+    public partial class User
     {
         /// <summary>
         ///     Конструктор по-умолчанию (создает пустые коллекции)

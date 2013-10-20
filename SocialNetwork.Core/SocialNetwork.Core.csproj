@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -57,6 +57,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -66,29 +67,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201310201501452_InitialDataBase.cs" />
-    <Compile Include="Migrations\201310201501452_InitialDataBase.Designer.cs">
-      <DependentUpon>201310201501452_InitialDataBase.cs</DependentUpon>
+    <Compile Include="Migrations\201310201950495_test.cs" />
+    <Compile Include="Migrations\201310201950495_test.Designer.cs">
+      <DependentUpon>201310201950495_test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Abstract\IFriendShipRepository.cs" />
-    <Compile Include="Models\Abstract\IMessageRepository.cs" />
-    <Compile Include="Models\Abstract\IRoleRepository.cs" />
-    <Compile Include="Models\Abstract\IUserRepository.cs" />
     <Compile Include="Models\FriendShip.cs" />
-    <Compile Include="Models\Mapping\FriendShipMap.cs" />
-    <Compile Include="Models\Mapping\MessageMap.cs" />
-    <Compile Include="Models\Mapping\RoleMap.cs" />
-    <Compile Include="Models\Mapping\UserMap.cs" />
-    <Compile Include="Models\Mapping\UserRoleMap.cs" />
     <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\Repos\RepositoryBase.cs" />
-    <Compile Include="Models\Repos\RoleRepository.cs" />
-    <Compile Include="Models\Repos\UserRepository.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SocialNetworkContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\Abstract\IFriendShipRepository.cs" />
+    <Compile Include="Models\Abstract\IMessageRepository.cs" />
+    <Compile Include="Models\Abstract\IRoleRepository.cs" />
+    <Compile Include="Models\Abstract\IUserRepository.cs" />
+    <Compile Include="Models\Repos\FriendShipRepository.cs" />
+    <Compile Include="Models\Repos\MessageRepository.cs" />
+    <Compile Include="Models\Repos\RepositoryBase.cs" />
+    <Compile Include="Models\Repos\RoleRepository.cs" />
+    <Compile Include="Models\Repos\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,15 +94,6 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_data\SocialNetwork.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_data\SocialNetwork_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>SocialNetwork.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -125,13 +114,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.4.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 4.0 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310201501452_InitialDataBase.resx">
-      <DependentUpon>201310201501452_InitialDataBase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310201950495_test.resx">
+      <DependentUpon>201310201950495_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

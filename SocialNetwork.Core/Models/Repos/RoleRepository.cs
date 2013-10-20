@@ -11,12 +11,12 @@ using SocialNetwork.Core.Models.Abstract;
 namespace SocialNetwork.Core.Models.Repos
 {
     /// <summary>
-    /// Класс работы с репозиторием ролей
+    ///     Класс работы с репозиторием ролей
     /// </summary>
-    internal class RoleRepository : RepositoryBase, IRoleRepository
+    public class RoleRepository : RepositoryBase, IRoleRepository
     {
         /// <summary>
-        /// Получение роли по ее id
+        ///     Получение роли по ее id
         /// </summary>
         /// <param name="id">Идентификатор роли</param>
         /// <returns>Роль</returns>
@@ -26,7 +26,7 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
-        /// Получение списка ролей
+        ///     Получение списка ролей
         /// </summary>
         /// <returns>Коллекция ролей</returns>
         public IEnumerable<Role> GetAll()
@@ -35,7 +35,7 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
-        /// Добавление новой роли
+        ///     Добавление новой роли
         /// </summary>
         /// <param name="role">Роль</param>
         public void Add(Role role)
@@ -45,7 +45,7 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
-        /// Обновление данных о роли
+        ///     Обновление данных о роли
         /// </summary>
         /// <param name="role">Роль</param>
         public void Update(Role role)
@@ -55,7 +55,7 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
-        /// Удаление роли
+        ///     Удаление роли
         /// </summary>
         /// <param name="role">Роль</param>
         public void Delete(Role role)
@@ -65,7 +65,7 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
-        /// Удаление роли
+        ///     Удаление роли
         /// </summary>
         /// <param name="id">Идентификатор роли</param>
         public void Delete(int id)

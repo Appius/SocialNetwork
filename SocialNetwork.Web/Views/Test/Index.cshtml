@@ -1,0 +1,21 @@
+﻿@model IEnumerable<SocialNetwork.Core.Models.Role>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>title</title>
+    </head>
+    <body>
+        <div>
+            @foreach (var item in Model)
+              {
+                  @item.RoleName<br />
+              }
+        </div>
+    </body>
+</html>

@@ -1,15 +1,12 @@
-#region
-
 using System;
-
-#endregion
+using System.Collections.Generic;
 
 namespace SocialNetwork.Core.Models
 {
     /// <summary>
     ///     Класс для устанавления связи какой пользователь каким ролям принадлежит
     /// </summary>
-    public class UserRole
+    public partial class UserRole
     {
         /// <summary>
         ///     Уникальный идентификатор

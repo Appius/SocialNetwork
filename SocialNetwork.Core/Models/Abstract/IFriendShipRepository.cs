@@ -8,6 +8,7 @@ namespace SocialNetwork.Core.Models.Abstract
 {
     internal interface IFriendShipRepository
     {
-        bool SentRequest(User userWhoRequest, User userWhoReceive, string msg);
+        void SentRequest(User userWhoRequest, User userWhoReceive);
+        void SentRequest(FriendShip friendShip);
     }
 }
