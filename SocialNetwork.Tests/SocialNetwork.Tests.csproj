@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>a7f89f0c-bfde-4584-9b00-4edaffdde3ae</ProjectGuid>
+    <ProjectGuid>{826CC122-C256-4E98-9F1A-7E3CDFCE820A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SocialNetwork.Tests</RootNamespace>
@@ -50,8 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork.Core\SocialNetwork.Core.csproj">
+      <Project>{ad741d74-6060-4a6b-91e0-561ee0060f76}</Project>
+      <Name>SocialNetwork.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocialNetwork.Web\SocialNetwork.Web.csproj">
+      <Project>{549ca501-71ab-4f6d-9ba3-e6bc8f9990d7}</Project>
+      <Name>SocialNetwork.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
