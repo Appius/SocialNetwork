@@ -15,15 +15,15 @@ namespace SocialNetwork.Core.Models.Repos
         /// <summary>
         ///     Послать запрос на дружбу
         /// </summary>
-        /// <param name="userWhoRequest">Пользователь, который послал запрос</param>
-        /// <param name="userWhoReceive">Пользователь, которому пришло приглашение</param>
-        public void SentRequest(User userWhoRequest, User userWhoReceive)
+        /// <param name="fromUser">Пользователь, который послал запрос</param>
+        /// <param name="toUser">Пользователь, которому пришло приглашение</param>
+        public void SentRequest(User fromUser, User toUser)
         {
             SentRequest(new FriendShip
             {
                 RequestDate = DateTime.Now,
-                FromUser = userWhoReceive,
-                ToUser = userWhoRequest
+                FromUser = fromUser,
+                ToUser = toUser
             });
         }
 

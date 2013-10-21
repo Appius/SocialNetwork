@@ -3,7 +3,7 @@ namespace SocialNetwork.Core.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test : DbMigration
+    public partial class Test : DbMigration
     {
         public override void Up()
         {
@@ -17,8 +17,8 @@ namespace SocialNetwork.Core.Migrations
                         RequestDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User1Id, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.User2Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.User1Id)
+                .ForeignKey("dbo.Users", t => t.User2Id)
                 .Index(t => t.User1Id)
                 .Index(t => t.User2Id);
             
@@ -62,8 +62,8 @@ namespace SocialNetwork.Core.Migrations
                         PostedDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.User1Id, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.User2Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.User1Id)
+                .ForeignKey("dbo.Users", t => t.User2Id)
                 .Index(t => t.User1Id)
                 .Index(t => t.User2Id);
             

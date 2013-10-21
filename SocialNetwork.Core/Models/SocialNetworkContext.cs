@@ -1,4 +1,10 @@
+#region
+
+using System;
 using System.Data.Entity;
+using SocialNetwork.Core.Models.Mapping;
+
+#endregion
 
 namespace SocialNetwork.Core.Models
 {
@@ -10,7 +16,7 @@ namespace SocialNetwork.Core.Models
         }
 
         public SocialNetworkContext()
-            : base("Name=SocialNetworkContext")
+            : base("Name=SmarterASP.NETContext")
         {
         }
 
@@ -19,5 +25,14 @@ namespace SocialNetwork.Core.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new FriendShipMap());
+            modelBuilder.Configurations.Add(new MessageMap());
+            modelBuilder.Configurations.Add(new RoleMap());
+            modelBuilder.Configurations.Add(new UserRoleMap());
+            modelBuilder.Configurations.Add(new UserMap());
+        }
     }
 }

@@ -1,0 +1,63 @@
+﻿CREATE TABLE [dbo].[Users] (
+    [Id]             INT             IDENTITY (1, 1) NOT NULL,
+    [Email]          NVARCHAR (50)   NOT NULL,
+    [Password]       NVARCHAR (50)   NOT NULL,
+    [FirstName]      NVARCHAR (50)   NOT NULL,
+    [LastName]       NVARCHAR (50)   NOT NULL,
+    [MiddleName]     NVARCHAR (50)   NULL,
+    [Birthday]       DATETIME2 (6)   NOT NULL,
+    [Avatar]         VARBINARY (MAX) NULL,
+    [Mobile]         NVARCHAR (20)   NULL,
+    [Sex]            BIT             NOT NULL,
+    [Website]        NVARCHAR (100)  NULL,
+    [Skype]          NVARCHAR (50)   NULL,
+    [CurrentCity]    NCHAR (50)      NULL,
+    [Activies]       NVARCHAR (1000) NULL,
+    [Interests]      NVARCHAR (1000) NULL,
+    [FavoriteMusic]  NVARCHAR (1000) NULL,
+    [FavoriteMovies] NVARCHAR (1000) NULL,
+    [FavoriteBooks]  NVARCHAR (1000) NULL,
+    [FavoriteGames]  NVARCHAR (1000) NULL,
+    [FavoriteQuotes] NVARCHAR (1000) NULL,
+    [AboutMe]        NVARCHAR (1000) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Roles] (
+    [Id]          INT            IDENTITY (1, 1) NOT NULL,
+    [RoleName]    NVARCHAR (256) NOT NULL,
+    [Description] NVARCHAR (256) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[UserRole] (
+    [Id]     INT IDENTITY (1, 1) NOT NULL,
+    [RoleId] INT NOT NULL,
+    [UserId] INT NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_UserRole_ToRole] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_UserRole_ToUser] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[Messages] (
+    [Id]         INT            IDENTITY (1, 1) NOT NULL,
+    [User1Id]    INT            NOT NULL,
+    [User2Id]    INT            NOT NULL,
+    [Title]      NVARCHAR (50)  NULL,
+    [MsgText]    NVARCHAR (MAX) NOT NULL,
+    [PostedDate] DATETIME2 (6)  NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Messages_ToUsers1] FOREIGN KEY ([User1Id]) REFERENCES [dbo].[Users] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Messages_ToUsers2] FOREIGN KEY ([User2Id]) REFERENCES [dbo].[Users] ([Id]) ON DELETE NO ACTION
+);
+
+CREATE TABLE [dbo].[FriendShips] (
+    [Id]          INT           IDENTITY (1, 1) NOT NULL,
+    [User1Id]     INT           NOT NULL,
+    [User2Id]     INT           NOT NULL,
+    [RequestDate] DATETIME2 (6) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_FriendShips_ToUsers1] FOREIGN KEY ([User1Id]) REFERENCES [dbo].[Users] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_FriendShips_ToUsers2] FOREIGN KEY ([User2Id]) REFERENCES [dbo].[Users] ([Id]) ON DELETE NO ACTION
+);
+================================================================================================================================

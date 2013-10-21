@@ -19,12 +19,12 @@ namespace SocialNetwork.Core.Models.Repos
         /// <param name="userWhoReceive">Пользователь, который принимает</param>
         /// <param name="msgText">Текст сообщения</param>
         /// <param name="title">Заголовок сообщения</param>
-        public void SentMessage(User userWhoSented, User userWhoReceive, string msgText, string title = "")
+        public void SentMessage(User fromUser, User toUser, string msgText, string title = "")
         {
             SentMessage(new Message
             {
-                FromUser = userWhoReceive,
-                ToUser = userWhoSented,
+                FromUser = fromUser,
+                ToUser = toUser,
                 MsgText = msgText,
                 Title = title,
                 PostedDate = DateTime.Now
