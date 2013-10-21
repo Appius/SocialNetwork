@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SocialNetwork.Core.Models.Abstract
 {
-    internal interface IUserRepository
+    public interface IUserRepository
     {
         User Get(int id);
         IEnumerable<User> GetAll();

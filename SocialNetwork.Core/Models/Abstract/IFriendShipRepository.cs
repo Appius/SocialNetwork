@@ -6,7 +6,7 @@ using System;
 
 namespace SocialNetwork.Core.Models.Abstract
 {
-    internal interface IFriendShipRepository
+    public interface IFriendShipRepository
     {
         void SentRequest(User userWhoRequest, User userWhoReceive);
         void SentRequest(FriendShip friendShip);

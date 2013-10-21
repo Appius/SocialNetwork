@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace SocialNetwork.Core.Models.Abstract
 {
-    internal interface IRoleRepository
+    public interface IRoleRepository
     {
         Role Get(int id);
         IEnumerable<Role> GetAll();
