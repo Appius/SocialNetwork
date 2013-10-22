@@ -97,6 +97,33 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Гость.
+        /// </summary>
+        public static string Guest {
+            get {
+                return ResourceManager.GetString("Guest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Запомнить?.
+        /// </summary>
+        public static string IsRemember {
+            get {
+                return ResourceManager.GetString("IsRemember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Логин.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Social Network.
         /// </summary>
         public static string MainName {
@@ -124,11 +151,29 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пароль.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Регистрация.
         /// </summary>
         public static string Registration {
             get {
                 return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SN.
+        /// </summary>
+        public static string ShortName {
+            get {
+                return ResourceManager.GetString("ShortName", resourceCulture);
             }
         }
     }

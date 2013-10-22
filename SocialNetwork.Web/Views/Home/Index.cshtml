@@ -1,10 +1,23 @@
-﻿@{
-    ViewBag.Title = "title";
+﻿@using System.Reflection
+@using SocialNetwork.Web.App_GlobalResources
+@{
+    ViewBag.Title = "Добро пожаловать";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div class="jumbotron">
-    <div class="container">
-        <h1>Welcome!</h1>
-    </div>
+    <h1>Добро пожаловать на SN!</h1>
+    <p>
+        Это простая реализация социальной сети с возможностью регистрации своих данных и получения доступа к данным других. Все открыто. Также можно добавить друзей для более удобного мониторинга их состоний и пересылки сообщений.
+    </p>
+    <p>
+        С помощью формы ниже вы можете авторизироваться, или же пройти регистрацию.
+    </p>
 </div>
+
+<div class="row text-center">
+        @Html.ActionLink(@Resources.Entrance, "LogOn", "Account", null, new { @class = "btn btn-lg btn-primary", @style="margin: 0 5px"})
+        @Html.ActionLink(@Resources.Registration, "Register", "Account", null, new { @class = "btn btn-lg btn-success", @style="margin: 0 5px"})
+</div>
+

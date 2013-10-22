@@ -31,11 +31,15 @@
             </div>
         </div>
 
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
 
         <footer class="navbar-fixed-bottom row">
             <div class="container">
-               Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetAdminLink()
+                <div class="copyright pull-right">
+                    Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetAdminLink()
+                </div>
             </div>
         </footer>
 

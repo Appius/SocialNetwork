@@ -36,14 +36,14 @@ namespace SocialNetwork.Web
 
 //            Style bundles
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/site.css",
                 "~/Content/bootstrap/bootstrap.css",
-                "~/Content/bootstrap/bootstrap-responsive.css"));
+                "~/Content/bootstrap/bootstrap-responsive.css",
+                "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/css-admin").Include(
-                "~/Areas/admin/Content/admin.css",
                 "~/Content/bootstrap/bootstrap.css",
-                "~/Content/bootstrap/bootstrap-responsive.css"));
+                "~/Content/bootstrap/bootstrap-responsive.css",
+                "~/Areas/admin/Content/admin.css"));
 
             /*bundles.Add(new StyleBundle("~/Content/MarkdownDeepStyle").Include("~/Scripts/mdd_styles.css"));*/
             /*bundles.Add(new StyleBundle("~/Content/DatePicker").Include("~/Content/datepicker.css"));*/

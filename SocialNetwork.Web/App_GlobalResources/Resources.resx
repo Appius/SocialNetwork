@@ -129,6 +129,9 @@
   <data name="Friends" xml:space="preserve">
     <value>Друзья</value>
   </data>
+  <data name="Guest" xml:space="preserve">
+    <value>Гость</value>
+  </data>
   <data name="MainName" xml:space="preserve">
     <value>Social Network</value>
   </data>
@@ -140,5 +143,17 @@
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>SN</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="IsRemember" xml:space="preserve">
+    <value>Запомнить?</value>
   </data>
 </root>
