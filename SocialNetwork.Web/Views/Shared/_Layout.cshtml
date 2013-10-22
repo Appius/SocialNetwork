@@ -14,16 +14,16 @@
         @Scripts.Render("~/Scripts/modernizr")
     </head>
     <body>
-        <div class="navbar navbar-default navbar-static-top">
+        <div class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">@Resources.MainName</a>
+                    <a class="navbar-brand" href="/">@Resources.MainName</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        @Html.ActionMenuItem(@Resources.MyPage,"Index","User", ViewContext.RouteData.Values["controller"] as string)
-                        @Html.ActionMenuItem(@Resources.Friends,"Friends","Account", ViewContext.RouteData.Values["controller"] as string)
-                        @Html.ActionMenuItem(@Resources.MyPage,"Overview","Home", ViewContext.RouteData.Values["controller"] as string)
+                        @Html.ActionMenuItem(@Resources.MyPage,"Index","User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                        @Html.ActionMenuItem(@Resources.Friends,"Friends","Account", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                        @Html.ActionMenuItem(@Resources.Overview,"Overview","Home", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
                     </ul>
 
                     @Html.Partial("_LogOnPartial")
@@ -31,28 +31,11 @@
             </div>
         </div>
 
-        @*<header class="navbar">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">@Resources.MainName</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @Html.ActionMenuItem(@Resources.MyPage,"Index","User", ViewContext.RouteData.Values["controller"] as string)
-                        @Html.ActionMenuItem(@Resources.Friends,"Friends","Account", ViewContext.RouteData.Values["controller"] as string)
-                        @Html.ActionMenuItem(@Resources.MyPage,"Overview","Home", ViewContext.RouteData.Values["controller"] as string)
-                    </ul>
-
-                    @Html.Partial("_LogOnPartial")
-                </div>
-            </div>
-        </header>*@
-
         @RenderBody()
 
         <footer class="navbar-fixed-bottom row">
             <div class="container">
-                Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetAdminLink()
+               Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetAdminLink()
             </div>
         </footer>
 

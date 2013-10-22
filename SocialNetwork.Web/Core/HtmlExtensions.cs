@@ -25,12 +25,14 @@ namespace SocialNetwork.Web.Core
         /// <param name="actionName">Метод в контроллере</param>
         /// <param name="controllerName">Контроллер, куда попадем</param>
         /// <param name="currentController">Текущий контроллер</param>
+        /// <param name="currentAction">Текущее действие</param>
         public static MvcHtmlString ActionMenuItem(this HtmlHelper helper, string linkText,
-            string actionName, string controllerName, string currentController)
+            string actionName, string controllerName, string currentController, string currentAction)
         {
             var tag = new TagBuilder("li");
 
-            if (String.Compare(controllerName, currentController, StringComparison.OrdinalIgnoreCase) == 0)
+            if (String.Compare(controllerName, currentController, StringComparison.OrdinalIgnoreCase) == 0
+                && String.Compare(actionName, currentAction, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 tag.AddCssClass("active");
             }
@@ -107,7 +109,7 @@ namespace SocialNetwork.Web.Core
 
             if (version != null && product != null)
                 return
-                    new HtmlString(string.Format("<span>{0} v{1}.{2}.{3} ({4})</span>", product.Product, version.Major,
+                    new HtmlString(string.Format("<span>v{0}.{1}.{2}.{3}</span>", version.Major,
                         version.Minor, version.Build, version.Revision));
             return new HtmlString("");
         }
