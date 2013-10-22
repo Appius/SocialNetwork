@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         //
         // GET: /User/

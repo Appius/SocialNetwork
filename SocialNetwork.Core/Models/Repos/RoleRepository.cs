@@ -26,6 +26,16 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
+        ///     Получение роли по ее имени
+        /// </summary>
+        /// <param name="name">Имя роли</param>
+        /// <returns>Роль</returns>
+        public Role Get(string name)
+        {
+            return Db.Roles.FirstOrDefault(item => item.RoleName == name);
+        }
+
+        /// <summary>
         ///     Получение списка ролей
         /// </summary>
         /// <returns>Коллекция ролей</returns>

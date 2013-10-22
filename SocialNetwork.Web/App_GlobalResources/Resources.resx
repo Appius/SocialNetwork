@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="Entrance" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
   <data name="Friends" xml:space="preserve">
     <value>Друзья</value>
   </data>
@@ -128,5 +137,8 @@
   </data>
   <data name="Overview" xml:space="preserve">
     <value>Обзор пользователей</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Регистрация</value>
   </data>
 </root>

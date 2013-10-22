@@ -10,6 +10,7 @@ namespace SocialNetwork.Core.Models.Abstract
     public interface IRoleRepository
     {
         Role Get(int id);
+        Role Get(string name);
         IEnumerable<Role> GetAll();
         void Add(Role document);
         void Update(Role document);

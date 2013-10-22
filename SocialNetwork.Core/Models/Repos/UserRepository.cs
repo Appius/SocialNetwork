@@ -31,6 +31,16 @@ namespace SocialNetwork.Core.Models.Repos
         }
 
         /// <summary>
+        ///     Получение пользователя по его email
+        /// </summary>
+        /// <param name="email">E-mail</param>
+        /// <returns>Пользователь</returns>
+        public User Get(string email)
+        {
+            return Db.Users.FirstOrDefault(item => item.Email == email);
+        }
+
+        /// <summary>
         ///     Получение списка всех пользователей
         /// </summary>
         /// <returns>Коллекция пользователей</returns>
@@ -76,6 +86,17 @@ namespace SocialNetwork.Core.Models.Repos
         {
             Db.Users.Remove(user);
             Db.SaveChanges();
+        }
+
+        /// <summary>
+        ///     Авторизация пользователя
+        /// </summary>
+        /// <param name="email">E-nail</param>
+        /// <param name="password">Пароль</param>
+        /// <returns>Пользователь</returns>
+        public User Login(string email, string password)
+        {
+            return Db.Users.FirstOrDefault(item => item.Email == email && item.Password == password);
         }
     }
 }

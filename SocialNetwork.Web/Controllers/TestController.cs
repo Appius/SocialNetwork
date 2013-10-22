@@ -7,7 +7,7 @@ using SocialNetwork.Core.Models.Repos;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public class TestController : Controller
+    public class TestController : BaseController
     {
         //
         // GET: /Test/
