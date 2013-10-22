@@ -29,7 +29,7 @@ namespace SocialNetwork.Web.Auth
             get { return UserIdentity; }
         }
 
-        /// <summary>
+        /// <summary>   
         ///     Находится в данной роли или нет
         /// </summary>
         /// <param name="role">Имя роли</param>
