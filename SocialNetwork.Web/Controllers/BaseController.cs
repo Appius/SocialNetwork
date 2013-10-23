@@ -9,10 +9,20 @@ using SocialNetwork.Web.Auth;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public abstract class BaseController : Controller
+    public class BaseController : Controller
     {
+        protected BaseController(IAuthentication auth)
+        {
+            Auth = auth;
+        }
+
+        protected BaseController()
+            : this(DependencyResolver.Current.GetService<IAuthentication>())
+        {
+        }
+
         /// <summary>
-        ///     Обьект авторизации
+        ///     Объект авторизации
         /// </summary>
         public IAuthentication Auth { get; set; }
 

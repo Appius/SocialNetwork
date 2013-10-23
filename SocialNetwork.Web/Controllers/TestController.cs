@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
 using System.Web.Mvc;
 using SocialNetwork.Core.Models.Repos;
+
+#endregion
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -11,7 +12,6 @@ namespace SocialNetwork.Web.Controllers
     {
         //
         // GET: /Test/
-
         public ActionResult Index()
         {
             var roleRepository = new RoleRepository();
@@ -19,6 +19,5 @@ namespace SocialNetwork.Web.Controllers
 
             return View(roles);
         }
-
     }
 }

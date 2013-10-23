@@ -25,22 +25,27 @@
             </div>
 
             <div class="form-group">
-                @Html.CheckBoxFor(m => m.RememberMe, new {@style = "top: 50%"})
+                @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new {@class = "checkbox", @style = "display: inline;"})
             </div>
 
-            <p style="margin-top: 10px;" class="pull-right">
-                <input type="submit" value="@Resources.Entrance" class="btn btn-primary" />
-            </p>
+            <div>
+                <div class="pull-left registration-link">
+                    @Html.ActionLink(@Resources.Registration,"Register","Account")
+                </div>
+                <div class="pull-right">
+                    <input type="submit" value="@Resources.Entrance" class="btn btn-primary" />
+                </div>
+            </div>
         </fieldset>
     }
 </div>
+
 @section scripts{
     <script type="text/javascript" language="javascript">
         $(document).ready(function () {
             $('.validation-summary-valid, .validation-summary-errors').addClass('alert alert-error');
-        });
-        $(document).ready(function () {
+
             $("form").bind('invalid-form.validate',
                 function () {
                     $(document).find('input[type=\"submit\"]').removeAttrs('disabled');

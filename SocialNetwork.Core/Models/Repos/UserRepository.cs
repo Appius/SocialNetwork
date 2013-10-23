@@ -15,11 +15,6 @@ namespace SocialNetwork.Core.Models.Repos
     /// </summary>
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public UserRepository(SocialNetworkContext db)
-            : base(db)
-        {
-        }
-
         /// <summary>
         ///     Получение пользователя по его уникальному идентификатору
         /// </summary>

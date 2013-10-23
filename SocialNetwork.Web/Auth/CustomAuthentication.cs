@@ -3,6 +3,7 @@
 using System;
 using System.Security.Principal;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Security;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
@@ -23,17 +24,17 @@ namespace SocialNetwork.Web.Auth
         /// </summary>
         public IUserRepository UserRepository { get; set; }
 
-        /// <summary>
-        ///     Репозиторий ролей
-        /// </summary>
-        public IRoleRepository RoleRepository { get; set; }
-
         #region IAuthentication Members
 
         /// <summary>
         ///     Текущий пользователь
         /// </summary>
         private IPrincipal _currentUser;
+
+        public CustomAuthentication(IUserRepository userRepository)
+        {
+            UserRepository = userRepository;
+        }
 
         /// <summary>
         ///     Процедура входа
@@ -80,7 +81,10 @@ namespace SocialNetwork.Web.Auth
                     {
                         var ticket = FormsAuthentication.Decrypt(authCookie.Value);
                         if (ticket != null)
-                            _currentUser = new UserProvider(ticket.Name, UserRepository, RoleRepository);
+                        {
+                            var roleRepository = DependencyResolver.Current.GetService<IRoleRepository>();
+                            _currentUser = new UserProvider(ticket.Name, UserRepository, roleRepository);
+                        }
                     }
                     else
                         _currentUser = new UserProvider(null, null, null);
@@ -95,7 +99,7 @@ namespace SocialNetwork.Web.Auth
         }
 
         /// <summary>
-        ///     Создаение куков
+        ///     Создание куков
         /// </summary>
         /// <param name="userName">Имя пользователя</param>
         /// <param name="isPersistent">Постоянная авторизация или нет</param>

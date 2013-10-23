@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
 using System.Web.Mvc;
-using System.Web.Security;
 using SocialNetwork.Web.ViewModels;
+
+#endregion
 
 namespace SocialNetwork.Web.Controllers
 {
@@ -16,24 +16,48 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Форма входа
+        /// </summary>
         [HttpGet]
         public ActionResult LogOn()
         {
             return View();
         }
 
+        /// <summary>
+        /// Продедура аутентификации пользователей
+        /// </summary>
+        /// <param name="logOnViewModel">Модель входа</param>
+        /// <param name="returnUrl">Куда идти</param>
         [HttpPost]
         public ActionResult LogOn(LogOnViewModel logOnViewModel, string returnUrl)
         {
+            if (ModelState.IsValid)
+            {
+                var user = Auth.Login(logOnViewModel.UserName, logOnViewModel.Password, logOnViewModel.RememberMe);
+                if (user != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState["Password"].Errors.Add("Ошибка входа");
+            }
             return View(logOnViewModel);
         }
 
+        /// <summary>
+        /// Выход из системы
+        /// </summary>
         public ActionResult Logout()
         {
             Auth.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Форма регистрации
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Register()
         {
@@ -59,6 +83,5 @@ namespace SocialNetwork.Web.Controllers
             }
             return View(model);
         }*/
-
     }
 }

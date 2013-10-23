@@ -115,7 +115,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Логин.
+        ///   Looks up a localized string similar to login.
         /// </summary>
         public static string Login {
             get {
@@ -151,7 +151,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пароль.
+        ///   Looks up a localized string similar to password.
         /// </summary>
         public static string Password {
             get {

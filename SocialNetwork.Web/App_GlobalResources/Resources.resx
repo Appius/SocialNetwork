@@ -148,10 +148,10 @@
     <value>SN</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Логин</value>
+    <value>login</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Пароль</value>
+    <value>password</value>
   </data>
   <data name="IsRemember" xml:space="preserve">
     <value>Запомнить?</value>

@@ -3,6 +3,8 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
+using Autofac;
+using Autofac.Core;
 
 #endregion
 
@@ -38,7 +40,6 @@ namespace SocialNetwork.Web.Auth
         {
             var app = (HttpApplication) source;
             HttpContext context = app.Context;
-
             var auth = DependencyResolver.Current.GetService<IAuthentication>();
             auth.HttpContext = context;
 
