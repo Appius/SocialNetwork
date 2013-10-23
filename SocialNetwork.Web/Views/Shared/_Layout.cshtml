@@ -10,6 +10,8 @@
         @*<link rel="shortcut icon" href="../../assets/ico/favicon.png">*@
         <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/css")
+        @RenderSection("styles", false)
+
         @Scripts.Render("~/Scripts/jquery")
         @Scripts.Render("~/Scripts/modernizr")
     </head>

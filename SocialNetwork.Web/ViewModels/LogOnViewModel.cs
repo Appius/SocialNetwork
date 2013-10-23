@@ -17,8 +17,8 @@ namespace SocialNetwork.Web.ViewModels
         ///     Логин
         /// </summary>
         [Required]
-        [Display(ResourceType = typeof (Resources), Name = "Login")]
-        public string UserName { get; set; }
+        [Display(ResourceType = typeof (Resources), Name = "Email")]
+        public string Email { get; set; }
 
         /// <summary>
         ///     Пароль

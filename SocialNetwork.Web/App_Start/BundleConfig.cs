@@ -17,7 +17,7 @@ namespace SocialNetwork.Web
             bundles.Add(new ScriptBundle("~/Scripts/modernizr").Include(
                 "~/Scripts/modernizr-2.6.2.js"));
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
-                "~/Scripts/jquery-2.0.3*"));
+                "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
                 "~/Scripts/bootstrap*"));
@@ -27,8 +27,8 @@ namespace SocialNetwork.Web
             /*bundles.Add(new ScriptBundle("~/Scripts/markdown").Include(
                 "~/Scripts/MarkdownDeepLib*"));*/
 
-            /*bundles.Add(new ScriptBundle("~/Scripts/datepicker").Include(
-                "~/Scripts/bootstrap-datepicker*"));*/
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrap-datepicker").Include(
+                "~/Scripts/bootstrap-datepicker*"));
 
             bundles.Add(new ScriptBundle("~/Scripts/validation").Include(
                 "~/Scripts/jquery.validate*"));
@@ -45,8 +45,9 @@ namespace SocialNetwork.Web
                 "~/Content/bootstrap/bootstrap-responsive.css",
                 "~/Areas/admin/Content/admin.css"));
 
+
             /*bundles.Add(new StyleBundle("~/Content/MarkdownDeepStyle").Include("~/Scripts/mdd_styles.css"));*/
-            /*bundles.Add(new StyleBundle("~/Content/DatePicker").Include("~/Content/datepicker.css"));*/
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include("~/Content/datepicker.css"));
         }
     }
 }

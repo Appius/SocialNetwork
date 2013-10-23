@@ -61,6 +61,51 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Длина email должна быть от 3 до 100 символов.
+        /// </summary>
+        public static string AllowedLengthEmail {
+            get {
+                return ResourceManager.GetString("AllowedLengthEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Длина фамилии должна быть от 3 до 100 символов.
+        /// </summary>
+        public static string AllowedLengthLastName {
+            get {
+                return ResourceManager.GetString("AllowedLengthLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Длина отчества должна быть до 100 символов.
+        /// </summary>
+        public static string AllowedLengthMiddleName {
+            get {
+                return ResourceManager.GetString("AllowedLengthMiddleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Длина имени должна быть от 3 до 100 символов.
+        /// </summary>
+        public static string AllowedLengthName {
+            get {
+                return ResourceManager.GetString("AllowedLengthName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата рождения.
+        /// </summary>
+        public static string Birthday {
+            get {
+                return ResourceManager.GetString("Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Изменить пароль.
         /// </summary>
         public static string ChangePassword {
@@ -70,11 +115,56 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пароли должны совпадать.
+        /// </summary>
+        public static string ComparePasswords {
+            get {
+                return ResourceManager.GetString("ComparePasswords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Подтвердите пароль.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вход.
         /// </summary>
         public static string Entrance {
             get {
                 return ResourceManager.GetString("Entrance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка входа.
+        /// </summary>
+        public static string ErrorEnterence {
+            get {
+                return ResourceManager.GetString("ErrorEnterence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователь с таким email уже зарегистрирован.
+        /// </summary>
+        public static string ExistEmail {
+            get {
+                return ResourceManager.GetString("ExistEmail", resourceCulture);
             }
         }
         
@@ -115,6 +205,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Фамилия.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to login.
         /// </summary>
         public static string Login {
@@ -133,11 +232,110 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отчество.
+        /// </summary>
+        public static string MiddleName {
+            get {
+                return ResourceManager.GetString("MiddleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моя страница.
         /// </summary>
         public static string MyPage {
             get {
                 return ResourceManager.GetString("MyPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Имя.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите, пожалуйста, вашу дату рождения.
+        /// </summary>
+        public static string NoBirthday {
+            get {
+                return ResourceManager.GetString("NoBirthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите, пожалуйста, ваш email.
+        /// </summary>
+        public static string NoEmail {
+            get {
+                return ResourceManager.GetString("NoEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите, пожалуйста, вашу фамилию.
+        /// </summary>
+        public static string NoLastName {
+            get {
+                return ResourceManager.GetString("NoLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите, пожалуйста, ваше имя.
+        /// </summary>
+        public static string NoName {
+            get {
+                return ResourceManager.GetString("NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите, пожалуйста, пароль.
+        /// </summary>
+        public static string NoPass {
+            get {
+                return ResourceManager.GetString("NoPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите ваш пол.
+        /// </summary>
+        public static string NoSex {
+            get {
+                return ResourceManager.GetString("NoSex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Формат даты введен не верно.
+        /// </summary>
+        public static string NoValidDate {
+            get {
+                return ResourceManager.GetString("NoValidDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email имеет неверный формат.
+        /// </summary>
+        public static string NoValidEmail {
+            get {
+                return ResourceManager.GetString("NoValidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пароль должен включать как минимум одну большую букву, одну маленькую, один спец. символ, одну цифру и не должен содержать пробелы. Длина пароля - от 6 до 18 символов..
+        /// </summary>
+        public static string NoValidPass {
+            get {
+                return ResourceManager.GetString("NoValidPass", resourceCulture);
             }
         }
         
@@ -165,6 +363,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string Registration {
             get {
                 return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пол.
+        /// </summary>
+        public static string Sex {
+            get {
+                return ResourceManager.GetString("Sex", resourceCulture);
             }
         }
         

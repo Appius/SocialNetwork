@@ -10,14 +10,6 @@
     margin: 5px 0;
 }
 
-.form-group {
-    margin-bottom: 0;
-}
-
-    .form-group .field-validation-error {
-        margin-bottom: 3px;
-    }
-
 .checkbox {
     padding-left: 0;
     vertical-align: top;
@@ -27,6 +19,21 @@
     margin-top: 14px;
 }
 
+.form-horizontal .controls {
+    margin-left: 180px;
+}
+
+.form-horizontal .control-group {
+    margin-bottom: 20px;
+}
+
+.form-horizontal .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+}
+
 /* Styles for signin form
 -----------------------------------------------------------*/
 .form-signin {
@@ -34,6 +41,13 @@
     padding: 15px;
     margin: 0 auto;
 }
+
+.form-signin .form-group {
+    margin-bottom: 0;
+}
+    .form-signin .form-group .field-validation-error {
+        margin-bottom: 3px;
+    }
 
     .form-signin .form-signin-heading,
     .form-signin .checkbox {
@@ -91,9 +105,34 @@
 .validation-summary-errors {
     font-weight: bold;
     color: rgb(185, 74, 72);
-    background-color: #ffeeee;
 }
 
 .validation-summary-valid {
     display: none;
+}
+
+.bs-callout-danger {
+    background-color: #fcf2f2;
+    border-color: #dFb5b4;
+}
+
+.bs-callout-warning {
+    background-color: #fefbed;
+    border-color: #f1e7bc;
+}
+
+.bs-callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+}
+
+/* Styles for registration form
+-----------------------------------------------------------*/
+.form-registration {
+    max-width: 700px;
+}
+
+.form-registration .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
 }

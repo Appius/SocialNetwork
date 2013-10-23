@@ -8,6 +8,7 @@ using Autofac.Integration.Mvc;
 using SocialNetwork.Core.Models.Abstract;
 using SocialNetwork.Core.Models.Repos;
 using SocialNetwork.Web.Auth;
+using SocialNetwork.Web.Mappers;
 
 #endregion
 
@@ -24,7 +25,7 @@ namespace SocialNetwork.Web
             builder.RegisterType<MessageRepository>().As<IMessageRepository>().InstancePerHttpRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
             builder.RegisterType<CustomAuthentication>().As<IAuthentication>().InstancePerHttpRequest();
-//            kernel.Bind<IAuthentication>().To<CustomAuthentication>().InRequestScope();
+            builder.RegisterType<CommonMapper>().As<IMapper>().InstancePerHttpRequest();
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

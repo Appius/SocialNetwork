@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.ValidationSummary(true, "Неверный логин/пароль. Введите корректные данные и попробуйте еще раз.")
+@Html.ValidationSummary(true, "Неверный логин/пароль. Введите корректные данные и попробуйте еще раз.",new {@class="bs-callout-danger"})
 
 <div class="form-signin">
     @using (Html.BeginForm("LogOn","Account",FormMethod.Post, new {@onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');" }))
@@ -15,8 +15,8 @@
             <legend>Данные аккаунта</legend>
 
             <div class="form-group">
-                @Html.TextBoxFor(m => m.UserName, new {@placeholder="Login", @class="form-control"})
-                @Html.ValidationMessageFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.Email, new {@placeholder="Email", @class="form-control"})
+                @Html.ValidationMessageFor(m => m.Email)
             </div>
 
             <div class="form-group">
@@ -55,3 +55,4 @@
     </script>
     @Scripts.Render("~/Scripts/validation")
 }
+

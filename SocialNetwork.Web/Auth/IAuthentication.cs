@@ -27,10 +27,10 @@ namespace SocialNetwork.Web.Auth
         /// <summary>
         ///     Процедура входа
         /// </summary>
-        /// <param name="login">Логин</param>
+        /// <param name="email">Логин</param>
         /// <param name="password">Пароль</param>
         /// <param name="isPersistent">Постоянная авторизация или нет</param>
-        User Login(string login, string password, bool isPersistent);
+        User Login(string email, string password, bool isPersistent);
 
         /// <summary>
         ///     Выход из системы

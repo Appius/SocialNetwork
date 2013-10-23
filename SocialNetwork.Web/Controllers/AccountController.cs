@@ -2,6 +2,10 @@
 
 using System;
 using System.Web.Mvc;
+using System.Web.Security;
+using Elmah.ContentSyndication;
+using SocialNetwork.Core.Models.Abstract;
+using SocialNetwork.Web.App_GlobalResources;
 using SocialNetwork.Web.ViewModels;
 
 #endregion
@@ -35,12 +39,12 @@ namespace SocialNetwork.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = Auth.Login(logOnViewModel.UserName, logOnViewModel.Password, logOnViewModel.RememberMe);
+                var user = Auth.Login(logOnViewModel.Email, logOnViewModel.Password, logOnViewModel.RememberMe);
                 if (user != null)
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState["Password"].Errors.Add("Ошибка входа");
+                ModelState["Password"].Errors.Add(Resources.ErrorEnterence);
             }
             return View(logOnViewModel);
         }
@@ -64,24 +68,20 @@ namespace SocialNetwork.Web.Controllers
             return View();
         }
 
-/*        [HttpPost]
+        [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+            var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
+            var user = userRepository.Get(model.Email);
+            if (user!=null)
+                ModelState.AddModelError("Email", Resources.ExistEmail);
+
+            
             if (ModelState.IsValid)
             {
-                MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, null, null, true, null, out createStatus);
-
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    Roles.AddUserToRole(model.UserName, "user");
-                    FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie #1#);
-                    Session["id"] = null;
-                    return RedirectToAction("Index", "Home");
-                }
-                ModelState.AddModelError("", ErrorCodeToString(createStatus));
+                
             }
             return View(model);
-        }*/
+        }
     }
 }

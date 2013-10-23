@@ -156,4 +156,73 @@
   <data name="IsRemember" xml:space="preserve">
     <value>Запомнить?</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Отчество</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="NoName" xml:space="preserve">
+    <value>Введите, пожалуйста, ваше имя</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Пол</value>
+  </data>
+  <data name="NoLastName" xml:space="preserve">
+    <value>Введите, пожалуйста, вашу фамилию</value>
+  </data>
+  <data name="NoSex" xml:space="preserve">
+    <value>Выберите ваш пол</value>
+  </data>
+  <data name="ComparePasswords" xml:space="preserve">
+    <value>Пароли должны совпадать</value>
+  </data>
+  <data name="NoEmail" xml:space="preserve">
+    <value>Введите, пожалуйста, ваш email</value>
+  </data>
+  <data name="NoPass" xml:space="preserve">
+    <value>Введите, пожалуйста, пароль</value>
+  </data>
+  <data name="ErrorEnterence" xml:space="preserve">
+    <value>Ошибка входа</value>
+  </data>
+  <data name="ExistEmail" xml:space="preserve">
+    <value>Пользователь с таким email уже зарегистрирован</value>
+  </data>
+  <data name="AllowedLengthName" xml:space="preserve">
+    <value>Длина имени должна быть от 3 до 100 символов</value>
+  </data>
+  <data name="AllowedLengthEmail" xml:space="preserve">
+    <value>Длина email должна быть от 3 до 100 символов</value>
+  </data>
+  <data name="AllowedLengthLastName" xml:space="preserve">
+    <value>Длина фамилии должна быть от 3 до 100 символов</value>
+  </data>
+  <data name="AllowedLengthMiddleName" xml:space="preserve">
+    <value>Длина отчества должна быть до 100 символов</value>
+  </data>
+  <data name="NoBirthday" xml:space="preserve">
+    <value>Введите, пожалуйста, вашу дату рождения</value>
+  </data>
+  <data name="NoValidPass" xml:space="preserve">
+    <value>Пароль должен включать как минимум одну большую букву, одну маленькую, один спец. символ, одну цифру и не должен содержать пробелы. Длина пароля - от 6 до 18 символов.</value>
+  </data>
+  <data name="NoValidDate" xml:space="preserve">
+    <value>Формат даты введен не верно</value>
+  </data>
+  <data name="NoValidEmail" xml:space="preserve">
+    <value>Email имеет неверный формат</value>
+  </data>
 </root>
