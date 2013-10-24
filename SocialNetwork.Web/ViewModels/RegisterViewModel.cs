@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using SocialNetwork.Web.App_GlobalResources;
+
+#endregion
 
 namespace SocialNetwork.Web.ViewModels
 {
@@ -33,51 +37,53 @@ namespace SocialNetwork.Web.ViewModels
         /// </summary>
         [StringLength(100, ErrorMessageResourceType = typeof (Resources),
             ErrorMessageResourceName = "AllowedLengthMiddleName")]
-        [Display(ResourceType = typeof(Resources), Name = "MiddleName")]
+        [Display(ResourceType = typeof (Resources), Name = "MiddleName")]
         public string MiddleName { get; set; }
 
         /// <summary>
         ///     Email
         /// </summary>
-        [EmailAddress]
-//        [EmailAddress(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoValidEmail")]
-        [StringLength(100, MinimumLength = 3, ErrorMessageResourceType = typeof (Resources),
-            ErrorMessageResourceName = "AllowedLengthEmail")]
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoEmail")]
-        [Display(ResourceType = typeof(Resources), Name = "Email")]
+        [EmailAddress(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoValidEmail",
+            ErrorMessage = null)]
+        [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoEmail")]
+        [Display(ResourceType = typeof (Resources), Name = "Email")]
         public string Email { get; set; }
 
         /// <summary>
         ///     Пол
         /// </summary>
-        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoSex")]
-        [Display(ResourceType = typeof(Resources), Name = "Sex")]
+        [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoSex")]
+        [Display(ResourceType = typeof (Resources), Name = "Sex")]
         public bool Sex { get; set; }
 
         /// <summary>
         ///     Пароль
         /// </summary>
-//        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoPass")]
+        [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoPass")]
         [Category("Security")]
-//        [ValidPassword(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoValidPass")]
+        [DataType(DataType.Password)]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,18}$",
             ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoValidPass")]
-        [PasswordPropertyText]
+        [PasswordPropertyText(true)]
         [Display(ResourceType = typeof (Resources), Name = "Password")]
-        public bool Password { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         ///     Подтверждение пароля
         /// </summary>
-//        [Required]
+        [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoConfirmPass")]
         [Category("Security")]
-        [PasswordPropertyText]
-        [Compare("Password", ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "ComparePasswords")]
-        [Display(ResourceType = typeof(Resources), Name = "ConfirmPassword")]
-        public bool ConfirmPassword { get; set; }
+        [PasswordPropertyText(true)]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessageResourceType = typeof (Resources),
+            ErrorMessageResourceName = "ComparePasswords")]
+        //TODO: why don't work?
+        //http://20fingers2brains.blogspot.com/2013/03/compare-data-annotation-attribute-in.html
+        [Display(ResourceType = typeof (Resources), Name = "ConfirmPassword")]
+        public string ConfirmPassword { get; set; }
 
         /// <summary>
-        ///     День рожденье
+        ///     День рождение
         /// </summary>
         [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoBirthday")]
         [Display(ResourceType = typeof (Resources), Name = "Birthday")]

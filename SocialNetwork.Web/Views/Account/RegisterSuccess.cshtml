@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-success">
+    <h4>
+        Поздравляю!
+    </h4>
+    <p>
+        Ваш новый аккаунт был создан успешно. Теперь можете войти на сайт по своим именем и паролем. Желаю успехов  и не нарушайте правила!
+    </p>
+    <p>
+        Вы будете перенаправлены через <strong><span id="timeLeft">5</span></strong> секунд. <a href="@Model.Link">Нажмите</a>, если не хотите ждать.
+    </p>
+</div>
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        var windowLocation = '/account/logon';
+        $(document).ready(function() {
+            window.setInterval(function() {
+                var timeLeft = $("#timeLeft").html();
+                if (eval(timeLeft) == 0) {
+                    window.location = windowLocation;
+                } else {
+                    $("#timeLeft").html(eval(timeLeft) - eval(1));
+                }
+            }, 1000);
+        });
+    </script>
+};

@@ -2,10 +2,11 @@
 
 using System;
 using System.Web.Mvc;
-using System.Web.Security;
-using Elmah.ContentSyndication;
+using SocialNetwork.Core.Helpers;
+using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
 using SocialNetwork.Web.App_GlobalResources;
+using SocialNetwork.Web.Mappers;
 using SocialNetwork.Web.ViewModels;
 
 #endregion
@@ -21,7 +22,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Форма входа
+        ///     Форма входа
         /// </summary>
         [HttpGet]
         public ActionResult LogOn()
@@ -30,7 +31,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Продедура аутентификации пользователей
+        ///     Продедура аутентификации пользователей
         /// </summary>
         /// <param name="logOnViewModel">Модель входа</param>
         /// <param name="returnUrl">Куда идти</param>
@@ -39,7 +40,8 @@ namespace SocialNetwork.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = Auth.Login(logOnViewModel.Email, logOnViewModel.Password, logOnViewModel.RememberMe);
+                var user = Auth.Login(logOnViewModel.Email, logOnViewModel.Password.ComputeStringHash(),
+                    logOnViewModel.RememberMe);
                 if (user != null)
                 {
                     return RedirectToAction("Index", "Home");
@@ -50,38 +52,60 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Выход из системы
+        ///     Выход из системы
         /// </summary>
         public ActionResult Logout()
         {
-            Auth.LogOut();
+            Auth.LogOff();
             return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
-        /// Форма регистрации
+        ///     Форма регистрации
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
 
+        /// <summary>
+        ///     Форма регистрации
+        /// </summary>
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
             var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
             var user = userRepository.Get(model.Email);
-            if (user!=null)
+            if (user != null)
                 ModelState.AddModelError("Email", Resources.ExistEmail);
 
-            
             if (ModelState.IsValid)
             {
-                
+                var mapper = DependencyResolver.Current.GetService<IMapper>();
+
+                try
+                {
+                    user = (User) mapper.Map(model, typeof (RegisterViewModel), typeof (User));
+                    user.Password = user.Password.ComputeStringHash();
+
+                    userRepository.Add(user);
+                    return RedirectToAction("RegisterSuccess", "Account");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", Resources.SomethingWrong);
+                }
             }
             return View(model);
+        }
+
+        /// <summary>
+        ///     Страница, которая говорит, что регистрация прошла успешно
+        /// </summary>
+        public ActionResult RegisterSuccess()
+        {
+            return View();
         }
     }
 }

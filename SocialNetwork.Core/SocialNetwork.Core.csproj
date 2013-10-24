@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Migrations\201310211121168_Test.cs" />
     <Compile Include="Migrations\201310211121168_Test.Designer.cs">
       <DependentUpon>201310211121168_Test.cs</DependentUpon>

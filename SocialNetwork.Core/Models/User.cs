@@ -33,25 +33,21 @@ namespace SocialNetwork.Core.Models
         /// <summary>
         ///     Email пользователя
         /// </summary>
-        [Required]
         public string Email { get; set; }
 
         /// <summary>
         ///     Пароль пользователя
         /// </summary>
-        [Required]
         public string Password { get; set; }
 
         /// <summary>
         ///     Имя пользователя
         /// </summary>
-        [Required]
         public string FirstName { get; set; }
 
         /// <summary>
         ///     Фамилия пользователя
         /// </summary>
-        [Required]
         public string LastName { get; set; }
 
         /// <summary>
@@ -62,7 +58,6 @@ namespace SocialNetwork.Core.Models
         /// <summary>
         ///     День рождения пользователя
         /// </summary>
-        [Required]
         public DateTime Birthday { get; set; }
 
         /// <summary>

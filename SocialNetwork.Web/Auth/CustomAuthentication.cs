@@ -56,7 +56,7 @@ namespace SocialNetwork.Web.Auth
         /// <summary>
         ///     Выход из системы
         /// </summary>
-        public void LogOut()
+        public void LogOff()
         {
             var httpCookie = HttpContext.Response.Cookies[CookieName];
             if (httpCookie != null)

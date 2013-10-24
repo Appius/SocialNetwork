@@ -35,6 +35,6 @@ namespace SocialNetwork.Web.Auth
         /// <summary>
         ///     Выход из системы
         /// </summary>
-        void LogOut();
+        void LogOff();
     }
 }

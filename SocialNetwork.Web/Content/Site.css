@@ -19,19 +19,10 @@
     margin-top: 14px;
 }
 
-.form-horizontal .controls {
-    margin-left: 180px;
-}
-
-.form-horizontal .control-group {
-    margin-bottom: 20px;
-}
-
-.form-horizontal .control-label {
-    float: left;
-    width: 160px;
-    padding-top: 5px;
-    text-align: right;
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid rgb(238, 238, 238);
 }
 
 /* Styles for signin form
@@ -79,7 +70,7 @@
     }
 
     .form-signin input[type="password"] {
-        margin-bottom: 5px;
+        margin-bottom: 1px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
@@ -128,11 +119,26 @@
 
 /* Styles for registration form
 -----------------------------------------------------------*/
-.form-registration {
-    max-width: 700px;
-}
+/*.form-registration {
+    height: 816px;
+}*/
 
 .form-registration .form-horizontal .form-group{
     margin-left: 0;
     margin-right: 0;
+}
+
+.form-horizontal .controls {
+    margin-left: 180px;
+}
+
+.form-horizontal .control-group {
+    margin-bottom: 20px;
+}
+
+.form-horizontal .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
 }

@@ -16,14 +16,14 @@ namespace SocialNetwork.Web.ViewModels
         /// <summary>
         ///     Логин
         /// </summary>
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoEmail")]
         [Display(ResourceType = typeof (Resources), Name = "Email")]
         public string Email { get; set; }
 
         /// <summary>
         ///     Пароль
         /// </summary>
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources), ErrorMessageResourceName = "NoPass")]
         [DataType(DataType.Password)]
         [Display(ResourceType = typeof (Resources), Name = "Password")]
         public string Password { get; set; }

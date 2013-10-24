@@ -1,7 +1,9 @@
 ﻿using System;
 using AutoMapper;
-
 // TODO: Move to Core?
+using SocialNetwork.Core.Models;
+using SocialNetwork.Web.ViewModels;
+
 namespace SocialNetwork.Web.Mappers
 {
     /// <summary>
@@ -9,7 +11,10 @@ namespace SocialNetwork.Web.Mappers
     /// </summary>
     public class CommonMapper: IMapper
     {
-        static CommonMapper() {}
+        static CommonMapper()
+        {
+            Mapper.CreateMap<RegisterViewModel, User>();
+        }
 
         public object Map(object source, Type sourceType, Type destinationType)
         {

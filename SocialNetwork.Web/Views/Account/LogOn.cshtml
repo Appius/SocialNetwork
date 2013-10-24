@@ -24,18 +24,16 @@
                 @Html.ValidationMessageFor(m => m.Password)
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-top: 5px;">
                 @Html.CheckBoxFor(m => m.RememberMe)
                 @Html.LabelFor(m => m.RememberMe, new {@class = "checkbox", @style = "display: inline;"})
             </div>
 
-            <div>
-                <div class="pull-left registration-link">
-                    @Html.ActionLink(@Resources.Registration,"Register","Account")
-                </div>
-                <div class="pull-right">
-                    <input type="submit" value="@Resources.Entrance" class="btn btn-primary" />
-                </div>
+            <div class="pull-left registration-link">
+                @Html.ActionLink(@Resources.Registration,"Register","Account")
+            </div>
+            <div class="pull-right">
+                <input type="submit" value="@Resources.Entrance" class="btn btn-primary" />
             </div>
         </fieldset>
     }

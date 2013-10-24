@@ -133,7 +133,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to email.
+        ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
             get {
@@ -268,6 +268,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Повторите, пожалуйста, введенный пароль.
+        /// </summary>
+        public static string NoConfirmPass {
+            get {
+                return ResourceManager.GetString("NoConfirmPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введите, пожалуйста, ваш email.
         /// </summary>
         public static string NoEmail {
@@ -331,7 +340,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пароль должен включать как минимум одну большую букву, одну маленькую, один спец. символ, одну цифру и не должен содержать пробелы. Длина пароля - от 6 до 18 символов..
+        ///   Looks up a localized string similar to Пароль не соответствует заданным критериям надежности.
         /// </summary>
         public static string NoValidPass {
             get {
@@ -349,7 +358,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to password.
+        ///   Looks up a localized string similar to Пароль.
         /// </summary>
         public static string Password {
             get {
@@ -363,6 +372,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string Registration {
             get {
                 return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Придумайте себе пароль - он должен содержать как минимум один букву верхнего регистра, одну нижнего, одну цифру, один специальный символ и не должен содержать пробелов. Допустимая длина пароль - от 6 до 18 символов.
+        /// </summary>
+        public static string RequiredPass {
+            get {
+                return ResourceManager.GetString("RequiredPass", resourceCulture);
             }
         }
         
@@ -381,6 +399,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string ShortName {
             get {
                 return ResourceManager.GetString("ShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Что-то пошло не так, попробуйте еще раз....
+        /// </summary>
+        public static string SomethingWrong {
+            get {
+                return ResourceManager.GetString("SomethingWrong", resourceCulture);
             }
         }
     }

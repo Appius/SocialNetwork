@@ -2,7 +2,6 @@
 
 using System;
 using System.Web.Mvc;
-using SocialNetwork.Web.Auth;
 
 #endregion
 
