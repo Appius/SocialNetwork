@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
+using SocialNetwork.Core.Models.Repos;
 using SocialNetwork.Web.App_GlobalResources;
 using SocialNetwork.Web.Mappers;
 using SocialNetwork.Web.ViewModels;
@@ -15,7 +16,36 @@ namespace SocialNetwork.Web.Controllers
 {
     public class AccountController : BaseController
     {
+
+        #region Private methods
+
+        /// <summary>
+        /// Добавление к пользователю определенной роли
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <param name="roleName">Имя роли</param>
+        private void AddUserToRole(User user, string roleName)
+        {
+            var role = RoleRepository.Get(roleName);
+
+            AddUserToRole(user, role);
+        }
+
+        /// <summary>
+        /// Добавление к пользователю определенной роли
+        /// </summary>
+        /// <param name="user">Пользователь</param>
+        /// <param name="role">Роль</param>
+        private void AddUserToRole(User user, Role role)
+        {
+            var userRoleRepository = DependencyResolver.Current.GetService<IUserRoleRepository>();
+            userRoleRepository.Add(user, role);
+        }
+
+        #endregion
+        
         // GET: /Account/
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -47,7 +77,7 @@ namespace SocialNetwork.Web.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState["Password"].Errors.Add(Resources.ErrorEnterence);
+                ModelState.AddModelError("", Resources.ErrorEnterence);
             }
             return View(logOnViewModel);
         }
@@ -76,8 +106,7 @@ namespace SocialNetwork.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
-            var userRepository = DependencyResolver.Current.GetService<IUserRepository>();
-            var user = userRepository.Get(model.Email);
+            var user = UserRepository.Get(model.Email);
             if (user != null)
                 ModelState.AddModelError("Email", Resources.ExistEmail);
 
@@ -93,9 +122,13 @@ namespace SocialNetwork.Web.Controllers
                     var pass = user.Password;
 
                     user.Password = user.Password.ComputeStringHash();
-                    userRepository.Add(user);
+                    UserRepository.Add(user);
 
-                    LogOn(new LogOnViewModel {Email = user.Email, Password = pass}, "/account/");
+                    // добавление роли пользователю
+                    AddUserToRole(UserRepository.Get(user.Email), "user");
+                    // вход
+                    LogOn(new LogOnViewModel { Email = user.Email, Password = pass }, "/account/");
+
                     return RedirectToAction("Index", "Account");
                 }
                 catch (Exception)

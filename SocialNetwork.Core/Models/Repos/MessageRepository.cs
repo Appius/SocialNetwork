@@ -15,8 +15,8 @@ namespace SocialNetwork.Core.Models.Repos
         /// <summary>
         ///     Отправить сообщение
         /// </summary>
-        /// <param name="userWhoSented">Пользователь, который посылает</param>
-        /// <param name="userWhoReceive">Пользователь, который принимает</param>
+        /// <param name="fromUser">Пользователь, который посылает</param>
+        /// <param name="toUser">Пользователь, который принимает</param>
         /// <param name="msgText">Текст сообщения</param>
         /// <param name="title">Заголовок сообщения</param>
         public void SentMessage(User fromUser, User toUser, string msgText, string title = "")

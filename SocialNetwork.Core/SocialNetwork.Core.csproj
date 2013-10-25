@@ -77,6 +77,7 @@
     <Compile Include="Models\Abstract\IMessageRepository.cs" />
     <Compile Include="Models\Abstract\IRoleRepository.cs" />
     <Compile Include="Models\Abstract\IUserRepository.cs" />
+    <Compile Include="Models\Abstract\IUserRoleRepository.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Mapping\FriendShipMap.cs" />
     <Compile Include="Models\Mapping\MessageMap.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Models\Repos\RepositoryBase.cs" />
     <Compile Include="Models\Repos\RoleRepository.cs" />
     <Compile Include="Models\Repos\UserRepository.cs" />
+    <Compile Include="Models\Repos\UserRoleRepository.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SocialNetworkContext.cs" />
     <Compile Include="Models\User.cs" />

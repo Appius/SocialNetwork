@@ -2,8 +2,10 @@
 
 using System;
 using System.Security.Principal;
+using System.Web.Mvc;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
+using SocialNetwork.Core.Models.Repos;
 
 #endregion
 
@@ -39,12 +41,11 @@ namespace SocialNetwork.Web.Auth
             {
                 return false;
             }
+            var userRoleRepository = DependencyResolver.Current.GetService<IUserRoleRepository>();
+            var roleRoleRepository = DependencyResolver.Current.GetService<IRoleRepository>();
+
             return
-                UserIdentity.User.UserRoles.Contains(new UserRole
-                {
-                    User = UserIdentity.User,
-                    Role = _roleRepository.Get(role)
-                });
+                userRoleRepository.Contains(UserIdentity.User, roleRoleRepository.Get(role));
         }
 
         #endregion
