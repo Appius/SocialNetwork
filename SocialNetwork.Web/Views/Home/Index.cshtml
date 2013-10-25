@@ -19,7 +19,7 @@
 <div class="row text-center">
     @if (Request.IsAuthenticated)
     {
-        @Html.ActionLink(@Resources.Entrance, "Index", "Account", null, new {@class = "btn btn-lg btn-primary", @style = "margin: 0 5px"})
+        @Html.ActionLink(@Resources.YourPage, "Index", "Account", null, new {@class = "btn btn-lg btn-primary", @style = "margin: 0 5px"})
     }
     else
     {

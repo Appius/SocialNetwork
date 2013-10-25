@@ -40,7 +40,8 @@ namespace SocialNetwork.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = Auth.Login(logOnViewModel.Email, logOnViewModel.Password.ComputeStringHash(),
+                var pass = logOnViewModel.Password.ComputeStringHash();
+                var user = Auth.Login(logOnViewModel.Email, pass,
                     logOnViewModel.RememberMe);
                 if (user != null)
                 {
@@ -87,10 +88,15 @@ namespace SocialNetwork.Web.Controllers
                 try
                 {
                     user = (User) mapper.Map(model, typeof (RegisterViewModel), typeof (User));
-                    user.Password = user.Password.ComputeStringHash();
 
+                    // сохраняем пароль для входа сразу после регистрации
+                    var pass = user.Password;
+
+                    user.Password = user.Password.ComputeStringHash();
                     userRepository.Add(user);
-                    return RedirectToAction("RegisterSuccess", "Account");
+
+                    LogOn(new LogOnViewModel {Email = user.Email, Password = pass}, "/account/");
+                    return RedirectToAction("Index", "Account");
                 }
                 catch (Exception)
                 {

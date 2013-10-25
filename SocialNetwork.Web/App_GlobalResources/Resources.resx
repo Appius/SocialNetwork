@@ -234,4 +234,7 @@
   <data name="SomethingWrong" xml:space="preserve">
     <value>Что-то пошло не так, попробуйте еще раз...</value>
   </data>
+  <data name="YourPage" xml:space="preserve">
+    <value>Ваша страница</value>
+  </data>
 </root>

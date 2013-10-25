@@ -410,5 +410,14 @@ namespace SocialNetwork.Web.App_GlobalResources {
                 return ResourceManager.GetString("SomethingWrong", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ваша страница.
+        /// </summary>
+        public static string YourPage {
+            get {
+                return ResourceManager.GetString("YourPage", resourceCulture);
+            }
+        }
     }
 }
