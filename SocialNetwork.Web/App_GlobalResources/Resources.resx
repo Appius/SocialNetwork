@@ -291,4 +291,7 @@
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="OldPasswordNotCorrect" xml:space="preserve">
+    <value>Текущий пароль не верный</value>
+  </data>
 </root>

@@ -475,6 +475,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Текущий пароль не верный.
+        /// </summary>
+        public static string OldPasswordNotCorrect {
+            get {
+                return ResourceManager.GetString("OldPasswordNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обзор пользователей.
         /// </summary>
         public static string Overview {

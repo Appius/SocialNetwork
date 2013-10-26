@@ -53,10 +53,9 @@ namespace SocialNetwork.Web.Core
         {
             var tag = new TagBuilder("li");
 
-            if (String.Compare(act, currentAct, StringComparison.OrdinalIgnoreCase) == 0)
-            {
+            if ((String.Compare(act, currentAct, StringComparison.OrdinalIgnoreCase) == 0) ||
+                (string.IsNullOrWhiteSpace(act) && string.IsNullOrWhiteSpace(currentAct)))
                 tag.AddCssClass("active");
-            }
 
             tag.InnerHtml = helper.ActionLink(linkText, "Edit", "Account", new {act}, null).ToString();
 

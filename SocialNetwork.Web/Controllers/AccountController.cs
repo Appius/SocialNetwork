@@ -6,6 +6,7 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using AutoMapper.Internal;
 using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
@@ -202,6 +203,11 @@ namespace SocialNetwork.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Сохранение основных данных
+        /// </summary>
+        /// <param name="model">Моделька</param>
+        /// <param name="photo">Фотография пользователя</param>
         [Authorize]
         [HttpPost]
         public ActionResult SaveGeneralInfo(GeneralInfoViewModel model, HttpPostedFileBase photo)
@@ -229,13 +235,79 @@ namespace SocialNetwork.Web.Controllers
 
                     UserRepository.Update(user);
 
-                    if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.AbsolutePath);
+                    return RedirectToAction("Edit", "Account", new { success = 1 });
                 }
                 catch (Exception)
                 {
                     ModelState.AddModelError("", Resources.SomethingWrong);
                 }
             }
+            return View("Edit", model);
+        }
+
+        /// <summary>
+        /// Сохранение второстепенных данных
+        /// </summary>
+        /// <param name="model">Моделька</param>
+        [Authorize]
+        [HttpPost]
+        public ActionResult SaveAdvancedInfo(AdvancedInfoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    User user = CurrentUser;
+                    user.Activies = model.Activies;
+                    user.AboutMe = model.AboutMe;
+                    user.FavoriteBooks = model.FavoriteBooks;
+                    user.FavoriteGames = model.FavoriteGames;
+                    user.FavoriteMovies = model.FavoriteMovies;
+                    user.FavoriteMusic = model.FavoriteMusic;
+                    user.FavoriteQuotes = model.FavoriteQuotes;
+                    user.Interests = model.Interests;
+                
+                    UserRepository.Update(user);
+
+                    return RedirectToAction("Edit", "Account", new {act = "advanced", success = 1});
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", Resources.SomethingWrong);
+                }
+            }
+            ViewBag.Act = "advanced";
+            return View("Edit", model);
+        }
+
+        /// <summary>
+        /// Сохранение второстепенных данных
+        /// </summary>
+        /// <param name="model">Моделька</param>
+        [Authorize]
+        [HttpPost]
+        public ActionResult SaveNewPassInfo(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (CurrentUser.Password == model.OldPassword.ComputeStringHash())
+                    {
+                        CurrentUser.Password = model.NewPassword.ComputeStringHash();
+                        UserRepository.Update(CurrentUser);
+
+                        return RedirectToAction("Edit", "Account", new { act = "changepass", success = 1 });
+                    }
+                    else
+                        ModelState.AddModelError("OldPassword", Resources.OldPasswordNotCorrect);
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", Resources.SomethingWrong);
+                }
+            }
+            ViewBag.Act = "changepass";
             return View("Edit", model);
         }
     }

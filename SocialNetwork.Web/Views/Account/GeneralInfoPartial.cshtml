@@ -4,7 +4,7 @@
 <div class="col-md-offset-3 col-md-6 form-edit">
     @using (Html.BeginForm("SaveGeneralInfo", "Account", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
-        <fieldset style="margin-top: 20px;">
+        <fieldset>
             @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
 
             <div class="form-group">

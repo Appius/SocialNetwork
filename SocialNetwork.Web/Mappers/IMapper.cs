@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace SocialNetwork.Web.Mappers
 {
-    interface IMapper
+    internal interface IMapper
     {
         object Map(object source, Type sourceType, Type destinationType);
     }

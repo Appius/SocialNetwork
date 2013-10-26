@@ -1,40 +1,50 @@
-﻿@using System
-@using SocialNetwork.Web.Core
+﻿@using SocialNetwork.Web.Core
 @using SocialNetwork.Web.ViewModels
 @{
+    var act = Request["act"] ?? (string) ViewBag.Act ?? string.Empty;
+
     ViewBag.Title = "SN :: Change settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<ul class="nav nav-tabs nav-justified">
-    @Html.EditMenuItem("Основные данные","",(string)ViewBag.Act.ToString())
-    @Html.EditMenuItem("Изменение пароля","changepass",(string)ViewBag.Act.ToString())
-    @Html.EditMenuItem("Дополнительные данные","advanced",(string)ViewBag.Act.ToString())
+
+<ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
+    @Html.EditMenuItem("Основные данные","",act)
+    @Html.EditMenuItem("Изменение пароля","changepass",act)
+    @Html.EditMenuItem("Дополнительные данные","advanced",act)
 </ul>
 
-@{
-    var act = (string) ViewBag.Act.ToString();
-    switch (act)
+@Html.ValidationSummary("", new {@class = "bs-callout-danger"})
+
+@if (!string.IsNullOrWhiteSpace(Request["success"]))
+{
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Успех!</strong> Данные сохранены успешно!
+    </div>
+}
+
+@switch (act)
+{
+    case "changepass":
     {
-        case "changepass":
-        {
-            var model = Model as ChangePasswordViewModel;
-            @Html.Partial("ChangePasswordPartial", model)
-            break;
-        }
-        case "advanced":
-        {
-            var model = Model as AdvancedInfoViewModel;
-            @Html.Partial("AdvancedInfoPartial", model)
-            break;
-        }
-        default:
-        {
-            var model = Model as GeneralInfoViewModel;
-            @Html.Partial("GeneralInfoPartial", model)
-            break;
-        }
+        var model = Model as ChangePasswordViewModel;
+        @Html.Partial("ChangePasswordPartial", model)
+        break;
+    }
+    case "advanced":
+    {
+        var model = Model as AdvancedInfoViewModel;
+        @Html.Partial("AdvancedInfoPartial", model)
+        break;
+    }
+    default:
+    {
+        var model = Model as GeneralInfoViewModel;
+        @Html.Partial("GeneralInfoPartial", model)
+        break;
     }
 }
+
 
 @section scripts{
     <script type="text/javascript" language="javascript">
