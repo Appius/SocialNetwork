@@ -1,7 +1,11 @@
 ﻿#region
 
 using System;
+using System.Globalization;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
@@ -44,11 +48,9 @@ namespace SocialNetwork.Web.Controllers
 
         #endregion
         
-        // GET: /Account/
-        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "User");
         }
 
         /// <summary>
@@ -57,17 +59,21 @@ namespace SocialNetwork.Web.Controllers
         [HttpGet]
         public ActionResult LogOn()
         {
+            if (CurrentUser != null) RedirectToAction("Index", "Account");
+
             return View();
         }
 
         /// <summary>
-        ///     Продедура аутентификации пользователей
+        ///     Процедура аутентификации пользователей
         /// </summary>
         /// <param name="logOnViewModel">Модель входа</param>
         /// <param name="returnUrl">Куда идти</param>
         [HttpPost]
         public ActionResult LogOn(LogOnViewModel logOnViewModel, string returnUrl)
         {
+            if (CurrentUser != null) return RedirectToAction("Index", "Account");
+
             if (ModelState.IsValid)
             {
                 var pass = logOnViewModel.Password.ComputeStringHash();
@@ -85,7 +91,7 @@ namespace SocialNetwork.Web.Controllers
         /// <summary>
         ///     Выход из системы
         /// </summary>
-        public ActionResult Logout()
+        public ActionResult LogOff()
         {
             Auth.LogOff();
             return RedirectToAction("Index", "Home");
@@ -97,6 +103,7 @@ namespace SocialNetwork.Web.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            if (CurrentUser != null) return RedirectToAction("Index", "Account");
             return View();
         }
 
@@ -106,6 +113,8 @@ namespace SocialNetwork.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+            if (CurrentUser != null) return RedirectToAction("Index", "Account");
+
             var user = UserRepository.Get(model.Email);
             if (user != null)
                 ModelState.AddModelError("Email", Resources.ExistEmail);
@@ -145,6 +154,89 @@ namespace SocialNetwork.Web.Controllers
         public ActionResult RegisterSuccess()
         {
             return View();
+        }
+
+        /// <summary>
+        /// Страница изменения настроек
+        /// </summary>
+        /// <param name="act">Категория настроек</param>
+        [Authorize]
+        [HttpGet]
+        public ActionResult Edit(string act = "")
+        {
+            ViewBag.Act = act;
+
+            var mapper = DependencyResolver.Current.GetService<IMapper>();
+            switch (act)
+            {
+                case "changepass":
+                {
+                    return View(new ChangePasswordViewModel());
+                }
+                case "advanced":
+                {
+                    return View(mapper.Map(CurrentUser, typeof(User), typeof(AdvancedInfoViewModel)));
+                }
+                default:
+                {
+                    var user = (GeneralInfoViewModel)mapper.Map(CurrentUser, typeof (User), typeof (GeneralInfoViewModel));
+                    var photoName = CurrentUser.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
+                    var photoPath = Path.Combine(Server.MapPath("~/Pics"), photoName);
+
+                    if (System.IO.File.Exists(photoPath))
+                    {
+                        user.AvatarUrl = Url.Content(Path.Combine(Url.Content("~/Pics/"), photoName));
+                    }
+                    return View(user);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Страница изменения настроек
+        /// </summary>
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(object model)
+        {
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult SaveGeneralInfo(GeneralInfoViewModel model, HttpPostedFileBase photo)
+        {
+            if (photo != null && photo.ContentLength > 0)
+            {
+                var fileName = CurrentUser.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
+                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
+                photo.SaveAs(path);
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    User user = CurrentUser;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.MiddleName = model.MiddleName;
+                    user.Mobile = model.Mobile;
+                    user.Skype = model.Skype;
+                    user.Email = model.Email;
+                    user.Website = model.Website;
+                    user.CurrentCity = model.CurrentCity;
+
+                    UserRepository.Update(user);
+
+                    if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.AbsolutePath);
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", Resources.SomethingWrong);
+                }
+            }
+            return View("Edit", model);
         }
     }
 }

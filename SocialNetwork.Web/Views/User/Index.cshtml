@@ -1,6 +1,164 @@
-﻿@{
-    ViewBag.Title = "Пользователь Mr. Smith";
+﻿@model SocialNetwork.Core.Models.User
+@{
+    if (Model == null)
+    {
+        ViewBag.Title = "404 Not found";
+    }
+    else
+    {
+        ViewBag.Title = Model.FirstName + " " + Model.LastName;
+    }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Информация пользователя мистера Смита.</h2>
+@*<h2>Просмотр страницы пользователя</h2>*@
+
+@if (Model == null)
+{
+    <text>
+        <h3>404 page not found: Пользователь не найден</h3>
+    </text>
+}
+else
+{
+    <div class="row user-info">
+        <div class="col-md-6">
+            <div class="page-header">
+                <h3>
+                    @Model.FirstName <em>@Model.MiddleName</em> @Model.LastName @if(User.Identity.Name == Model.Email){<small>@Html.ActionLink("[редактировать]", "Edit", "Account")</small>}
+                </h3>
+
+            </div>
+            <p>
+                <label class="user-info-key text-muted">E-mail:</label>
+                <div class="user-info-value">
+                    <a href="mailto:@Model.Email">
+                        @Model.Email
+                    </a>
+                </div>
+            </p>
+            <p>
+                <label class="user-info-key text-muted">Дата рождения:</label>
+                <div class="user-info-value">
+                    @Model.Birthday.ToShortDateString()
+                </div>
+            </p>
+            <p>
+                <label class="user-info-key text-muted">Пол:</label>
+                <div class="user-info-value">
+                    @if (Model.Sex)
+                    {
+                        <text>мужской</text>
+                    }
+                    else
+                    {
+                        <text>женский</text>
+                    }
+                </div>
+            </p>
+            @if (Model.CurrentCity != null)
+            {
+                <p>
+                    <label class="user-info-key text-muted">Город:</label>
+                    <div class="user-info-value">
+                        @Model.CurrentCity
+                    </div>
+                </p>
+            }
+            @if (Model.Mobile != null)
+            {
+                <p>
+                    <label class="user-info-key text-muted">Моб. телефон:</label>
+                    <div class="user-info-value">
+                        @Model.Mobile
+                    </div>
+                </p>
+            }
+            @if (Model.Skype != null)
+            {
+                <p>
+                    <label class="user-info-key text-muted">Skype:</label>
+                    <div class="user-info-value">
+                        <a href="skype:@Model.Skype?call">@Model.Skype</a>
+                    </div>
+                </p>
+            }
+            @if (Model.Website != null)
+            {
+                <p>
+                    <label class="user-info-key text-muted">Website:</label>
+                    <div class="user-info-value">
+                        <a href="@Model.Website">@Model.Website</a>
+                    </div>
+                </p>
+            }
+        </div>
+        <div class="col-md-6 photo">
+            @if (ViewBag.PhotoUrl == null)
+            {
+                <img class="img-rounded pull-right" alt="photo" src="~/Pics/no-photo.bmp" height="600"/>
+            }
+            else
+            {
+                <img class="img-rounded pull-right" alt="photo" src="@ViewBag.PhotoUrl"/>
+            }
+        </div>
+    </div>
+
+    if (Model.Activies != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Деятельность</h4>
+            <p>@Model.Activies</p>
+        </div>
+    }
+    if (Model.Interests != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Интересы</h4>
+            <p>@Model.Interests</p>
+        </div>
+    }
+    if (Model.AboutMe != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>О себе</h4>
+            <p>@Model.Activies</p>
+        </div>
+    }
+    if (Model.FavoriteBooks != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Любимые книги</h4>
+            <p>@Model.FavoriteBooks</p>
+        </div>
+    }
+    if (Model.FavoriteGames != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Любимые игры</h4>
+            <p>@Model.FavoriteGames</p>
+        </div>
+    }
+    if (Model.FavoriteMovies != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Любимые фильмы</h4>
+            <p>@Model.FavoriteMovies</p>
+        </div>
+    }
+    if (Model.FavoriteMusic != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Любимыя музыка</h4>
+            <p>@Model.FavoriteMovies</p>
+        </div>
+    }
+    if (Model.FavoriteQuotes != null)
+    {
+        <div class="bs-callout bs-callout-info">
+            <h4>Любимые цитаты</h4>
+            <p>@Model.FavoriteMovies</p>
+        </div>
+    }
+}

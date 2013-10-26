@@ -47,12 +47,7 @@ namespace SocialNetwork.Web.Controllers
         /// </summary>
         public User CurrentUser
         {
-            get
-            {
-                var curUserIdentity = Auth.CurrentUser.Identity;
-                var iuserProvider = (IUserProvider) curUserIdentity;
-                return iuserProvider.User;
-            }
+            get { return ((IUserProvider) Auth.CurrentUser.Identity).User; }
         }
     }
 }

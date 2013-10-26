@@ -1,0 +1,103 @@
+﻿@using SocialNetwork.Web.App_GlobalResources
+@model SocialNetwork.Web.ViewModels.GeneralInfoViewModel
+
+<div class="col-md-offset-3 col-md-6 form-edit">
+    @using (Html.BeginForm("SaveGeneralInfo", "Account", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
+    {
+        <fieldset style="margin-top: 20px;">
+            @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FirstName, new {@class = "control-label"})
+                
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.FirstName, new {@placeholder = "FirstName", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.FirstName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.LastName, new {@placeholder = "LastName", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.MiddleName, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.MiddleName, new {@placeholder = "MiddleName", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.MiddleName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Email, new {@placeholder = "Email", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CurrentCity, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.CurrentCity, new {@placeholder = "CurrentCity", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.CurrentCity)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Mobile, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Mobile, new {@placeholder = "Mobile", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Mobile)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Skype, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Skype, new {@placeholder = "Skype", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Skype)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Website, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Website, new {@placeholder = "Website", @class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Website)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.AvatarUrl, new {@class = "control-label"})
+
+                <div class="controls">
+                    @if (string.IsNullOrWhiteSpace(@Model.AvatarUrl))
+                    {
+                        <text><img src="~/Pics/no-photo.bmp" alt="photo" height="100" /></text>
+                    }
+                    else
+                    {
+                        <text><img class="img-rounded" src="@Model.AvatarUrl" alt="photo" height="100" /></text>
+                    }
+                    <input type="file" name="photo" id="photo" accept="image/*" />
+                </div>
+            </div>
+
+            <div class="controls pull-right">
+                <input type="submit" value="@Resources.Save" class="btn btn-success" />
+            </div>
+        </fieldset>
+    }
+</div>

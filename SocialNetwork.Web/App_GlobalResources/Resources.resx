@@ -237,4 +237,58 @@
   <data name="YourPage" xml:space="preserve">
     <value>Ваша страница</value>
   </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>О себе</value>
+  </data>
+  <data name="Activies" xml:space="preserve">
+    <value>Деятельность</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Ваше фото</value>
+  </data>
+  <data name="CurrentCity" xml:space="preserve">
+    <value>Текущий город</value>
+  </data>
+  <data name="FavoriteBooks" xml:space="preserve">
+    <value>Любимые книги</value>
+  </data>
+  <data name="FavoriteGames" xml:space="preserve">
+    <value>Любимые игры</value>
+  </data>
+  <data name="FavoriteMovies" xml:space="preserve">
+    <value>Любимые фильмы</value>
+  </data>
+  <data name="FavoriteMusic" xml:space="preserve">
+    <value>Любимая музыка</value>
+  </data>
+  <data name="FavoriteQuotes" xml:space="preserve">
+    <value>Любимые цытаты</value>
+  </data>
+  <data name="Interests" xml:space="preserve">
+    <value>Интересы</value>
+  </data>
+  <data name="Mobile" xml:space="preserve">
+    <value>Мобильный телефон</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Старый пароль</value>
+  </data>
+  <data name="Skype" xml:space="preserve">
+    <value>Skype</value>
+  </data>
+  <data name="TooManySymbols" xml:space="preserve">
+    <value>Слишком длинное название...</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Сайт</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить данные</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
 </root>

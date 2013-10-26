@@ -1,0 +1,52 @@
+﻿@using System
+@using SocialNetwork.Web.Core
+@using SocialNetwork.Web.ViewModels
+@{
+    ViewBag.Title = "SN :: Change settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul class="nav nav-tabs nav-justified">
+    @Html.EditMenuItem("Основные данные","",(string)ViewBag.Act.ToString())
+    @Html.EditMenuItem("Изменение пароля","changepass",(string)ViewBag.Act.ToString())
+    @Html.EditMenuItem("Дополнительные данные","advanced",(string)ViewBag.Act.ToString())
+</ul>
+
+@{
+    var act = (string) ViewBag.Act.ToString();
+    switch (act)
+    {
+        case "changepass":
+        {
+            var model = Model as ChangePasswordViewModel;
+            @Html.Partial("ChangePasswordPartial", model)
+            break;
+        }
+        case "advanced":
+        {
+            var model = Model as AdvancedInfoViewModel;
+            @Html.Partial("AdvancedInfoPartial", model)
+            break;
+        }
+        default:
+        {
+            var model = Model as GeneralInfoViewModel;
+            @Html.Partial("GeneralInfoPartial", model)
+            break;
+        }
+    }
+}
+
+@section scripts{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $('.validation-summary-valid, .validation-summary-errors').addClass('alert alert-error');
+
+            $("form").bind('invalid-form.validate',
+                function() {
+                    $(document).find('input[type=\"submit\"]').removeAttrs('disabled');
+                }
+            );
+        });
+    </script>
+    @Scripts.Render("~/Scripts/validation")
+}

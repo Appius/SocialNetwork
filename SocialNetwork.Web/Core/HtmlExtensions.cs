@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using System.Web.Routing;
 
 #endregion
 
@@ -37,6 +38,27 @@ namespace SocialNetwork.Web.Core
             }
 
             tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName).ToString();
+
+            return MvcHtmlString.Create(tag.ToString());
+        }
+
+        /// <summary>
+        /// Генерация меню настроек пользователя
+        /// </summary>
+        /// <param name="helper">HtmlHelper</param>
+        /// <param name="linkText">Текст ссылки</param>
+        /// <param name="act">Категория настроек</param>
+        /// <param name="currentAct">Текущая категория</param>
+        public static MvcHtmlString EditMenuItem(this HtmlHelper helper, string linkText, string act, string currentAct)
+        {
+            var tag = new TagBuilder("li");
+
+            if (String.Compare(act, currentAct, StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                tag.AddCssClass("active");
+            }
+
+            tag.InnerHtml = helper.ActionLink(linkText, "Edit", "Account", new {act}, null).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }

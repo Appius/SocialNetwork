@@ -61,6 +61,24 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to О себе.
+        /// </summary>
+        public static string AboutMe {
+            get {
+                return ResourceManager.GetString("AboutMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Деятельность.
+        /// </summary>
+        public static string Activies {
+            get {
+                return ResourceManager.GetString("Activies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Длина email должна быть от 3 до 100 символов.
         /// </summary>
         public static string AllowedLengthEmail {
@@ -97,6 +115,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ваше фото.
+        /// </summary>
+        public static string Avatar {
+            get {
+                return ResourceManager.GetString("Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Дата рождения.
         /// </summary>
         public static string Birthday {
@@ -129,6 +156,24 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Текущий город.
+        /// </summary>
+        public static string CurrentCity {
+            get {
+                return ResourceManager.GetString("CurrentCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменить данные.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -178,6 +223,51 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Любимые книги.
+        /// </summary>
+        public static string FavoriteBooks {
+            get {
+                return ResourceManager.GetString("FavoriteBooks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Любимые игры.
+        /// </summary>
+        public static string FavoriteGames {
+            get {
+                return ResourceManager.GetString("FavoriteGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Любимые фильмы.
+        /// </summary>
+        public static string FavoriteMovies {
+            get {
+                return ResourceManager.GetString("FavoriteMovies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Любимая музыка.
+        /// </summary>
+        public static string FavoriteMusic {
+            get {
+                return ResourceManager.GetString("FavoriteMusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Любимые цытаты.
+        /// </summary>
+        public static string FavoriteQuotes {
+            get {
+                return ResourceManager.GetString("FavoriteQuotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Друзья.
         /// </summary>
         public static string Friends {
@@ -192,6 +282,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string Guest {
             get {
                 return ResourceManager.GetString("Guest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Интересы.
+        /// </summary>
+        public static string Interests {
+            get {
+                return ResourceManager.GetString("Interests", resourceCulture);
             }
         }
         
@@ -241,6 +340,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Мобильный телефон.
+        /// </summary>
+        public static string Mobile {
+            get {
+                return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Моя страница.
         /// </summary>
         public static string MyPage {
@@ -255,6 +363,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новый пароль.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
             }
         }
         
@@ -349,6 +466,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Старый пароль.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Обзор пользователей.
         /// </summary>
         public static string Overview {
@@ -385,6 +511,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пол.
         /// </summary>
         public static string Sex {
@@ -403,11 +538,38 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skype.
+        /// </summary>
+        public static string Skype {
+            get {
+                return ResourceManager.GetString("Skype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так, попробуйте еще раз....
         /// </summary>
         public static string SomethingWrong {
             get {
                 return ResourceManager.GetString("SomethingWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Слишком длинное название....
+        /// </summary>
+        public static string TooManySymbols {
+            get {
+                return ResourceManager.GetString("TooManySymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сайт.
+        /// </summary>
+        public static string Website {
+            get {
+                return ResourceManager.GetString("Website", resourceCulture);
             }
         }
         

@@ -73,7 +73,6 @@ namespace SocialNetwork.Core.Models
         /// <summary>
         ///     Пол пользователя (0 - male, 1 - female)
         /// </summary>
-        [Required]
         public bool Sex { get; set; }
 
         /// <summary>

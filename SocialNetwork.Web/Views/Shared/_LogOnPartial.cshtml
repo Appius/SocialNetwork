@@ -8,10 +8,13 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    @Html.ActionLink(@Resources.ChangePassword, "ChangePassword", "Account")
+                    @Html.ActionLink(@Resources.Edit, "Edit", "Account")
                 </li>
                 <li>
-                    @Html.ActionLink(@Resources.Exit, "Logout", "Account")
+                    @Html.ActionLink(@Resources.ChangePassword, "Edit", "Account", new {@act="changepass"}, null)
+                </li>
+                <li>
+                    @Html.ActionLink(@Resources.Exit, "LogOff", "Account")
                 </li>
             </ul>
         </li>
