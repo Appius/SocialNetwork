@@ -11,7 +11,7 @@ namespace SocialNetwork.Web.Controllers
     {
         //
         // GET: /Search/
-        public ActionResult Index()
+        public ActionResult Index(string srchTerm, string currCity, bool? sex = null)
         {
             return View();
         }
