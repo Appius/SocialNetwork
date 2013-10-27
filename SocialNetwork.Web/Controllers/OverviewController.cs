@@ -7,11 +7,11 @@ using System.Web.Mvc;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public class SearchController : BaseController
+    public class OverviewController : BaseController
     {
         //
         // GET: /Search/
-        public ActionResult Index(string str = "search")
+        public ActionResult Index()
         {
             return View();
         }

@@ -25,7 +25,7 @@
                     <ul class="nav navbar-nav">
                         @Html.ActionMenuItem(@Resources.MyPage,"Index","User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
                         @Html.ActionMenuItem(@Resources.Friends,"Friends","Account", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
-                        @Html.ActionMenuItem(@Resources.Overview,"Overview","Home", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                        @Html.ActionMenuItem(@Resources.Overview,"Index","Overview", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
                     </ul>
 
                     @Html.Partial("_LogOnPartial")

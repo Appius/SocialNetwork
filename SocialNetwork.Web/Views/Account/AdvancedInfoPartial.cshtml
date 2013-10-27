@@ -2,7 +2,7 @@
 @model SocialNetwork.Web.ViewModels.AdvancedInfoViewModel
 
 <div class="form-edit">
-    @using (Html.BeginForm("SaveNewPassInfo", "Account", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
+    @using (Html.BeginForm("SaveAdvancedInfo", "Account", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
         <fieldset>
             @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
@@ -11,7 +11,7 @@
                 @Html.LabelFor(m => m.Activies, new {@class = "control-label"})
                 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.Activies, new {@placeholder = "Activies", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.Activies, new {@placeholder = "Activies", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.Activies)
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 @Html.LabelFor(m => m.Interests, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.Interests, new {@placeholder = "Interests", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.Interests, new {@placeholder = "Interests", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.Interests)
                 </div>
             </div>
@@ -29,8 +29,17 @@
                 @Html.LabelFor(m => m.FavoriteMusic, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.FavoriteMusic, new {@placeholder = "FavoriteMusic", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.FavoriteMusic, new {@placeholder = "FavoriteMusic", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.FavoriteMusic)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.FavoriteMovies, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.FavoriteMovies, new {@placeholder = "FavoriteMovies", @class = "form-control", @rows="5"})
+                    @Html.ValidationMessageFor(m => m.FavoriteMovies)
                 </div>
             </div>
 
@@ -38,7 +47,7 @@
                 @Html.LabelFor(m => m.FavoriteBooks, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.FavoriteBooks, new {@placeholder = "FavoriteBooks", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.FavoriteBooks, new {@placeholder = "FavoriteBooks", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.FavoriteBooks)
                 </div>
             </div>
@@ -47,7 +56,7 @@
                 @Html.LabelFor(m => m.FavoriteGames, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.FavoriteGames, new {@placeholder = "FavoriteGames", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.FavoriteGames, new {@placeholder = "FavoriteGames", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.FavoriteGames)
                 </div>
             </div>
@@ -56,7 +65,7 @@
                 @Html.LabelFor(m => m.FavoriteQuotes, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.FavoriteQuotes, new {@placeholder = "FavoriteQuotes", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.FavoriteQuotes, new {@placeholder = "FavoriteQuotes", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.FavoriteQuotes)
                 </div>
             </div>
@@ -65,7 +74,7 @@
                 @Html.LabelFor(m => m.AboutMe, new {@class = "control-label"})
 
                 <div class="controls">
-                    @Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "AboutMe", @class = "form-control", @row="10"})
+                    @Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "AboutMe", @class = "form-control", @rows="5"})
                     @Html.ValidationMessageFor(m => m.AboutMe)
                 </div>
             </div>

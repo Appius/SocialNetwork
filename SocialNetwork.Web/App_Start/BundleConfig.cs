@@ -20,7 +20,7 @@ namespace SocialNetwork.Web
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap").Include(
-                "~/Scripts/bootstrap*"));
+                "~/Scripts/bootstrap.js"));
             bundles.Add(new ScriptBundle("~/Scripts/site").Include(
                 "~/Scripts/site*"));
 

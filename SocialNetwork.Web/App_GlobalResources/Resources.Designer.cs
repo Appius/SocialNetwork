@@ -259,7 +259,7 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Любимые цытаты.
+        ///   Looks up a localized string similar to Любимые цитаты.
         /// </summary>
         public static string FavoriteQuotes {
             get {

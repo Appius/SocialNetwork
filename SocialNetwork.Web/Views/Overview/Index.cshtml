@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "SN :: Обзор пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h3>Обзор пользователей</h3>*@
+
+<div class="col-md-offset-3 col-md-6 search-form">
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get, new {@class = "navbar-form", @role = "search"}))
+    {
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+        <div class="spoiler">
+            <div class="spoiler-header">
+                <a href="#">
+                    Дополнительные параметры
+                </a>
+            </div>  
+            <div class="spoiler-text">
+                
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $('.spoiler-text').hide();
+            $('.spoiler').click(function () {
+                $('.spoiler-text').toggle(500);
+            });
+        });
+    </script>
+}
