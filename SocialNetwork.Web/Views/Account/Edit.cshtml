@@ -8,9 +8,9 @@
 }
 
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 20px;">
-    @Html.EditMenuItem("Основные данные","",act)
-    @Html.EditMenuItem("Изменение пароля","changepass",act)
-    @Html.EditMenuItem("Дополнительные данные","advanced",act)
+    @Html.MenuItem("Основные данные", "", act, "Edit", "Account")
+    @Html.MenuItem("Изменение пароля", "changepass", act, "Edit", "Account")
+    @Html.MenuItem("Дополнительные данные", "advanced", act, "Edit", "Account")
 </ul>
 
 @Html.ValidationSummary("", new {@class = "bs-callout-danger"})

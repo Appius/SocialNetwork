@@ -26,10 +26,17 @@
 }
 
 .photo img {
-    max-width: 400px;
+    max-width: 360px;
     max-height: 600px;
 }
 
+.full-height {
+    height: 100%;
+}
+
+.page-header {
+    padding-bottom: 0;
+}
 /* Styles for signin form
 -----------------------------------------------------------*/
 .form-signin {
@@ -133,15 +140,15 @@
     margin-right: 0;
 }
 
-.form-horizontal .controls {
+.form-registration .form-horizontal .controls {
     margin-left: 180px;
 }
 
-.form-horizontal .control-group {
+.form-registration .form-horizontal .control-group {
     margin-bottom: 20px;
 }
 
-.form-horizontal .control-label {
+.form-registration .form-horizontal .control-label {
     float: left;
     width: 160px;
     padding-top: 5px;
@@ -180,6 +187,21 @@
     margin-right: 20px;
 }
 
+.form-edit .controls {
+    margin-left: 170px;
+}
+
+.form-edit .form-group {
+    margin-bottom: 20px;
+}
+
+.form-edit .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+}
+
 /* Styles for edit panels
 -----------------------------------------------------------*/
 .panel-heading {
@@ -188,11 +210,23 @@
 
 /* Styles for spoilers
 -----------------------------------------------------------*/
+.spoiler {
+    margin-top: -1px;
+    border: 1px solid rgb(204, 204, 204);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
 .spoiler .spoiler-header {
     width: 100%;
+    margin: 5px;
 }
-.spoiler:hover {
+.spoiler .spoiler-header:hover {
     cursor: pointer;
+}
+
+.spoiler-text {
+    padding: 5px;
 }
 
 .spoiler a {
@@ -201,12 +235,154 @@
     text-decoration: none;
 }
 
-.spoiler-text {
-    font-size: 18px;
-}
-
 /* Styles for search-form
 -----------------------------------------------------------*/
 .search-form button[type="submit"]{
     margin-left: -1px;
+}
+
+.search-form button[type="submit"], .search-form input[type="text"]{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.search-form .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.search-form .controls {
+    margin-left: 150px;
+    width: 100%;
+}
+
+.search-form .form-group {
+    margin-bottom: 5px;
+}
+
+.search-form .control-label {
+    float: left;
+    width: 140px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+/* Styles for overview page
+-----------------------------------------------------------*/
+.users {
+}
+
+.users .users-item {
+    margin-top: 20px;
+    padding: 10px;
+    height: 200px;
+}
+
+.users .users-item {
+    border: 1px white dotted;
+}
+
+.users .users-item:hover {
+    border: 1px solid rgb(204, 204, 204);
+}
+
+.users .users-item img {
+    float: left;
+    margin-right: 10px;
+    max-width: 100px;
+    max-height: 180px;
+}
+    .users .users-item .users-user-info {
+        color: #999999;
+        font-weight: lighter;
+        float: left;
+    }
+
+/* Styles for addFriend and sendMsg blocks
+-----------------------------------------------------------*/
+.user-acts {
+    margin: 5px 0;
+}
+.user-acts a {
+    padding: 10px;
+}
+
+/* Styles for messages page
+-----------------------------------------------------------*/
+.msgs img {
+    max-width: 50px;
+    max-height: 50px;
+    float: left;
+    margin: 5px;
+}
+
+.msgs .posted-date {
+    color: #999999;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+/* Styles for new message page
+-----------------------------------------------------------*/
+.msg-new {
+}
+
+.msg-new .form-horizontal .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.msg-new .form-horizontal .controls {
+    margin-left: 180px;
+}
+
+.msg-new .form-horizontal .control-group {
+    margin-bottom: 20px;
+}
+
+.msg-new .form-horizontal .control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+/* Styles for view message page
+-----------------------------------------------------------*/
+.msg-view {}
+
+.msg-view .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+    .msg-view .form-group .msg-view-label-value
+    {
+        padding: 5px;
+        margin-left: 180px;
+        font-weight: bolder;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(204, 204, 204);
+        border-radius: 4px 4px 4px 4px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        max-height: 150px;
+        overflow: scroll;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+     .msg-view .quick-answer {
+         margin-top: 20px;
+     }
+
+     .msg-view .controls input[type="submit"] {
+         margin: 10px 0;
+     }
+    .msg-view .form-group .controls {
+            margin-left: 180px;
+    }
+.msg-view .msg-view-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
 }

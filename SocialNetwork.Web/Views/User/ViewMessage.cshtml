@@ -1,0 +1,74 @@
+﻿@model SocialNetwork.Web.ViewModels.MessageViewModel
+
+@{
+    ViewBag.Title = "SN :: Сообщение";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1 msg-view">
+    <strong>
+        <a href="@Request.UrlReferrer.PathAndQuery">&lt;- Назад</a>
+    </strong>
+    <div class="form-group">
+        <div class="msg-view-label">От</div>
+        <div class="msg-view-label-value">
+            @Model.FromUser.FirstName @Model.FromUser.LastName
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="msg-view-label">Кому</div>
+        <div class="msg-view-label-value">
+            @Model.ToUser.FirstName @Model.ToUser.LastName
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="msg-view-label">Заголовок</div>
+        <div class="msg-view-label-value">
+            @Model.Title
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="msg-view-label">Текст</div>
+        <div class="msg-view-label-value">
+            @Model.MsgText
+        </div>
+    </div>
+
+@if (Model.ToUser.Email == @User.Identity.Name)
+{
+    using (Html.BeginForm("QuickAnswer", "User", FormMethod.Post, new {@class = "form-horizontal quick-answer", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
+    {
+        @Html.Hidden("idToUser", Model.FromUser.Id)
+        @Html.Hidden("title", "FW: " + Model.Title)
+
+        <label for="msgText">Быстрый ответ</label>
+
+        <div class="controls">
+            <textarea class="form-control" cols="20" data-val="true" data-val-required="Введите текст сообщения" id="msgText" name="msgText" placeholder="Message Text" rows="5"></textarea>
+            <span class="field-validation-valid" data-valmsg-for="msgText" data-valmsg-replace="true"></span>
+        </div>
+
+        <div class="controls pull-right">
+            <input type="submit" value="Отправить" class="btn btn-success" />
+        </div>
+    }
+}
+</div>
+
+@section scripts{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $('.validation-summary-valid, .validation-summary-errors').addClass('alert alert-error');
+
+            $("form").bind('invalid-form.validate',
+                function() {
+                    $(document).find('input[type=\"submit\"]').removeAttrs('disabled');
+                }
+            );
+        });
+    </script>
+    @Scripts.Render("~/Scripts/validation")
+}

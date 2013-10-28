@@ -1,7 +1,7 @@
 ﻿@using SocialNetwork.Web.App_GlobalResources
 @model SocialNetwork.Web.ViewModels.AdvancedInfoViewModel
 
-<div class="form-edit">
+<div class="form-edit col-md-10 col-md-offset-1">
     @using (Html.BeginForm("SaveAdvancedInfo", "Account", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
         <fieldset>

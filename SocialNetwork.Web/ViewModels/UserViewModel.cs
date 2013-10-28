@@ -9,6 +9,11 @@ namespace SocialNetwork.Web.ViewModels
     public class UserViewModel
     {
         /// <summary>
+        ///     Уникальный идентификатор
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         ///     Имя
         /// </summary>
         public string FirstName { get; set; }
@@ -19,14 +24,9 @@ namespace SocialNetwork.Web.ViewModels
         public string LastName { get; set; }
 
         /// <summary>
-        ///     Отчество
+        ///     День рождения
         /// </summary>
-        public string MiddleName { get; set; }
-
-        /// <summary>
-        ///     Возраст
-        /// </summary>
-        public int Old { get; set; }
+        public DateTime Birthday { get; set; }
 
         /// <summary>
         ///     Email
@@ -37,5 +37,10 @@ namespace SocialNetwork.Web.ViewModels
         ///     Город
         /// </summary>
         public string CurrentCity { get; set; }
+
+        /// <summary>
+        ///     Фото
+        /// </summary>
+        public string PhotoUrl { get; set; }
     }
 }

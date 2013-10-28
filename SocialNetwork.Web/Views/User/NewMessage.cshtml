@@ -1,0 +1,56 @@
+﻿@model SocialNetwork.Web.ViewModels.NewMessageViewModel
+@{
+    ViewBag.Title = "SN :: Новое Сообщение";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-10 col-md-offset-1 msg-new">
+    @using (Html.BeginForm("NewMessage","User",FormMethod.Post,new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
+    {
+        <fieldset>
+            @Html.HiddenFor(m=>m.Email,new{@value=Model.Email})
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ToUser, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.ToUser, new {@class = "form-control", @value=Model.ToUser, @disabled="disabled"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new {@class = "control-label"})
+
+                <div class="controls">
+                    @Html.TextBoxFor(m => m.Title, new {@placeholder = "Title", @class = "form-control"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.MsgText, new {@class = "control-label"})
+                
+                <div class="controls">
+                    @Html.TextAreaFor(m => m.MsgText, new {@placeholder = "Message Text", @class = "form-control", @rows="5"})
+                    @Html.ValidationMessageFor(m => m.MsgText)
+                </div>
+            </div>
+            <div class="controls pull-right">
+                <input type="submit" value="Отправить" class="btn btn-success" />
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $('.validation-summary-valid, .validation-summary-errors').addClass('alert alert-error');
+
+            $("form").bind('invalid-form.validate',
+                function() {
+                    $(document).find('input[type=\"submit\"]').removeAttrs('disabled');
+                }
+            );
+        });
+    </script>
+    @Scripts.Render("~/Scripts/validation")
+}

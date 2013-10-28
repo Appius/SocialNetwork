@@ -1,0 +1,64 @@
+﻿@using SocialNetwork.Web.Core
+@model IPagedList<SocialNetwork.Web.ViewModels.MessageViewModel>
+
+@{
+    var act = Request["act"] ?? (string) ViewBag.Act ?? string.Empty;
+    ViewBag.Title = "SN :: Сообщения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="nav nav-pills nav-stacked col-md-3">
+    @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Входящие сообщения", "", act, "Messages", "User", (int)@ViewBag.CountNewMsgInbox).ToHtmlString()))
+    @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Исходящие сообщения", "outbox", act, "Messages", "User", (int)@ViewBag.CountNewMsgOutbox).ToHtmlString()))
+</ul>
+
+<div class="col-md-9">
+@if (Model.Any())
+{
+    <table class="table msgs">
+        <tbody>
+            @foreach (var msg in Model)
+            {
+                <tr @if (!msg.IsRead){<text>class="active"</text>}>
+                    <td width="220px;">
+                        <img class="img-rounded" alt="avt" src="@msg.PhotoUrl" />
+
+                        <strong>
+                            @switch (act)
+                            {
+                                case "outbox":
+                                {
+                                    var name = string.Format("{0} {1}", msg.ToUser.FirstName, msg.ToUser.LastName);
+                                    @Html.ActionLink(name, "Index", "User", new {@id = msg.ToUser.Id}, null)
+                                    break;
+                                }
+                                default:
+                                {
+                                    var name = string.Format("{0} {1}", msg.FromUser.FirstName, msg.FromUser.LastName);
+                                    @Html.ActionLink(name, "Index", "User", new {@id = msg.FromUser.Id}, null)
+                                    break;
+                                }
+                            }
+                        </strong> <br />
+                        <small class="posted-date">
+                            @msg.PostedDate.ToShortDateString()
+                        </small>
+                    </td>
+                    <td>
+                        <strong>@Html.ActionLink(msg.Title,"ViewMessage","User",new{id=msg.Id},null)</strong><br/>
+                        @(msg.MsgText.Length > 50 ? msg.MsgText.Substring(0, 50)+"..." : msg.MsgText)
+                    </td>
+                    <td width="30px;" style="vertical-align: middle;">
+                        @Html.ActionGlyph("RemoveMessage","User", new { id = msg.Id }, "glyphicon-remove","Удалить", "Вы точно хотите удалить сообщение?")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination"))
+}
+else
+{
+    <h5><em>Сообщений не найдено</em></h5>
+}
+</div>

@@ -29,6 +29,7 @@ namespace SocialNetwork.Core.Models.Mapping
             Property(t => t.Title).HasColumnName("Title");
             Property(t => t.MsgText).HasColumnName("MsgText");
             Property(t => t.PostedDate).HasColumnName("PostedDate");
+            Property(t => t.IsRead).HasColumnName("IsRead");
 
             // Relationships
             HasRequired(t => t.FromUser)

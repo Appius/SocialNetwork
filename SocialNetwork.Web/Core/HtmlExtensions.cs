@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -49,7 +50,11 @@ namespace SocialNetwork.Web.Core
         /// <param name="linkText">Текст ссылки</param>
         /// <param name="act">Категория настроек</param>
         /// <param name="currentAct">Текущая категория</param>
-        public static MvcHtmlString EditMenuItem(this HtmlHelper helper, string linkText, string act, string currentAct)
+        /// <param name="controllerName">Имя контроллера</param>
+        /// <param name="newNumber">Число, которое будет отображаться справа от названия</param>
+        /// <param name="actionName">Имя метода</param>
+        public static MvcHtmlString MenuItem(this HtmlHelper helper, string linkText, string act, string currentAct,
+            string actionName, string controllerName, int newNumber = 0)
         {
             var tag = new TagBuilder("li");
 
@@ -57,7 +62,15 @@ namespace SocialNetwork.Web.Core
                 (string.IsNullOrWhiteSpace(act) && string.IsNullOrWhiteSpace(currentAct)))
                 tag.AddCssClass("active");
 
-            tag.InnerHtml = helper.ActionLink(linkText, "Edit", "Account", new {act}, null).ToString();
+            if (newNumber != 0)
+            {
+                var spanTag = new TagBuilder("span");
+                spanTag.AddCssClass("badge pull-right");
+                spanTag.InnerHtml = newNumber.ToString(CultureInfo.InvariantCulture);
+                linkText = linkText + spanTag;
+            }
+
+            tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName, new {act}, null).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }
@@ -100,6 +113,39 @@ namespace SocialNetwork.Web.Core
             imgBuilder.MergeAttribute("src", url.Content(imagePath));
             imgBuilder.MergeAttribute("alt", alt);
             imgBuilder.MergeAttribute("title", alt);
+            var imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);
+
+            // build the <a> tag
+            var anchorBuilder = new TagBuilder("a");
+            if (!String.IsNullOrEmpty(confirm))
+            {
+                anchorBuilder.MergeAttribute("onclick", "return confirm('" + confirm + "');");
+            }
+            anchorBuilder.MergeAttribute("href", url.Action(action, controller, routeValues));
+            anchorBuilder.InnerHtml = imgHtml; // include the <img> tag inside
+            var anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);
+
+            return MvcHtmlString.Create(anchorHtml);
+        }
+
+        /// <summary>
+        ///     Картинка-ссылка с подтверждением
+        /// </summary>
+        /// <param name="html">HtmlHelper</param>
+        /// <param name="action">Метод в контроллере</param>
+        /// <param name="controller">Контроллер</param>
+        /// <param name="routeValues">Роуты</param>
+        /// <param name="glyphName">Иконка</param>
+        /// <param name="alt">Замещающий текст</param>
+        /// <param name="confirm">Текст подтверждения</param>
+        public static MvcHtmlString ActionGlyph(this HtmlHelper html, string action, string controller,
+            object routeValues, string glyphName, string alt, string confirm)
+        {
+            var url = new UrlHelper(html.ViewContext.RequestContext);
+
+            // build the <img> tag
+            var imgBuilder = new TagBuilder("span");
+            imgBuilder.MergeAttribute("class", "glyphicon " + glyphName);
             var imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);
 
             // build the <a> tag

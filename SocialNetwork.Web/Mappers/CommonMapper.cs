@@ -16,6 +16,8 @@ namespace SocialNetwork.Web.Mappers
             Mapper.CreateMap<RegisterViewModel, User>();
             Mapper.CreateMap<User, AdvancedInfoViewModel>();
             Mapper.CreateMap<User, GeneralInfoViewModel>();
+            Mapper.CreateMap<User, UserViewModel>();
+            Mapper.CreateMap<Message, MessageViewModel>();
         }
 
         public object Map(object source, Type sourceType, Type destinationType)

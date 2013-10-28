@@ -1,0 +1,39 @@
+﻿@model PaginationModel
+<div class="text-center">
+    <ul class="pagination">
+        @foreach (var link in Model.PaginationLinks)
+        {
+            @BuildLink(link)
+        }
+    </ul>
+</div>
+
+@helper BuildLink(PaginationLink link)
+{
+    var liBuilder = new TagBuilder("li");
+    if (link.IsCurrent)
+    {
+        liBuilder.MergeAttribute("class", "active");
+    }
+    if (!link.Active)
+    {
+        liBuilder.MergeAttribute("class", "disabled");
+    }
+
+    var aBuilder = new TagBuilder("a");
+    aBuilder.MergeAttribute("href", link.Url ?? "#");
+    switch (link.DisplayText)
+    {
+        case "«":
+            aBuilder.SetInnerText("←");
+            break;
+        case "»":
+            aBuilder.SetInnerText("→");
+            break;
+        default:
+            aBuilder.SetInnerText(link.DisplayText);
+            break;
+    }
+    liBuilder.InnerHtml = aBuilder.ToString();
+    @Html.Raw(liBuilder.ToString())
+}

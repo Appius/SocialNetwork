@@ -22,10 +22,14 @@
 else
 {
     <div class="row user-info">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="page-header">
                 <h3>
-                    @Model.FirstName <em>@Model.MiddleName</em> @Model.LastName @if(User.Identity.Name == Model.Email){<small>@Html.ActionLink("[редактировать]", "Edit", "Account")</small>}
+                    @Model.FirstName "<em>@Model.MiddleName</em>" @Model.LastName
+                    @if (User.Identity.Name == Model.Email)
+                    {
+                        <small>@Html.ActionLink("[редактировать]", "Edit", "Account")</small>
+                    }
                 </h3>
 
             </div>
@@ -93,14 +97,21 @@ else
                 </p>
             }
         </div>
-        <div class="col-md-6 photo">
+        <div class="col-md-4 photo pull-right text-center">
             @if (ViewBag.PhotoUrl == null)
             {
-                <img class="img-rounded pull-right" alt="photo" src="~/Pics/no-photo.bmp" height="600"/>
+                <img class="img-rounded" alt="photo" src="~/Pics/no-photo.bmp" height="600"/>
             }
             else
             {
-                <img class="img-rounded pull-right" alt="photo" src="@ViewBag.PhotoUrl"/>
+                <img class="img-rounded" alt="photo" src="@ViewBag.PhotoUrl"/>
+            }
+            @if (User.Identity.Name != Model.Email)
+            {
+                <div class="user-acts">
+                    @Html.ActionLink("Написать сообщение","NewMessage","User",new {@idToUser=Model.Id},new {@class="btn btn-primary btn-block btn-lg"})
+                    @Html.ActionLink("Добавить в друзья","NewMessage","User",new {@idToUser=Model.Id},new {@class="btn btn-primary btn-block btn-lg"})
+                </div>
             }
         </div>
     </div>

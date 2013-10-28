@@ -1,0 +1,26 @@
+﻿@model SocialNetwork.Web.ViewModels.UserViewModel
+
+<div>
+    <img class="img-rounded" alt="avt" src="@Model.PhotoUrl" />
+</div>
+
+<h4>
+    @{
+        var name = string.Format("{0} {1}", Model.FirstName, Model.LastName);
+        @Html.ActionLink(name, "Index", "User", new {@id = Model.Id}, null)
+    }
+</h4>
+<div class="users-user-info">
+    <p>
+        Дата рождения: <strong>@Model.Birthday.ToShortDateString()</strong>
+    </p>
+    <p>
+        Email: <strong>@Model.Email</strong>
+    </p>
+    @if (!string.IsNullOrWhiteSpace(Model.CurrentCity))
+    {
+        <p>
+            Город: <strong>@Model.CurrentCity</strong>
+        </p>
+    }
+</div>

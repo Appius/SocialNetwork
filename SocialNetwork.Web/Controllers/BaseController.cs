@@ -12,13 +12,18 @@ namespace SocialNetwork.Web.Controllers
 {
     public class BaseController : Controller
     {
+        /// <summary>
+        ///     Дефолтное количество пользователей на странице
+        /// </summary>
+        protected const int DefaultPageSize = 9;
+
         protected BaseController(IAuthentication auth, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             Auth = auth;
             UserRepository = userRepository;
             RoleRepository = roleRepository;
         }
-        
+
         protected BaseController()
             : this(
                 DependencyResolver.Current.GetService<IAuthentication>(),

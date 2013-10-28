@@ -331,6 +331,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сообщения.
+        /// </summary>
+        public static string Messages {
+            get {
+                return ResourceManager.GetString("Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отчество.
         /// </summary>
         public static string MiddleName {
@@ -345,6 +354,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string Mobile {
             get {
                 return ResourceManager.GetString("Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сообщение.
+        /// </summary>
+        public static string Msg {
+            get {
+                return ResourceManager.GetString("Msg", resourceCulture);
             }
         }
         
@@ -408,6 +426,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string NoLastName {
             get {
                 return ResourceManager.GetString("NoLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введите текст сообщения.
+        /// </summary>
+        public static string NoMsgText {
+            get {
+                return ResourceManager.GetString("NoMsgText", resourceCulture);
             }
         }
         
@@ -565,11 +592,29 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Заголовок.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Слишком длинное название....
         /// </summary>
         public static string TooManySymbols {
             get {
                 return ResourceManager.GetString("TooManySymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кому.
+        /// </summary>
+        public static string ToUser {
+            get {
+                return ResourceManager.GetString("ToUser", resourceCulture);
             }
         }
         

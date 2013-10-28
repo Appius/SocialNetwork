@@ -20,20 +20,22 @@ namespace SocialNetwork.Core.Models
         /// <summary>
         ///     Заголовок сообщения (необязательно)
         /// </summary>
-        [Display(Name = "Заголовок сообщения")]
         public string Title { get; set; }
 
         /// <summary>
         ///     Текст сообщения
         /// </summary>
-        [Required]
-        [Display(Name = "Текст сообщения*")]
         public string MsgText { get; set; }
 
         /// <summary>
         ///     Время посылки сообщения
         /// </summary>
         public DateTime PostedDate { get; set; }
+
+        /// <summary>
+        ///     Прочитано сообщение или нет
+        /// </summary>
+        public bool IsRead { get; set; }
 
         public int User1Id { get; set; }
         public int User2Id { get; set; }
