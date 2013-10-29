@@ -7,6 +7,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!string.IsNullOrWhiteSpace(Request["success"]))
+{
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Успех!</strong> Сообщение отправлено успешно!
+    </div>
+}
+
 <ul class="nav nav-pills nav-stacked col-md-3">
     @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Входящие сообщения", "", act, "Messages", "User", (int)@ViewBag.CountNewMsgInbox).ToHtmlString()))
     @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Исходящие сообщения", "outbox", act, "Messages", "User", (int)@ViewBag.CountNewMsgOutbox).ToHtmlString()))
@@ -45,7 +53,7 @@
                         </small>
                     </td>
                     <td>
-                        <strong>@Html.ActionLink(msg.Title,"ViewMessage","User",new{id=msg.Id},null)</strong><br/>
+                        <strong>@Html.ActionLink(msg.Title ?? "No title","ViewMessage","User",new{id=msg.Id},null)</strong><br/>
                         @(msg.MsgText.Length > 50 ? msg.MsgText.Substring(0, 50)+"..." : msg.MsgText)
                     </td>
                     <td width="30px;" style="vertical-align: middle;">

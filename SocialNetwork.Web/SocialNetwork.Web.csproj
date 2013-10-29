@@ -276,7 +276,7 @@
     <Content Include="Views\Overview\UserPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapPagination.cshtml" />
     <Content Include="Views\User\Messages.cshtml" />
-    <Content Include="Views\User\NewMessage.cshtml" />
+    <Content Include="Views\User\NewMessagePartial.cshtml" />
     <Content Include="Views\User\ViewMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>

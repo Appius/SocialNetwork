@@ -1,4 +1,5 @@
-﻿@model SocialNetwork.Core.Models.User
+﻿@using SocialNetwork.Web.ViewModels
+@model SocialNetwork.Core.Models.User
 @{
     if (Model == null)
     {
@@ -109,8 +110,8 @@ else
             @if (User.Identity.Name != Model.Email)
             {
                 <div class="user-acts">
-                    @Html.ActionLink("Написать сообщение","NewMessage","User",new {@idToUser=Model.Id},new {@class="btn btn-primary btn-block btn-lg"})
-                    @Html.ActionLink("Добавить в друзья","NewMessage","User",new {@idToUser=Model.Id},new {@class="btn btn-primary btn-block btn-lg"})
+                    <a data-toggle="modal" href="#NewMsg" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Написать сообщение</a>
+                    <a data-toggle="modal" href="#AddFriend" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Добавить в друзья</a>
                 </div>
             }
         </div>
@@ -172,4 +173,21 @@ else
             <div class="panel-body">@Model.FavoriteQuotes</div>
         </div>
     }
+}
+
+@Html.Partial("NewMessagePartial", new NewMessageViewModel{ToUser = Model.FirstName + " " + Model.LastName, Email = Model.Email})
+
+@section scripts{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            $('.validation-summary-valid, .validation-summary-errors').addClass('alert alert-error');
+
+            $("form").bind('invalid-form.validate',
+                function() {
+                    $(document).find('input[type=\"submit\"]').removeAttrs('disabled');
+                }
+            );
+        });
+    </script>
+    @Scripts.Render("~/Scripts/validation")
 }

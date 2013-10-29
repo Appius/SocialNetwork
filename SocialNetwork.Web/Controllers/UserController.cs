@@ -95,7 +95,7 @@ namespace SocialNetwork.Web.Controllers
         /// <param name="idToUser">Кому предназначается сообщение</param>
         [HttpGet]
         [Authorize]
-        public ActionResult NewMessage(int? idToUser)
+        public ActionResult NewMessagePartial(int? idToUser)
         {
             if (idToUser != null)
             {
@@ -117,7 +117,7 @@ namespace SocialNetwork.Web.Controllers
         /// </summary>
         [HttpPost]
         [Authorize]
-        public ActionResult NewMessage(NewMessageViewModel model)
+        public ActionResult NewMessagePartial(NewMessageViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -128,8 +128,8 @@ namespace SocialNetwork.Web.Controllers
                     var messageRepository = DependencyResolver.Current.GetService<IMessageRepository>();
                     messageRepository.SentMessage(CurrentUser, toUser, model.MsgText, model.Title);
 
-                    if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
-                    return RedirectToAction("Index", "User");
+//                    if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
+                    return RedirectToAction("Messages", "User", new {@act = "outbox", @success = 1});
                 }
                 catch (Exception)
                 {

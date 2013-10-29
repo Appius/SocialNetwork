@@ -322,29 +322,10 @@
     font-size: 12px;
 }
 
-/* Styles for new message page
+/* Styles for new message partial view
 -----------------------------------------------------------*/
 .msg-new {
-}
-
-.msg-new .form-horizontal .form-group{
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.msg-new .form-horizontal .controls {
-    margin-left: 180px;
-}
-
-.msg-new .form-horizontal .control-group {
-    margin-bottom: 20px;
-}
-
-.msg-new .form-horizontal .control-label {
-    float: left;
-    width: 160px;
-    padding-top: 5px;
-    text-align: right;
+    margin: 0 10px;
 }
 
 /* Styles for view message page
