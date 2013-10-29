@@ -18,6 +18,7 @@ namespace SocialNetwork.Core.Models.Mapping
             // Table & Column Mappings
             ToTable("FriendShips");
             Property(t => t.Id).HasColumnName("Id");
+            Property(t => t.Message).HasColumnName("Message");
             Property(t => t.User1Id).HasColumnName("User1Id");
             Property(t => t.User2Id).HasColumnName("User2Id");
             Property(t => t.RequestDate).HasColumnName("RequestDate");

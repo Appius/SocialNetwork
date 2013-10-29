@@ -22,6 +22,10 @@ namespace SocialNetwork.Core.Models
         /// </summary>
         public DateTime RequestDate { get; set; }
 
+        /// <summary>
+        ///     Сообщение при посылки запроса
+        /// </summary>
+        public string Message { get; set; }
 
         public int User1Id { get; set; }
         public int User2Id { get; set; }

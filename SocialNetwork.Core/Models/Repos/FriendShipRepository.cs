@@ -17,13 +17,15 @@ namespace SocialNetwork.Core.Models.Repos
         /// </summary>
         /// <param name="fromUser">Пользователь, который послал запрос</param>
         /// <param name="toUser">Пользователь, которому пришло приглашение</param>
-        public void SentRequest(User fromUser, User toUser)
+        /// <param name="msg">Сообщение</param>
+        public void SentRequest(User fromUser, User toUser, string msg)
         {
             SentRequest(new FriendShip
             {
                 RequestDate = DateTime.Now,
-                FromUser = fromUser,
-                ToUser = toUser
+                User1Id = fromUser.Id,
+                User2Id = toUser.Id,
+                Message = msg
             });
         }
 

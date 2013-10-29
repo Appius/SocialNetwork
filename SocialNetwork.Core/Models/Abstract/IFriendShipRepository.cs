@@ -13,7 +13,8 @@ namespace SocialNetwork.Core.Models.Abstract
         /// </summary>
         /// <param name="fromUser">Пользователь, который послал запрос</param>
         /// <param name="toUser">Пользователь, которому пришло приглашение</param>
-        void SentRequest(User fromUser, User toUser);
+        /// <param name="msg">Сообщение</param>
+        void SentRequest(User fromUser, User toUser, string msg);
 
         /// <summary>
         ///     Послать запрос на дружбу

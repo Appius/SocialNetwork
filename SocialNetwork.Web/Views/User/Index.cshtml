@@ -26,7 +26,7 @@ else
         <div class="col-md-8">
             <div class="page-header">
                 <h3>
-                    @Model.FirstName <em>"@Model.MiddleName"</em> @Model.LastName
+                    @Model.FirstName @if(!string.IsNullOrWhiteSpace(Model.MiddleName)){<text><em>"@Model.MiddleName"</em></text>} @Model.LastName
                     @if (User.Identity.Name == Model.Email)
                     {
                         <small>@Html.ActionLink("[редактировать]", "Edit", "Account")</small>
