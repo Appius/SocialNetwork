@@ -235,6 +235,9 @@ namespace SocialNetwork.Web.Controllers
 
                     UserRepository.Update(user);
 
+                    if (CurrentUser.Email != user.Email)
+                        LogOff();
+                    
                     return RedirectToAction("Edit", "Account", new { success = 1 });
                 }
                 catch (Exception)
