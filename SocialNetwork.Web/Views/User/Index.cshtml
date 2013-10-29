@@ -176,6 +176,7 @@ else
 }
 
 @Html.Partial("NewMessagePartial", new NewMessageViewModel{ToUser = Model.FirstName + " " + Model.LastName, Email = Model.Email})
+@Html.Partial("AddFriendPartial", new AddFriendViewModel{ToUser = Model.FirstName + " " + Model.LastName, Email = Model.Email})
 
 @section scripts{
     <script type="text/javascript" language="javascript">

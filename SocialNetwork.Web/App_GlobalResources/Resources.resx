@@ -309,4 +309,7 @@
   <data name="ToUser" xml:space="preserve">
     <value>Кому</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
 </root>

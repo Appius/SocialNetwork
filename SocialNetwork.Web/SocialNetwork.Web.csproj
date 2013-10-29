@@ -278,6 +278,7 @@
     <Content Include="Views\User\Messages.cshtml" />
     <Content Include="Views\User\NewMessagePartial.cshtml" />
     <Content Include="Views\User\ViewMessage.cshtml" />
+    <Content Include="Views\User\AddFriendPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

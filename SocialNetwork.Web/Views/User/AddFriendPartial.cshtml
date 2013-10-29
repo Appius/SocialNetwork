@@ -1,13 +1,13 @@
-﻿@model SocialNetwork.Web.ViewModels.NewMessageViewModel
+﻿@model SocialNetwork.Web.ViewModels.AddFriendViewModel
 
-<div class="modal fade" id="NewMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="AddFriend" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            @using (Html.BeginForm("NewMessagePartial", "User", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
+            @using (Html.BeginForm("AddFriendPartial", "User", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
             {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Новое сообщение</h4>
+                    <h4 class="modal-title">Запрос на дружбу</h4>
                 </div>
                 <div class="modal-body">
                     <div class="msg-new">
@@ -23,18 +23,11 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(m => m.Title, new {@class = "control-label"})
-
-                                <div class="controls">
-                                    @Html.TextBoxFor(m => m.Title, new {@placeholder = "Title", @class = "form-control"})
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.MsgText, new {@class = "control-label"})
+                                @Html.LabelFor(m => m.Message, new {@class = "control-label"})
                 
                                 <div class="controls">
-                                    @Html.TextAreaFor(m => m.MsgText, new {@placeholder = "Message Text", @class = "form-control", @rows = "5"})
-                                    @Html.ValidationMessageFor(m => m.MsgText)
+                                    @Html.TextAreaFor(m => m.Message, new {@placeholder = "Message Text", @class = "form-control", @rows = "5"})
+                                    @Html.ValidationMessageFor(m => m.Message)
                                 </div>
                             </div>
                         </fieldset>

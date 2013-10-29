@@ -89,7 +89,7 @@ namespace SocialNetwork.Web.Controllers
             return View(msgsViewModels);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Создание нового сообщения
         /// </summary>
         /// <param name="idToUser">Кому предназначается сообщение</param>
@@ -110,7 +110,7 @@ namespace SocialNetwork.Web.Controllers
                 return View(msg);
             }
             return View();
-        }
+        }*/
 
         /// <summary>
         /// Создание нового сообщения
@@ -128,7 +128,6 @@ namespace SocialNetwork.Web.Controllers
                     var messageRepository = DependencyResolver.Current.GetService<IMessageRepository>();
                     messageRepository.SentMessage(CurrentUser, toUser, model.MsgText, model.Title);
 
-//                    if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
                     return RedirectToAction("Messages", "User", new {@act = "outbox", @success = 1});
                 }
                 catch (Exception)
@@ -212,6 +211,33 @@ namespace SocialNetwork.Web.Controllers
 
             if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
             return RedirectToAction("Messages", "User");
+        }
+
+        /// <summary>
+        /// Создание запроса на дружбу
+        /// </summary>
+        /// <param name="model">Кому предназначается</param>
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddFriendPartial(AddFriendViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var toUser = UserRepository.Get(model.Email);
+
+                    var friendShipRespository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+                    friendShipRespository.SentRequest(CurrentUser, toUser, model.Message);
+
+                    return RedirectToAction("Friends", "User", new { @act = "requests", @success = 1 });
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", Resources.SomethingWrong);
+                }
+            }
+            return View(model);
         }
     }
 }
