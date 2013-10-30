@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Configuration;
 using System.Web.Mvc;
 using MvcPaging;
 using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
-using SocialNetwork.Core.Models.Repos;
 using SocialNetwork.Web.App_GlobalResources;
 using SocialNetwork.Web.Mappers;
 using SocialNetwork.Web.ViewModels;
@@ -24,29 +22,37 @@ namespace SocialNetwork.Web.Controllers
     public class UserController : BaseController
     {
         /// <summary>
-        /// Главная страница просмотра информации о пользователе
+        ///     Главная страница просмотра информации о пользователе
         /// </summary>
         /// <param name="id">Уникальный идентификатор пользователя (0 - твоя страница)</param>
         [Authorize]
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int? id)
         {
-            if (id == 0) id = CurrentUser.Id;
-            var user = UserRepository.Get(id);
+            if (id == null) id = CurrentUser.Id;
+            var user = UserRepository.Get((int)id);
 
             if (user == null) return View();
+
+            var mapper = DependencyResolver.Current.GetService<IMapper>();
+            var userFullInfo = (UserFullInfoViewModel)mapper.Map(user, typeof(User), typeof(UserFullInfoViewModel));
+
+            var fileName = user.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
+            var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
+            userFullInfo.PhotoUrl = Url.Content(System.IO.File.Exists(path)
+                ? Path.Combine(Url.Content("~/Pics/"), fileName)
+                : Url.Content("~/Pics/no-photo.bmp"));
 
             var photoName = user.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
             var photoPath = Path.Combine(Server.MapPath("~/Pics"), photoName);
 
             if (System.IO.File.Exists(photoPath))
-            {
                 ViewBag.PhotoUrl = Url.Content(Path.Combine(Url.Content("~/Pics/"), photoName));
-            }
-            return View(user);
+
+            return View(userFullInfo);
         }
 
         /// <summary>
-        /// Страница просмотра сообщений
+        ///     Страница просмотра сообщений
         /// </summary>
         /// <param name="page">Номер страницы</param>
         /// <param name="act">Категория</param>
@@ -62,7 +68,7 @@ namespace SocialNetwork.Web.Controllers
             switch (act)
             {
                 case "outbox":
-                    msgs = messageRepository.GetOutbox(CurrentUser).OrderByDescending(item=>item.PostedDate).ToList();
+                    msgs = messageRepository.GetOutbox(CurrentUser).OrderByDescending(item => item.PostedDate).ToList();
                     break;
                 default:
                     msgs = messageRepository.GetInbox(CurrentUser).OrderByDescending(item => item.PostedDate).ToList();
@@ -75,12 +81,14 @@ namespace SocialNetwork.Web.Controllers
 
             msgsViewModels.ForEach(delegate(MessageViewModel model)
             {
-                var fileName = (act == "outbox" ? model.ToUser.Id : model.FromUser.Id).ToString(CultureInfo.InvariantCulture).ComputeStringHash();
+                var fileName =
+                    (act == "outbox" ? model.ToUser.Id : model.FromUser.Id).ToString(CultureInfo.InvariantCulture)
+                        .ComputeStringHash();
                 var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
 
                 model.PhotoUrl = Url.Content(System.IO.File.Exists(path)
-                        ? Path.Combine(Url.Content("~/Pics/"), fileName)
-                        : Url.Content("~/Pics/no-photo.bmp"));
+                    ? Path.Combine(Url.Content("~/Pics/"), fileName)
+                    : Url.Content("~/Pics/no-photo.bmp"));
             });
 
             ViewBag.CountNewMsgInbox = messageRepository.GetInbox(CurrentUser).Count(item => !item.IsRead);
@@ -113,7 +121,7 @@ namespace SocialNetwork.Web.Controllers
         }*/
 
         /// <summary>
-        /// Создание нового сообщения
+        ///     Создание нового сообщения
         /// </summary>
         [HttpPost]
         [Authorize]
@@ -139,7 +147,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Просмотр сообщения
+        ///     Просмотр сообщения
         /// </summary>
         /// <param name="id">Уникальный идентификатор сообщения</param>
         /// <returns></returns>
@@ -160,7 +168,8 @@ namespace SocialNetwork.Web.Controllers
                     messageRepository.Update(message);
                 }
 
-                var messageViewModel = (MessageViewModel)mapper.Map(message, typeof(Message), typeof(MessageViewModel));
+                var messageViewModel =
+                    (MessageViewModel) mapper.Map(message, typeof (Message), typeof (MessageViewModel));
 
                 return View(messageViewModel);
             }
@@ -168,7 +177,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Быстрый ответ
+        ///     Быстрый ответ
         /// </summary>
         /// <param name="idToUser">Кому отвечаем</param>
         /// <param name="title">Заголовок</param>
@@ -197,7 +206,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Удаление сообщения
+        ///     Удаление сообщения
         /// </summary>
         /// <param name="id">Идентификатор сообщения</param>
         [Authorize]
@@ -214,7 +223,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Создание запроса на дружбу
+        ///     Создание запроса на дружбу
         /// </summary>
         /// <param name="model">Кому предназначается</param>
         [HttpPost]
@@ -230,7 +239,7 @@ namespace SocialNetwork.Web.Controllers
                     var friendShipRespository = DependencyResolver.Current.GetService<IFriendShipRepository>();
                     friendShipRespository.SentRequest(CurrentUser, toUser, model.Message);
 
-                    return RedirectToAction("Friends", "User", new { @act = "requests", @success = 1 });
+                    return RedirectToAction("Friends", "User", new { @act = "outboxrequests", @success = 1 });
                 }
                 catch (Exception)
                 {
@@ -238,6 +247,105 @@ namespace SocialNetwork.Web.Controllers
                 }
             }
             return View(model);
+        }
+
+        /// <summary>
+        ///     Страница просмотра друзей, а так же входящих и исходящих заявок в друзья
+        /// </summary>
+        public ActionResult Friends(int? page, string act = "")
+        {
+            var mapper = DependencyResolver.Current.GetService<IMapper>();
+            var currentPageIndex = page.HasValue ? page.Value - 1 : 0;
+
+            var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+
+            IEnumerable<FriendShip> friendShips;
+            IPagedList<FriendShipRequestViewModel> friendShipRequestViewModel;
+            switch (act)
+            {
+                case "inboxrequests":
+                    friendShips =
+                        friendshipRepository.GetInboxRequests(CurrentUser).OrderByDescending(item => item.RequestDate).ToList();
+                    friendShipRequestViewModel = friendShips.Select(
+                        item =>
+                        {
+                            var temp = (FriendShipRequestViewModel)
+                                mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel));
+                            temp.Message = item.Message;
+                            temp.RequestDate = item.RequestDate;
+                            return temp;
+                        }).ToPagedList(currentPageIndex, DefaultPageSize);
+                    break;
+                case "outboxrequests":
+                    friendShips = friendshipRepository.GetOutboxRequests(CurrentUser).OrderByDescending(item => item.RequestDate).ToList();
+                    friendShipRequestViewModel = friendShips.Select(
+                        item =>
+                        {
+                            var temp = (FriendShipRequestViewModel)
+                                mapper.Map(item.ToUser, typeof (User), typeof (FriendShipRequestViewModel));
+                            temp.Message = item.Message;
+                            temp.RequestDate = item.RequestDate;
+                            return temp;
+                        }).ToPagedList(currentPageIndex, DefaultPageSize);
+                    break;
+                default:
+                    friendShips = friendshipRepository.GetFriends(CurrentUser).ToList();
+                    friendShipRequestViewModel = friendShips.Select(
+                        item => (FriendShipRequestViewModel)
+                            mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel)))
+                        .ToPagedList(currentPageIndex, DefaultPageSize);
+                    break;
+            }
+
+            friendShipRequestViewModel.ForEach(delegate(FriendShipRequestViewModel model)
+            {
+                var fileName = model.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
+                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
+
+                model.PhotoUrl = Url.Content(System.IO.File.Exists(path)
+                    ? Path.Combine(Url.Content("~/Pics/"), fileName)
+                    : Url.Content("~/Pics/no-photo.bmp"));
+            });
+
+            ViewBag.CountNewRequestsInbox = friendshipRepository.GetInboxRequests(CurrentUser).Count();
+            ViewBag.CountNewRequestsOutbox = friendshipRepository.GetOutboxRequests(CurrentUser).Count();
+
+            return View(friendShipRequestViewModel);
+        }
+
+        /// <summary>
+        ///     Подтвердить запрос на дружбу
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        public ActionResult ConfirmFriendRequest(int? id)
+        {
+            if (id == null)
+                if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
+                else return RedirectToAction("Index", "Home");
+
+            var fromUser = UserRepository.Get((int) id);
+            var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+            friendshipRepository.Confirm(fromUser, CurrentUser);
+
+            return RedirectToAction("Index", "User", new {id});
+        }
+
+        /// <summary>
+        ///     Удалить запрос на дружбу
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя</param>
+        public ActionResult RemoveFriendRequest(int? id)
+        {
+            if (id == null)
+                if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
+                else return RedirectToAction("Index", "Home");
+
+            var fromUser = UserRepository.Get((int) id);
+            var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+            friendshipRepository.Remove(fromUser, CurrentUser);
+
+            if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

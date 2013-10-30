@@ -199,13 +199,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AddFriendViewModel.cs" />
     <Compile Include="ViewModels\AdvancedInfoViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\FriendShipRequestViewModel.cs" />
     <Compile Include="ViewModels\GeneralInfoViewModel.cs" />
     <Compile Include="ViewModels\LogOnViewModel.cs" />
     <Compile Include="ViewModels\MessageViewModel.cs" />
     <Compile Include="ViewModels\NewMessageViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\UserFullInfoViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -279,6 +282,8 @@
     <Content Include="Views\User\NewMessagePartial.cshtml" />
     <Content Include="Views\User\ViewMessage.cshtml" />
     <Content Include="Views\User\AddFriendPartial.cshtml" />
+    <Content Include="Views\User\Friends.cshtml" />
+    <Content Include="Views\User\UserPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,6 +37,11 @@
 .page-header {
     padding-bottom: 0;
 }
+
+.middle {
+    vertical-align: middle !important;
+}
+
 /* Styles for signin form
 -----------------------------------------------------------*/
 .form-signin {
@@ -366,4 +371,19 @@
     width: 160px;
     padding-top: 5px;
     text-align: right;
+}
+
+/* Styles for friends page
+-----------------------------------------------------------*/
+.friends img {
+    max-width: 50px;
+    max-height: 50px;
+    float: left;
+    margin: 5px;
+}
+
+.friends .posted-date {
+    color: #999999;
+    font-weight: lighter;
+    font-size: 12px;
 }

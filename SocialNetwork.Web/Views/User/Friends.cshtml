@@ -1,0 +1,80 @@
+﻿@using System.Globalization
+@using SocialNetwork.Web.Core
+@model IPagedList<SocialNetwork.Web.ViewModels.FriendShipRequestViewModel>
+
+@{
+    var act = Request["act"] ?? string.Empty;
+    ViewBag.Title = "SN :: Сообщения";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!string.IsNullOrWhiteSpace(Request["success"]))
+{
+    <div class="alert alert-success fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <strong>Успех!</strong> Запрос отправлен успешно!
+    </div>
+}
+
+<ul class="nav nav-pills nav-stacked col-md-3">
+    @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Друзья", "", act, "Friends", "User").ToHtmlString()))
+    @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Входящие запросы", "inboxrequests", act, "Friends", "User", (int)@ViewBag.CountNewRequestsInbox).ToHtmlString()))
+    @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Исходящие запросы", "outboxrequests", act, "Friends", "User", (int)@ViewBag.CountNewRequestsOutbox).ToHtmlString()))
+</ul>
+
+<div class="col-md-9">
+@if (Model.Any())
+{
+    if (!string.IsNullOrWhiteSpace(act))
+    {
+        <table class="table friends">
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td width="250px">
+                            <img class="img-rounded" alt="avt" src="@user.PhotoUrl" />
+
+                            <strong>
+                                @{
+                                    var name = string.Format("{0} {1}", user.FirstName, user.LastName);
+                                    @Html.ActionLink(name, "Index", "User", new {@id = user.Id}, null)
+                                }
+                            </strong> <br />
+                            <small class="posted-date">
+                                @user.RequestDate.ToString(CultureInfo.InvariantCulture)
+                            </small>
+                        </td>
+                        <td>
+                            @user.Message
+                        </td>
+                        <td width="150px" class="middle">
+                            @Html.ActionLink("Добавить в друзья", "ConfirmFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-success"})
+                        </td>
+                        <td width="90px" class="middle">
+                            @Html.ActionLink("Отказать", "RemoveFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-danger"})
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination"))
+    }
+    else
+    {
+        <div class="row users">
+            @foreach (var user in Model)
+            {
+                <div class="col-md-6 users-item">
+                    @Html.Partial("UserPartial", user)
+                </div>
+            }
+        </div>
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination"))
+    }
+}
+else
+{
+    <h5><em>Объектов не найдено</em></h5>
+}
+</div>

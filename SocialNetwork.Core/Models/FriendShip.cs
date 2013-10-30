@@ -31,6 +31,11 @@ namespace SocialNetwork.Core.Models
         public int User2Id { get; set; }
 
         /// <summary>
+        ///     Подтвержден ли запрос на дружбу
+        /// </summary>
+        public bool IsConfirmed { get; set; }
+
+        /// <summary>
         ///     Пользователь, который сделал запрос на дружбу
         /// </summary>
         [ForeignKey("User1Id")]
