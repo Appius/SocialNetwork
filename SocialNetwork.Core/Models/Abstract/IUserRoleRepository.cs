@@ -24,7 +24,7 @@ namespace SocialNetwork.Core.Models.Abstract
         void Delete(User user, Role role);
 
         /// <summary>
-        ///     Имеет ли пользователь заданную роль
+        ///     Имеет ли пользователь заданую роль
         /// </summary>
         /// <param name="user">Пользователь</param>
         /// <param name="role">Роль</param>

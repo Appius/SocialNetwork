@@ -50,10 +50,17 @@ namespace SocialNetwork.Core.Models.Abstract
         void Confirm(User fromUser, User toUser);
 
         /// <summary>
-        ///     Удалить заявку на дружбу
+        ///     Удалить заявку на дружбу (или дружественную связь)
         /// </summary>
         /// <param name="fromUser">От пользователя</param>
         /// <param name="toUser">К пользователю</param>
         void Remove(User fromUser, User toUser);
+
+        /// <summary>
+        ///     Возвращает true если пользователи друзья
+        /// </summary>
+        /// <param name="user1">Первый пользователь</param>
+        /// <param name="user2">Второй пользователь</param>
+        bool IsFriends(User user1, User user2);
     }
 }

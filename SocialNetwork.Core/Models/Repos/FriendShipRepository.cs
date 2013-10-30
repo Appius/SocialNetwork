@@ -102,5 +102,17 @@ namespace SocialNetwork.Core.Models.Repos
             Db.FriendShips.Remove(friendship);
             Db.SaveChanges();
         }
+
+        /// <summary>
+        ///     Возвращает true если пользователи друзья
+        /// </summary>
+        /// <param name="user1">Первый пользователь</param>
+        /// <param name="user2">Второй пользователь</param>
+        public bool IsFriends(User user1, User user2)
+        {
+            return (Db.FriendShips.FirstOrDefault(item =>
+                (item.User1Id == user1.Id && item.User2Id == user2.Id) ||
+                (item.User2Id == user1.Id && item.User1Id == user2.Id)) != null);
+        }
     }
 }

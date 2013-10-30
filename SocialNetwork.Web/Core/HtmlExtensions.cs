@@ -138,16 +138,18 @@ namespace SocialNetwork.Web.Core
         /// <param name="glyphName">Иконка</param>
         /// <param name="alt">Замещающий текст</param>
         /// <param name="confirm">Текст подтверждения</param>
+        /// <param name="cssclass">CSS класс</param>
+        /// <param name="text">Текст возле картинки</param>
         public static MvcHtmlString ActionGlyph(this HtmlHelper html, string action, string controller,
-            object routeValues, string glyphName, string alt, string confirm)
+            object routeValues, string glyphName, string alt, string confirm, string cssclass="", string text="")
         {
             var url = new UrlHelper(html.ViewContext.RequestContext);
 
             // build the <img> tag
             var imgBuilder = new TagBuilder("span");
             imgBuilder.MergeAttribute("class", "glyphicon " + glyphName);
-            var imgHtml = imgBuilder.ToString(TagRenderMode.SelfClosing);
-
+            var imgHtml = imgBuilder.ToString(TagRenderMode.Normal);
+            
             // build the <a> tag
             var anchorBuilder = new TagBuilder("a");
             if (!String.IsNullOrEmpty(confirm))
@@ -155,7 +157,13 @@ namespace SocialNetwork.Web.Core
                 anchorBuilder.MergeAttribute("onclick", "return confirm('" + confirm + "');");
             }
             anchorBuilder.MergeAttribute("href", url.Action(action, controller, routeValues));
-            anchorBuilder.InnerHtml = imgHtml; // include the <img> tag inside
+            if (!string.IsNullOrWhiteSpace(cssclass))
+                anchorBuilder.MergeAttribute("class", cssclass);
+
+//            var textBuilder = new TagBuilder("span") {InnerHtml = text};
+
+            anchorBuilder.InnerHtml = imgHtml + text;
+
             var anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);
 
             return MvcHtmlString.Create(anchorHtml);

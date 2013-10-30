@@ -48,12 +48,15 @@
                         <td>
                             @user.Message
                         </td>
-                        <td width="150px" class="middle">
-                            @Html.ActionLink("Добавить в друзья", "ConfirmFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-success"})
-                        </td>
-                        <td width="90px" class="middle">
-                            @Html.ActionLink("Отказать", "RemoveFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-danger"})
-                        </td>
+                        @if (act != "outboxrequests")
+                        {
+                            <td width="150px" class="middle">
+                                @Html.ActionLink("Добавить в друзья", "ConfirmFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-success"})
+                            </td>
+                            <td width="90px" class="middle">
+                                @Html.ActionLink("Отказать", "RemoveFriendRequest", "User", new {@id = user.Id}, new {@class = "btn btn-danger"})
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>

@@ -42,6 +42,9 @@ namespace SocialNetwork.Web.Controllers
                 ? Path.Combine(Url.Content("~/Pics/"), fileName)
                 : Url.Content("~/Pics/no-photo.bmp"));
 
+            var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+            userFullInfo.IsFriend = friendshipRepository.IsFriends(user, CurrentUser);
+
             var photoName = user.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
             var photoPath = Path.Combine(Server.MapPath("~/Pics"), photoName);
 

@@ -1,4 +1,5 @@
-﻿@using SocialNetwork.Web.ViewModels
+﻿@using SocialNetwork.Web.Core
+@using SocialNetwork.Web.ViewModels
 @model UserFullInfoViewModel
 @{
     if (Model == null)
@@ -102,8 +103,19 @@ else
             @if (User.Identity.Name != Model.Email)
             {
                 <div class="user-acts">
-                    <a data-toggle="modal" href="#NewMsg" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Написать сообщение</a>
-                    <a data-toggle="modal" href="#AddFriend" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span> Добавить в друзья</a>
+                    <a data-toggle="modal" href="#NewMsg" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-envelope"></span> Написать сообщение
+                    </a>
+                    @if (!Model.IsFriend)
+                    {
+                        <a data-toggle="modal" href="#AddFriend" class="btn btn-primary btn-sm" >
+                            <span class="glyphicon glyphicon-plus" ></span > Добавить в друзья 
+                        </a>
+                    }
+                    else
+                    {
+                        @Html.ActionGlyph("RemoveFriendRequest","User", new { id = Model.Id }, "glyphicon-remove", "", "Вы точно хотите удалить его из дурзей?", "btn btn-danger btn-sm", "Удалить из друзей")
+                    }
                 </div>
             }
         </div>

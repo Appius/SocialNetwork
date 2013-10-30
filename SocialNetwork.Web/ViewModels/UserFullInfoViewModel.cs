@@ -111,5 +111,10 @@ namespace SocialNetwork.Web.ViewModels
         ///     Блок "О себе"
         /// </summary>
         public string AboutMe { get; set; }
+
+        /// <summary>
+        /// Друг?
+        /// </summary>
+        public bool IsFriend { get; set; }
     }
 }
