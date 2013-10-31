@@ -6,11 +6,8 @@ using System.Web.Mvc;
 
 namespace SocialNetwork.Web.Areas.admin.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
-        //
-        // GET: /admin/Users/
-
         public ActionResult Index()
         {
             return View();
