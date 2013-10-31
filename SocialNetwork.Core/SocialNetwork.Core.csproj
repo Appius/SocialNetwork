@@ -69,9 +69,9 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\StreamHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Migrations\201310211121168_Test.cs" />
-    <Compile Include="Migrations\201310211121168_Test.Designer.cs">
-      <DependentUpon>201310211121168_Test.cs</DependentUpon>
+    <Compile Include="Migrations\201310311947410_db_migration.cs" />
+    <Compile Include="Migrations\201310311947410_db_migration.Designer.cs">
+      <DependentUpon>201310311947410_db_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Abstract\IFriendShipRepository.cs" />
@@ -130,8 +130,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310211121168_Test.resx">
-      <DependentUpon>201310211121168_Test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310311947410_db_migration.resx">
+      <DependentUpon>201310311947410_db_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

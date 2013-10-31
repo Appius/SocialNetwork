@@ -21,6 +21,13 @@ namespace SocialNetwork.Web.Areas.admin
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "SocialNetwork.Web.Areas.admin.Controllers" }
                 );
+
+/*            context.MapRouteLowercase(
+                "Admin_elmah",
+                "admin/elmah/{type}",
+                new {action = "Index", controller = "Elmah", type = UrlParameter.Optional}
+                );*/
+
         }
     }
 }
