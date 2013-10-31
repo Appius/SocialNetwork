@@ -5,12 +5,9 @@ using System.Globalization;
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
-using AutoMapper.Internal;
 using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
-using SocialNetwork.Core.Models.Repos;
 using SocialNetwork.Web.App_GlobalResources;
 using SocialNetwork.Web.Mappers;
 using SocialNetwork.Web.ViewModels;
@@ -21,11 +18,10 @@ namespace SocialNetwork.Web.Controllers
 {
     public class AccountController : BaseController
     {
-
         #region Private methods
 
         /// <summary>
-        /// Добавление к пользователю определенной роли
+        ///     Добавление к пользователю определенной роли
         /// </summary>
         /// <param name="user">Пользователь</param>
         /// <param name="roleName">Имя роли</param>
@@ -37,7 +33,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Добавление к пользователю определенной роли
+        ///     Добавление к пользователю определенной роли
         /// </summary>
         /// <param name="user">Пользователь</param>
         /// <param name="role">Роль</param>
@@ -48,7 +44,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         #endregion
-        
+
         public ActionResult Index()
         {
             return RedirectToAction("Index", "User");
@@ -137,7 +133,7 @@ namespace SocialNetwork.Web.Controllers
                     // добавление роли пользователю
                     AddUserToRole(UserRepository.Get(user.Email), "user");
                     // вход
-                    LogOn(new LogOnViewModel { Email = user.Email, Password = pass }, "/account/");
+                    LogOn(new LogOnViewModel {Email = user.Email, Password = pass}, "/account/");
 
                     return RedirectToAction("Index", "Account");
                 }
@@ -158,7 +154,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Страница изменения настроек
+        ///     Страница изменения настроек
         /// </summary>
         /// <param name="act">Категория настроек</param>
         [Authorize]
@@ -176,25 +172,17 @@ namespace SocialNetwork.Web.Controllers
                 }
                 case "advanced":
                 {
-                    return View(mapper.Map(CurrentUser, typeof(User), typeof(AdvancedInfoViewModel)));
+                    return View(mapper.Map(CurrentUser, typeof (User), typeof (AdvancedInfoViewModel)));
                 }
                 default:
                 {
-                    var user = (GeneralInfoViewModel)mapper.Map(CurrentUser, typeof (User), typeof (GeneralInfoViewModel));
-                    var photoName = CurrentUser.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-                    var photoPath = Path.Combine(Server.MapPath("~/Pics"), photoName);
-
-                    if (System.IO.File.Exists(photoPath))
-                    {
-                        user.AvatarUrl = Url.Content(Path.Combine(Url.Content("~/Pics/"), photoName));
-                    }
-                    return View(user);
+                    return View(mapper.Map(CurrentUser, typeof (User), typeof (GeneralInfoViewModel)));
                 }
             }
         }
 
         /// <summary>
-        /// Страница изменения настроек
+        ///     Страница изменения настроек
         /// </summary>
         [Authorize]
         [HttpPost]
@@ -204,7 +192,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Сохранение основных данных
+        ///     Сохранение основных данных
         /// </summary>
         /// <param name="model">Моделька</param>
         /// <param name="photo">Фотография пользователя</param>
@@ -212,13 +200,6 @@ namespace SocialNetwork.Web.Controllers
         [HttpPost]
         public ActionResult SaveGeneralInfo(GeneralInfoViewModel model, HttpPostedFileBase photo)
         {
-            if (photo != null && photo.ContentLength > 0)
-            {
-                var fileName = CurrentUser.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
-                photo.SaveAs(path);
-            }
-
             if (ModelState.IsValid)
             {
                 try
@@ -232,13 +213,15 @@ namespace SocialNetwork.Web.Controllers
                     user.Email = model.Email;
                     user.Website = model.Website;
                     user.CurrentCity = model.CurrentCity;
+                    if (photo != null && photo.ContentLength > 0)
+                        user.Avatar = photo.InputStream.ReadToEnd();
 
                     UserRepository.Update(user);
 
                     if (CurrentUser.Email != user.Email)
                         LogOff();
-                    
-                    return RedirectToAction("Edit", "Account", new { success = 1 });
+
+                    return RedirectToAction("Edit", "Account", new {success = 1});
                 }
                 catch (Exception)
                 {
@@ -249,7 +232,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Сохранение второстепенных данных
+        ///     Сохранение второстепенных данных
         /// </summary>
         /// <param name="model">Моделька</param>
         [Authorize]
@@ -269,7 +252,7 @@ namespace SocialNetwork.Web.Controllers
                     user.FavoriteMusic = model.FavoriteMusic;
                     user.FavoriteQuotes = model.FavoriteQuotes;
                     user.Interests = model.Interests;
-                
+
                     UserRepository.Update(user);
 
                     return RedirectToAction("Edit", "Account", new {act = "advanced", success = 1});
@@ -284,7 +267,7 @@ namespace SocialNetwork.Web.Controllers
         }
 
         /// <summary>
-        /// Сохранение второстепенных данных
+        ///     Сохранение второстепенных данных
         /// </summary>
         /// <param name="model">Моделька</param>
         [Authorize]
@@ -300,10 +283,9 @@ namespace SocialNetwork.Web.Controllers
                         CurrentUser.Password = model.NewPassword.ComputeStringHash();
                         UserRepository.Update(CurrentUser);
 
-                        return RedirectToAction("Edit", "Account", new { act = "changepass", success = 1 });
+                        return RedirectToAction("Edit", "Account", new {act = "changepass", success = 1});
                     }
-                    else
-                        ModelState.AddModelError("OldPassword", Resources.OldPasswordNotCorrect);
+                    ModelState.AddModelError("OldPassword", Resources.OldPasswordNotCorrect);
                 }
                 catch (Exception)
                 {

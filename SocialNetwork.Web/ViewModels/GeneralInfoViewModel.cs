@@ -13,6 +13,11 @@ namespace SocialNetwork.Web.ViewModels
     public class GeneralInfoViewModel
     {
         /// <summary>
+        /// Идентификатор пользователя
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         ///     Имя пользователя
         /// </summary>
         [Required(ErrorMessageResourceType = typeof (Resources), ErrorMessageResourceName = "NoName")]

@@ -29,8 +29,7 @@
             {
                 <tr @if (!msg.IsRead){<text>class="active"</text>}>
                     <td width="220px;">
-                        <img class="img-rounded" alt="avt" src="@msg.PhotoUrl" />
-
+                        <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new { id = (act == "outbox" ? msg.ToUser.Id : msg.FromUser.Id) })' alt="no-photo" />
                         <strong>
                             @switch (act)
                             {

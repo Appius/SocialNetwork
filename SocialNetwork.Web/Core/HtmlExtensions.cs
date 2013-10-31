@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using System.Web.Routing;
 
 #endregion
 
@@ -159,8 +158,6 @@ namespace SocialNetwork.Web.Core
             anchorBuilder.MergeAttribute("href", url.Action(action, controller, routeValues));
             if (!string.IsNullOrWhiteSpace(cssclass))
                 anchorBuilder.MergeAttribute("class", cssclass);
-
-//            var textBuilder = new TagBuilder("span") {InnerHtml = text};
 
             anchorBuilder.InnerHtml = imgHtml + text;
 

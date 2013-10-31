@@ -5,6 +5,7 @@
     @using (Html.BeginForm("SaveGeneralInfo", "Account", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
         <fieldset>
+            @Html.HiddenFor(m=>m.Id);
             @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
 
             <div class="form-group">
@@ -83,15 +84,8 @@
                 @Html.LabelFor(m => m.AvatarUrl, new {@class = "control-label"})
 
                 <div class="controls">
-                    @if (string.IsNullOrWhiteSpace(@Model.AvatarUrl))
-                    {
-                        <text><img src="~/Pics/no-photo.bmp" alt="photo" height="100" /></text>
-                    }
-                    else
-                    {
-                        <text><img class="img-rounded" src="@Model.AvatarUrl" alt="photo" height="100" /></text>
-                    }
-                    <input type="file" name="photo" id="photo" accept="image/*" />
+                    <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new { id = Model.Id })' alt="no-photo" />
+                    <input type="file" name="photo" id="photo" accept="image/jpeg" />
                 </div>
             </div>
 

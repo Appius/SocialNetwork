@@ -190,6 +190,8 @@
 .form-edit img {
     float: left;
     margin-right: 20px;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 .form-edit .controls {

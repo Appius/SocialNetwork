@@ -33,7 +33,7 @@
                 {
                     <tr>
                         <td width="250px">
-                            <img class="img-rounded" alt="avt" src="@user.PhotoUrl" />
+                            <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new { id = user.Id })' alt="no-photo" />
 
                             <strong>
                                 @{

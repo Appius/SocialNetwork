@@ -2,7 +2,7 @@
 @model SocialNetwork.Web.ViewModels.UserViewModel
 
 <div>
-    <img class="img-rounded" alt="avt" src="@Model.PhotoUrl" />
+    <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new { id = Model.Id })' alt="no-photo" />
 </div>
 
 <h4>

@@ -137,16 +137,6 @@ namespace SocialNetwork.Web.Controllers
                 item => (UserViewModel) mapper.Map(item, typeof (User), typeof (UserViewModel)))
                 .ToPagedList(currentPageIndex, DefaultPageSize);
 
-            usersViewModels.ForEach(delegate(UserViewModel model)
-            {
-                var fileName = model.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
-
-                model.PhotoUrl = Url.Content(System.IO.File.Exists(path)
-                        ? Path.Combine(Url.Content("~/Pics/"), fileName)
-                        : Url.Content("~/Pics/no-photo.bmp"));
-            });
-
             return View(usersViewModels);
         }
     }

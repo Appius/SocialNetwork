@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -36,20 +37,8 @@ namespace SocialNetwork.Web.Controllers
             var mapper = DependencyResolver.Current.GetService<IMapper>();
             var userFullInfo = (UserFullInfoViewModel)mapper.Map(user, typeof(User), typeof(UserFullInfoViewModel));
 
-            var fileName = user.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-            var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
-            userFullInfo.PhotoUrl = Url.Content(System.IO.File.Exists(path)
-                ? Path.Combine(Url.Content("~/Pics/"), fileName)
-                : Url.Content("~/Pics/no-photo.bmp"));
-
             var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
             userFullInfo.IsFriend = friendshipRepository.IsFriends(user, CurrentUser);
-
-            var photoName = user.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-            var photoPath = Path.Combine(Server.MapPath("~/Pics"), photoName);
-
-            if (System.IO.File.Exists(photoPath))
-                ViewBag.PhotoUrl = Url.Content(Path.Combine(Url.Content("~/Pics/"), photoName));
 
             return View(userFullInfo);
         }
@@ -81,18 +70,6 @@ namespace SocialNetwork.Web.Controllers
             var msgsViewModels = msgs.Select(
                 item => (MessageViewModel) mapper.Map(item, typeof (Message), typeof (MessageViewModel)))
                 .ToPagedList(currentPageIndex, DefaultPageSize);
-
-            msgsViewModels.ForEach(delegate(MessageViewModel model)
-            {
-                var fileName =
-                    (act == "outbox" ? model.ToUser.Id : model.FromUser.Id).ToString(CultureInfo.InvariantCulture)
-                        .ComputeStringHash();
-                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
-
-                model.PhotoUrl = Url.Content(System.IO.File.Exists(path)
-                    ? Path.Combine(Url.Content("~/Pics/"), fileName)
-                    : Url.Content("~/Pics/no-photo.bmp"));
-            });
 
             ViewBag.CountNewMsgInbox = messageRepository.GetInbox(CurrentUser).Count(item => !item.IsRead);
             ViewBag.CountNewMsgOutbox = messageRepository.GetOutbox(CurrentUser).Count(item => !item.IsRead);
@@ -299,16 +276,6 @@ namespace SocialNetwork.Web.Controllers
                         .ToPagedList(currentPageIndex, DefaultPageSize);
                     break;
             }
-
-            friendShipRequestViewModel.ForEach(delegate(FriendShipRequestViewModel model)
-            {
-                var fileName = model.Id.ToString(CultureInfo.InvariantCulture).ComputeStringHash();
-                var path = Path.Combine(Server.MapPath("~/Pics"), fileName);
-
-                model.PhotoUrl = Url.Content(System.IO.File.Exists(path)
-                    ? Path.Combine(Url.Content("~/Pics/"), fileName)
-                    : Url.Content("~/Pics/no-photo.bmp"));
-            });
 
             ViewBag.CountNewRequestsInbox = friendshipRepository.GetInboxRequests(CurrentUser).Count();
             ViewBag.CountNewRequestsOutbox = friendshipRepository.GetOutboxRequests(CurrentUser).Count();

@@ -99,7 +99,7 @@ else
         </div>
         <div class="col-md-4 photo pull-right text-center">
             
-            <img class="img-rounded" alt="photo" src="@Model.PhotoUrl"/>
+            <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new { id = Model.Id })' alt="no-photo" />
             @if (User.Identity.Name != Model.Email)
             {
                 <div class="user-acts">
