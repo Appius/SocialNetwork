@@ -26,8 +26,9 @@ namespace SocialNetwork.Web.Core
         /// <param name="controllerName">Контроллер, куда попадем</param>
         /// <param name="currentController">Текущий контроллер</param>
         /// <param name="currentAction">Текущее действие</param>
+        /// <param name="area">Зона</param>
         public static MvcHtmlString ActionMenuItem(this HtmlHelper helper, string linkText,
-            string actionName, string controllerName, string currentController, string currentAction)
+            string actionName, string controllerName, string currentController, string currentAction, string area = "")
         {
             var tag = new TagBuilder("li");
 
@@ -37,7 +38,9 @@ namespace SocialNetwork.Web.Core
                 tag.AddCssClass("active");
             }
 
-            tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName).ToString();
+            tag.InnerHtml = string.IsNullOrWhiteSpace(area)
+                ? helper.ActionLink(linkText, actionName, controllerName).ToString()
+                : helper.ActionLink(linkText, actionName, controllerName, new {Area = area}, new {}).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }
@@ -80,16 +83,22 @@ namespace SocialNetwork.Web.Core
         /// <param name="helper">HtmlHelper</param>
         public static MvcHtmlString GetAdminLink(this HtmlHelper helper)
         {
-            /*var user = HttpContext.Current.User.Identity.Name;
-            var adminUsers = ConfigurationManager.AppSettings["App.Admins"].Replace(" ", "").Split(',');
-            var userIsAdmin = Array.Exists(adminUsers, s => s == user);
-            if (userIsAdmin)
+            if (HttpContext.Current.User.IsInRole("admin"))
             {
                 return
                     MvcHtmlString.Create(" | " +
                                          helper.ActionLink("Admin page", "Index", "Home", new {Area = "admin"}, new {}));
-            }*/
+            }
             return MvcHtmlString.Empty;
+        }
+
+        /// <summary>
+        ///     Ссылка на основную часть сайта
+        /// </summary>
+        /// <param name="helper">HtmlHelper</param>
+        public static MvcHtmlString GetRootLink(this HtmlHelper helper)
+        {
+            return MvcHtmlString.Create(" | " + helper.ActionLink("Root part", "Index", "Home", new { Area = "" }, new { }));
         }
 
         /// <summary>

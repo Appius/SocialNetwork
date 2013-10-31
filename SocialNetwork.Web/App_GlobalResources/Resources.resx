@@ -312,4 +312,10 @@
   <data name="Message" xml:space="preserve">
     <value>Сообщение</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Логи</value>
+  </data>
 </root>

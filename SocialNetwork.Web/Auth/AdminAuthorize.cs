@@ -11,8 +11,12 @@ namespace SocialNetwork.Web.Auth
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            Roles = "admin";
             base.OnAuthorization(filterContext);
+
+            if (!filterContext.HttpContext.User.IsInRole("admin"))
+            {
+                filterContext.Result = new RedirectResult("~/home/");
+            }
         }
     }
 }

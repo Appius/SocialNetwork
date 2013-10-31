@@ -322,6 +322,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Логи.
+        /// </summary>
+        public static string Logs {
+            get {
+                return ResourceManager.GetString("Logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Social Network.
         /// </summary>
         public static string MainName {
@@ -624,6 +633,15 @@ namespace SocialNetwork.Web.App_GlobalResources {
         public static string ToUser {
             get {
                 return ResourceManager.GetString("ToUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пользователи.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         

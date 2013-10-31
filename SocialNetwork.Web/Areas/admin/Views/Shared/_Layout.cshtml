@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization
-@using SocialNetwork.Web
+@using SocialNetwork.Web.App_GlobalResources
 @using SocialNetwork.Web.Core
 <!DOCTYPE html>
 <html>
@@ -8,36 +8,37 @@
         <meta name="viewport" content="width=device-width" />
         <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/css-admin")
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/modernizr")
+        @RenderSection("styles", false)
+
+        @Scripts.Render("~/Scripts/jquery")
+        @Scripts.Render("~/Scripts/modernizr")
     </head>
     <body>
-        <header>
-            <div class="navbar">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">@Resources.MainName [Admin]</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Something</a></li>
-                            <li><a href="#">Something else</a></li>
-                            <li><a href="#">else</a></li>
-                        </ul>
-                    </div>
+        <div class="navbar navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">@Resources.MainName <small>[admin]</small></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @Html.ActionMenuItem("Пользователи","Index","Users", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                        @Html.ActionMenuItem("Логи","Index","Users", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                    </ul>
+
+                    @Html.Partial("_LogOnPartial")
                 </div>
             </div>
-        </header>
-        @RenderBody()
+        </div>
+
+        <div class="container">
+            @RenderBody()
+        </div>
 
         <footer class="navbar-fixed-bottom row">
             <div class="container">
-                Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion()
+                <div class="copyright pull-right">
+                    Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetRootLink()
+                </div>
             </div>
         </footer>
 

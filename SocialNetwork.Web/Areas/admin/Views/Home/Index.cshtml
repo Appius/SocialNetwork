@@ -1,6 +1,17 @@
-﻿@{
+﻿@using SocialNetwork.Web.App_GlobalResources
+@{
     ViewBag.Title = "title";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>It's admin page.</h1>
+<div class="jumbotron">
+    <h2>Добро пожаловать в зону администирирования @Resources.ShortName</h2>
+    <p>
+        Это зона администрирований социальной сети @Resources.MainName. Здесь вы можете управлять пользователями - блокировать, разблокировать или даже удалить их без возможности восстановления, а также просмотреть логи всех ошибок, которые случились на сторону клиента.
+    </p>
+</div>
+
+<div class="row text-center">
+    @Html.ActionLink(@Resources.Users, "Index", "Users", new {Area="admin"}, new {@class = "btn btn-lg btn-primary", @style = "margin: 0 5px"})
+    @Html.ActionLink(@Resources.Logs, "Index", "Elmah", new {Area="admin"}, new {@class = "btn btn-lg btn-success", @style = "margin: 0 5px"})
+</div>
