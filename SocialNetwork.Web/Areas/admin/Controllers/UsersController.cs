@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SocialNetwork.Web.Auth;
 
 namespace SocialNetwork.Web.Areas.admin.Controllers
 {
-    public class HomeController : BaseController
+    public class UsersController : Controller
     {
         //
-        // GET: /admin/Home/
+        // GET: /admin/Users/
+
         public ActionResult Index()
         {
             return View();

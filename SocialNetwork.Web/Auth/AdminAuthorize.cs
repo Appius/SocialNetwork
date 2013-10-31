@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
 using System.Web.Mvc;
+
+#endregion
 
 namespace SocialNetwork.Web.Auth
 {
@@ -12,10 +12,10 @@ namespace SocialNetwork.Web.Auth
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             base.OnAuthorization(filterContext);
-
-            if (!filterContext.HttpContext.User.IsInRole("admin"))
+            
+            if (!filterContext.HttpContext.Request.IsAuthenticated || !filterContext.HttpContext.User.IsInRole("admin"))
             {
-                filterContext.Result = new RedirectResult("~/home/");
+                filterContext.Result = new RedirectResult("~/home/error");
             }
         }
     }

@@ -15,5 +15,12 @@ namespace SocialNetwork.Web.Controllers
         {
             return View();
         }
+
+        //
+        // GET: /Error/
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }
