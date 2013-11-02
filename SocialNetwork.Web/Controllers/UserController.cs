@@ -77,29 +77,6 @@ namespace SocialNetwork.Web.Controllers
             return View(msgsViewModels);
         }
 
-        /*/// <summary>
-        /// Создание нового сообщения
-        /// </summary>
-        /// <param name="idToUser">Кому предназначается сообщение</param>
-        [HttpGet]
-        [Authorize]
-        public ActionResult NewMessagePartial(int? idToUser)
-        {
-            if (idToUser != null)
-            {
-                var user = UserRepository.Get((int) idToUser);
-
-                var msg = new NewMessageViewModel
-                {
-                    Email = user.Email,
-                    ToUser = string.Format("{0} {1}", user.FirstName, user.LastName)
-                };
-
-                return View(msg);
-            }
-            return View();
-        }*/
-
         /// <summary>
         ///     Создание нового сообщения
         /// </summary>
@@ -142,8 +119,12 @@ namespace SocialNetwork.Web.Controllers
 
                 var message = messageRepository.Get((int) id);
 
+                if (!Equals(message.ToUser, CurrentUser) && !Equals(message.FromUser, CurrentUser))
+                    return RedirectToAction("Messages", "User");
+
                 if (message.ToUser.Id == CurrentUser.Id)
                 {
+
                     message.IsRead = true;
                     messageRepository.Update(message);
                 }
@@ -153,7 +134,7 @@ namespace SocialNetwork.Web.Controllers
 
                 return View(messageViewModel);
             }
-            return View();
+            return RedirectToAction("Messages", "User");
         }
 
         /// <summary>

@@ -13,6 +13,26 @@ namespace SocialNetwork.Core.Models
     /// </summary>
     public class User
     {
+        protected bool Equals(User other)
+        {
+            return Id == other.Id && string.Equals(Email, other.Email);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            return obj.GetType() == GetType() && Equals((User) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (Id*397) ^ (Email != null ? Email.GetHashCode() : 0);
+            }
+        }
+
         /// <summary>
         ///     Конструктор по-умолчанию (создает пустые коллекции)
         /// </summary>

@@ -19,26 +19,17 @@ namespace SocialNetwork.Web.Controllers
 {
     public class OverviewController : BaseController
     {
-        /// <summary>
-        ///     Поиск пользователя
-        /// </summary>
-        /// <param name="users">Коллекция пользователей</param>
-        /// <param name="srchTerm">Слово для поиска</param>
-        /// <param name="currCity">Текущий город</param>
-        /// <param name="skype">Skype</param>
-        /// <param name="email">E-mail</param>
-        /// <param name="sex">Пол</param>
-        private static IEnumerable<User> Search(IEnumerable<User> users, string srchTerm, string currCity, string skype,
-            string email, bool? sex = null)
-        {
-            #region Search term
+        public delegate IEnumerable<User> Search(IEnumerable<User> users, SearchModel model);
 
-            if (!string.IsNullOrWhiteSpace(srchTerm))
+        public IEnumerable<User> SrchTerm(IEnumerable<User> users, SearchModel model)
+        {
+            var term = model.Term;
+            if (string.IsNullOrWhiteSpace(term)) return users;
+
+            var words = term.Split(' ');
+            switch (words.Length)
             {
-                var words = srchTerm.Split(' ');
-                switch (words.Length)
-                {
-                    case 2:
+                case 2:
                     {
                         users = users.Where(item =>
                             (String.Compare(item.FirstName, words[0], StringComparison.OrdinalIgnoreCase) == 0 &&
@@ -47,7 +38,7 @@ namespace SocialNetwork.Web.Controllers
                                 String.Compare(item.FirstName, words[1], StringComparison.OrdinalIgnoreCase) == 0));
                         break;
                     }
-                    default:
+                default:
                     {
                         users = users.Where(item =>
                             String.Compare(item.FirstName, words[0].Trim(), StringComparison.OrdinalIgnoreCase) == 0
@@ -55,60 +46,44 @@ namespace SocialNetwork.Web.Controllers
                             || String.Compare(item.MiddleName, words[0].Trim(), StringComparison.OrdinalIgnoreCase) == 0);
                         break;
                     }
-                }
             }
+            return users;
+        }
 
-            #endregion
+        public IEnumerable<User> SrchCurrCity(IEnumerable<User> users, SearchModel model)
+        {
+            var city = model.CurrCity;
+            if (string.IsNullOrWhiteSpace(city)) return users;
+            users =
+                users.Where(
+                    item => String.Compare(item.CurrentCity, city.Trim(), StringComparison.OrdinalIgnoreCase) == 0);
+            return users;
+        }
 
-            #region Current City
+        public IEnumerable<User> SrchSkype(IEnumerable<User> users, SearchModel model)
+        {
+            var skype = model.Skype;
+            if (string.IsNullOrWhiteSpace(skype)) return users;
 
-            if (!string.IsNullOrWhiteSpace(currCity))
-            {
-                string city = currCity;
-                users =
-                    users.Where(
-                        item => String.Compare(item.CurrentCity, city.Trim(), StringComparison.OrdinalIgnoreCase) == 0);
-            }
+            users = users.Where(item => String.Compare(item.Skype, skype, StringComparison.OrdinalIgnoreCase) == 0);
+            return users;
+        }
 
-            #endregion
+        public IEnumerable<User> SrchEmail(IEnumerable<User> users, SearchModel model)
+        {
+            var email = model.Email;
+            if (string.IsNullOrWhiteSpace(email)) return users;
 
-            #region Skype
+            users = users.Where(item => String.Compare(item.Email, email, StringComparison.OrdinalIgnoreCase) == 0);
+            return users;
+        }
 
-            {
-                if (!string.IsNullOrWhiteSpace(skype))
-                {
-                    skype = skype.Trim();
+        public IEnumerable<User> SrchSex(IEnumerable<User> users, SearchModel model)
+        {
+            var sex = model.Sex;
+            if (sex == null) return users;
 
-                    users =
-                        users.Where(
-                            item => String.Compare(item.Skype, skype, StringComparison.OrdinalIgnoreCase) == 0);
-                }
-            }
-
-            #endregion
-
-            #region E-mail
-
-            if (!string.IsNullOrWhiteSpace(email))
-            {
-                email = email.Trim();
-
-                users =
-                    users.Where(
-                        item => String.Compare(item.Email, email, StringComparison.OrdinalIgnoreCase) == 0);
-            }
-
-            #endregion
-
-            #region Sex
-
-            if (sex != null)
-            {
-                users = users.Where(item => item.Sex == sex);
-            }
-
-            #endregion
-
+            users = users.Where(item => item.Sex == (bool) sex);
             return users;
         }
 
@@ -127,13 +102,32 @@ namespace SocialNetwork.Web.Controllers
             var currentPageIndex = page.HasValue ? page.Value - 1 : 0;
 
             var mapper = DependencyResolver.Current.GetService<IMapper>();
-            IEnumerable<User> users = UserRepository.GetAll();
+            var users = UserRepository.GetAll();
 
-            users = Search(users, srchterm, currentcity, skype, email, sex);
+            var searchModel = new SearchModel
+                {
+                    Email = email,
+                    Sex = sex,
+                    Skype = skype,
+                    CurrCity = currentcity,
+                    Term = srchterm
+                };
 
-            var enumerableUsers = users as User[] ?? users.ToArray();
+            Search search = null;
+            if (!string.IsNullOrWhiteSpace(srchterm))
+                search += SrchTerm;
+            if (!string.IsNullOrWhiteSpace(currentcity))
+                search += SrchCurrCity;
+            if (!string.IsNullOrWhiteSpace(skype))
+                search += SrchSkype;
+            if (!string.IsNullOrWhiteSpace(email))
+                search += SrchEmail;
+            if (sex!=null)
+                search += SrchSex;
 
-            var usersViewModels = enumerableUsers.Select(
+            if (search != null) users = search(users, searchModel);
+
+            var usersViewModels = users.Select(
                 item => (UserViewModel) mapper.Map(item, typeof (User), typeof (UserViewModel)))
                 .ToPagedList(currentPageIndex, DefaultPageSize);
 
