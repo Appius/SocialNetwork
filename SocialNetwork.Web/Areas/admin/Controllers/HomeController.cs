@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
 using System.Web.Mvc;
-using SocialNetwork.Web.Auth;
+
+#endregion
 
 namespace SocialNetwork.Web.Areas.admin.Controllers
 {
@@ -15,6 +15,5 @@ namespace SocialNetwork.Web.Areas.admin.Controllers
         {
             return View();
         }
-
     }
 }

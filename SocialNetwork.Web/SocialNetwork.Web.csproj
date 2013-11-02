@@ -174,6 +174,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\admin\Controllers\DataBaseStatsController.cs" />
     <Compile Include="Areas\admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\admin\Controllers\UsersController.cs" />
     <Compile Include="Attributes\ValidPasswordAttribute.cs" />
@@ -233,6 +234,7 @@
     <Content Include="Areas\admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\admin\Views\Home\Error.cshtml" />
     <Content Include="Areas\admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\admin\Views\DataBaseStats\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Smarter.NET %28web.deploy%29.pubxml">
       <SubType>Designer</SubType>
     </None>

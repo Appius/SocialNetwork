@@ -14,7 +14,7 @@
         @Scripts.Render("~/Scripts/modernizr")
     </head>
     <body>
-        <div class="navbar navbar-static-top">
+        @*<div class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/">@Resources.MainName <small>[admin]</small></a>
@@ -28,9 +28,21 @@
                     @Html.Partial("_LogOnPartial")
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div class="container">
+            <div>
+                <h3 class="text-muted">
+                    @Resources.MainName <small>[admin]</small>
+                </h3>
+                <ul class="nav nav-justified">
+                    @Html.ActionMenuItem("Главная страница","Index","Home", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                    @Html.ActionMenuItem("Пользователи","Index","Users", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                    @Html.ActionMenuItem("Логи","Index","Elmah", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                    @Html.ActionMenuItem("Статистика базы данных","Index","Database", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                </ul>
+            </div>
+
             @RenderBody()
         </div>
 
