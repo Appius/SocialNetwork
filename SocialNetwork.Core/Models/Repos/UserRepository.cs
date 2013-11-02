@@ -93,5 +93,16 @@ namespace SocialNetwork.Core.Models.Repos
         {
             return Db.Users.FirstOrDefault(item => item.Email == email && item.Password == password);
         }
+
+        /// <summary>
+        ///     Заблокировать/разблокировать пользователя
+        /// </summary>
+        /// <param name="id">ID пользователя</param>
+        public void Block(int id)
+        {
+            var user = Db.Users.FirstOrDefault(item => item.Id == id);
+            if (user != null) user.IsBlocked = !user.IsBlocked;
+            Db.SaveChanges();
+        }
     }
 }

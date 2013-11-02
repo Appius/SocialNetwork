@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.ValidationSummary(true, "Неверный логин/пароль. Введите корректные данные и попробуйте еще раз.",new {@class="bs-callout-danger"})
+@Html.ValidationSummary(true, "",new {@class="bs-callout-danger"})
 
 <div class="form-signin">
     @using (Html.BeginForm("LogOn","Account",FormMethod.Post, new {@onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');" }))

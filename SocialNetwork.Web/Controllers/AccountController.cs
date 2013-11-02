@@ -71,10 +71,14 @@ namespace SocialNetwork.Web.Controllers
         {
             if (CurrentUser != null) return RedirectToAction("Index", "Account");
 
+            var user = UserRepository.Get(logOnViewModel.Email);
+            if (user != null && user.IsBlocked)
+                ModelState.AddModelError("", Resources.AccBlocked);
+
             if (ModelState.IsValid)
             {
                 var pass = logOnViewModel.Password.ComputeStringHash();
-                var user = Auth.Login(logOnViewModel.Email, pass,
+                user = Auth.Login(logOnViewModel.Email, pass,
                     logOnViewModel.RememberMe);
                 if (user != null)
                 {

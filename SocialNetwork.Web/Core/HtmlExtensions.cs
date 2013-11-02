@@ -55,8 +55,8 @@ namespace SocialNetwork.Web.Core
         /// <param name="controllerName">Имя контроллера</param>
         /// <param name="newNumber">Число, которое будет отображаться справа от названия</param>
         /// <param name="actionName">Имя метода</param>
-        public static MvcHtmlString MenuItem(this HtmlHelper helper, string linkText, string act, string currentAct,
-            string actionName, string controllerName, int newNumber = 0)
+        /// <param name="area">Зона</param>
+        public static MvcHtmlString MenuItem(this HtmlHelper helper, string linkText, string act, string currentAct, string actionName, string controllerName, int newNumber = 0, string area = "")
         {
             var tag = new TagBuilder("li");
 
@@ -72,7 +72,9 @@ namespace SocialNetwork.Web.Core
                 linkText = linkText + spanTag;
             }
 
-            tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName, new {act}, null).ToString();
+            tag.InnerHtml = string.IsNullOrWhiteSpace(area)
+                                ? helper.ActionLink(linkText, actionName, controllerName, new {act}, null).ToString()
+                                : helper.ActionLink(linkText, actionName, controllerName, new {Area = area, act}, null).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }
@@ -168,7 +170,7 @@ namespace SocialNetwork.Web.Core
             if (!string.IsNullOrWhiteSpace(cssclass))
                 anchorBuilder.MergeAttribute("class", cssclass);
 
-            anchorBuilder.InnerHtml = imgHtml + text;
+            anchorBuilder.InnerHtml = imgHtml + " " + text;
 
             var anchorHtml = anchorBuilder.ToString(TagRenderMode.Normal);
 

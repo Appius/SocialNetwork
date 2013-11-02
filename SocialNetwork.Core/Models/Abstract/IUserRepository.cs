@@ -60,5 +60,11 @@ namespace SocialNetwork.Core.Models.Abstract
         /// <param name="password">Пароль</param>
         /// <returns>Пользователь</returns>
         User Login(string email, string password);
+
+        /// <summary>
+        ///     Заблокировать/разблокировать пользователя
+        /// </summary>
+        /// <param name="id">ID пользователя</param>
+        void Block(int id);
     }
 }

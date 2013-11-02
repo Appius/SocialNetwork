@@ -151,6 +151,11 @@ namespace SocialNetwork.Core.Models
         public string AboutMe { get; set; }
 
         /// <summary>
+        ///     Заблокирован ли пользователь
+        /// </summary>
+        public bool IsBlocked { get; set; }
+
+        /// <summary>
         ///     Список друзей, от которых получены приглашения на дружбу
         /// </summary>
         public ICollection<FriendShip> RequestedFriends { get; set; }

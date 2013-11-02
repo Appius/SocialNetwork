@@ -1,6 +1,64 @@
-﻿@{
+﻿@using MvcPaging
+@using SocialNetwork.Web.Core
+@model IPagedList<SocialNetwork.Web.ViewModels.UserViewModel>
+
+@{
+    var act = Request["act"] ?? string.Empty;
     ViewBag.Title = "Пользователи";
     Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
 }
 
+<div class="users-filter">
+    @*<h5><div class="text-muted">фильтр:</div></h5>*@
+    <ul class="nav nav-pills">
+           @Html.Raw(HttpUtility.HtmlDecode(Html.MenuItem("Все", "", act, "Index", "Users", (int)ViewBag.CountAllUsers).ToHtmlString()))
+        @Html.Raw(HttpUtility.HtmlDecode(@Html.MenuItem("Активные", "active", act, "Index", "Users", (int)ViewBag.CountActiveUsers).ToHtmlString()))           
+@Html.Raw(HttpUtility.HtmlDecode(@Html.MenuItem("Заблокированные", "blocked", act, "Index", "Users", (int)ViewBag.CountBlockedUsers).ToHtmlString()))
+    </ul>
+</div>
 
+@if (Model.Any())
+{
+    <table class="table users">
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td style="text-align: center; width: 110px;">
+                        <img class="img-rounded" src='@Url.Action("GetPhoto", "Picture", new {area="", id = user.Id})' alt="no-photo" />
+                    </td>
+                    <td>
+                        <p>
+                            @{
+                                var name = string.Format("{0} {1}", user.FirstName, user.LastName);
+                                @Html.ActionLink(name, "Index", "User", new {Area="", @id = user.Id}, null)
+                            }
+                        </p>
+                        <p>
+                            Дата рождения: <strong>@user.Birthday.ToShortDateString()</strong>
+                        </p>
+                        <p>
+                            Email: <strong>@user.Email</strong>
+                        </p>
+                    </td>
+                    <td style="width: 20px; vertical-align: middle;"><em>
+                        @if(user.IsBlocked){<text><div class="text-danger">blocked</div></text>}
+else {<text><div class="text-success">active</div></text>}
+</em>
+                    </td>
+                    <td style="width: 100px; vertical-align: middle;">
+                        @(user.IsBlocked ? Html.ActionGlyph("Block", "Users", new {id = user.Id}, "glyphicon-ban-circle", "", "Вы точно хотите разблокировать пользователя?", "btn btn-success btn-sm", "Разблокировать") : Html.ActionGlyph("Block", "Users", new {id = user.Id}, "glyphicon-ban-circle", "", "Вы точно хотите заблокировать пользователя?", "btn btn-danger btn-sm", "Блокировать"))
+                    </td>
+                    <td width="100px;"  style="vertical-align: middle;">
+                        @Html.ActionGlyph("Delete", "Users", new {id = user.Id}, "glyphicon-remove", "", "Вы точно хотите удалить пользователя? Это операция безвозвратная и удаляет все данные пользователя.", "btn btn-danger btn-sm", "Удалить")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount).Options(o => o.DisplayTemplate("BootstrapPagination"))
+}
+else
+{
+    <h5><em>Пользователей не найдено</em></h5>
+}

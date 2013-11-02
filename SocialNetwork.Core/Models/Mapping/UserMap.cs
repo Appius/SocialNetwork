@@ -71,6 +71,9 @@ namespace SocialNetwork.Core.Models.Mapping
             Property(t => t.AboutMe)
                 .HasMaxLength(1000);
 
+            Property(t => t.IsBlocked)
+                .IsRequired();
+
             // Table & Column Mappings
             ToTable("Users");
             Property(t => t.Id).HasColumnName("Id");
@@ -94,6 +97,7 @@ namespace SocialNetwork.Core.Models.Mapping
             Property(t => t.FavoriteGames).HasColumnName("FavoriteGames");
             Property(t => t.FavoriteQuotes).HasColumnName("FavoriteQuotes");
             Property(t => t.AboutMe).HasColumnName("AboutMe");
+            Property(t => t.IsBlocked).HasColumnName("IsBlocked");
         }
     }
 }

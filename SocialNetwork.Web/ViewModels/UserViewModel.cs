@@ -42,5 +42,10 @@ namespace SocialNetwork.Web.ViewModels
         ///     Фото
         /// </summary>
         public string PhotoUrl { get; set; }
+
+        /// <summary>
+        ///     Заблокирован ли пользователь
+        /// </summary>
+        public bool IsBlocked { get; set; }
     }
 }
