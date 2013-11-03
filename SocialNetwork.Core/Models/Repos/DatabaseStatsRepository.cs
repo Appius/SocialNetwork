@@ -16,6 +16,7 @@ namespace SocialNetwork.Core.Models.Repos
         /// </summary>
         public DbUsage GetStats()
         {
+            /*Better here http://kamranicus.com/Blog/Posts/51/protip-show-db-usage-in-your-ef-application */
             var sqlConn = Db.Database.Connection as SqlConnection;
             var cmd = new SqlCommand("sp_spaceused")
                 {

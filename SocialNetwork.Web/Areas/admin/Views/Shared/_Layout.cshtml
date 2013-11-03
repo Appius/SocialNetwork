@@ -22,10 +22,10 @@
                     @Resources.MainName <small>[admin]</small>
                 </h3>
                 <ul class="nav nav-justified">
-                    @Html.ActionMenuItem("Главная страница","Index","Home", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
-                    @Html.ActionMenuItem("Пользователи","Index","Users", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
-                    @Html.ActionMenuItem("Логи","Index","Elmah", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
-                    @Html.ActionMenuItem("Статистика базы данных","Index","DatabaseStats", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
+                    @Html.ActionMenuItem("Главная страница","Index","Home", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                    @Html.ActionMenuItem("Пользователи","Index","Users", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                    @Html.ActionMenuItem("Логи","Index","Elmah", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                    @Html.ActionMenuItem("Статистика базы данных","Index","DatabaseStats", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
                 </ul>
                 @RenderBody()
             </div>

@@ -2,19 +2,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using MvcPaging;
-using SocialNetwork.Core.Helpers;
 using SocialNetwork.Core.Models;
 using SocialNetwork.Core.Models.Abstract;
 using SocialNetwork.Web.App_GlobalResources;
 using SocialNetwork.Web.Mappers;
 using SocialNetwork.Web.ViewModels;
-using WebGrease.Css.Extensions;
 
 #endregion
 
@@ -30,12 +25,12 @@ namespace SocialNetwork.Web.Controllers
         public ActionResult Index(int? id)
         {
             if (id == null) id = CurrentUser.Id;
-            var user = UserRepository.Get((int)id);
+            var user = UserRepository.Get((int) id);
 
             if (user == null) return View();
 
             var mapper = DependencyResolver.Current.GetService<IMapper>();
-            var userFullInfo = (UserFullInfoViewModel)mapper.Map(user, typeof(User), typeof(UserFullInfoViewModel));
+            var userFullInfo = (UserFullInfoViewModel) mapper.Map(user, typeof (User), typeof (UserFullInfoViewModel));
 
             var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
             userFullInfo.IsFriend = friendshipRepository.IsFriends(user, CurrentUser);
@@ -69,7 +64,7 @@ namespace SocialNetwork.Web.Controllers
 
             var msgsViewModels = msgs.Select(
                 item => (MessageViewModel) mapper.Map(item, typeof (Message), typeof (MessageViewModel)))
-                .ToPagedList(currentPageIndex, DefaultPageSize);
+                                     .ToPagedList(currentPageIndex, DefaultPageSize);
 
             ViewBag.CountNewMsgInbox = messageRepository.GetInbox(CurrentUser).Count(item => !item.IsRead);
             ViewBag.CountNewMsgOutbox = messageRepository.GetOutbox(CurrentUser).Count(item => !item.IsRead);
@@ -124,7 +119,6 @@ namespace SocialNetwork.Web.Controllers
 
                 if (message.ToUser.Id == CurrentUser.Id)
                 {
-
                     message.IsRead = true;
                     messageRepository.Update(message);
                 }
@@ -200,7 +194,7 @@ namespace SocialNetwork.Web.Controllers
                     var friendShipRespository = DependencyResolver.Current.GetService<IFriendShipRepository>();
                     friendShipRespository.SentRequest(CurrentUser, toUser, model.Message);
 
-                    return RedirectToAction("Friends", "User", new { @act = "outboxrequests", @success = 1 });
+                    return RedirectToAction("Friends", "User", new {@act = "outboxrequests", @success = 1});
                 }
                 catch (Exception)
                 {
@@ -226,35 +220,40 @@ namespace SocialNetwork.Web.Controllers
             {
                 case "inboxrequests":
                     friendShips =
-                        friendshipRepository.GetInboxRequests(CurrentUser).OrderByDescending(item => item.RequestDate).ToList();
+                        friendshipRepository.GetInboxRequests(CurrentUser)
+                                            .OrderByDescending(item => item.RequestDate)
+                                            .ToList();
                     friendShipRequestViewModel = friendShips.Select(
                         item =>
-                        {
-                            var temp = (FriendShipRequestViewModel)
-                                mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel));
-                            temp.Message = item.Message;
-                            temp.RequestDate = item.RequestDate;
-                            return temp;
-                        }).ToPagedList(currentPageIndex, DefaultPageSize);
+                            {
+                                var temp = (FriendShipRequestViewModel)
+                                           mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel));
+                                temp.Message = item.Message;
+                                temp.RequestDate = item.RequestDate;
+                                return temp;
+                            }).ToPagedList(currentPageIndex, DefaultPageSize);
                     break;
                 case "outboxrequests":
-                    friendShips = friendshipRepository.GetOutboxRequests(CurrentUser).OrderByDescending(item => item.RequestDate).ToList();
+                    friendShips =
+                        friendshipRepository.GetOutboxRequests(CurrentUser)
+                                            .OrderByDescending(item => item.RequestDate)
+                                            .ToList();
                     friendShipRequestViewModel = friendShips.Select(
                         item =>
-                        {
-                            var temp = (FriendShipRequestViewModel)
-                                mapper.Map(item.ToUser, typeof (User), typeof (FriendShipRequestViewModel));
-                            temp.Message = item.Message;
-                            temp.RequestDate = item.RequestDate;
-                            return temp;
-                        }).ToPagedList(currentPageIndex, DefaultPageSize);
+                            {
+                                var temp = (FriendShipRequestViewModel)
+                                           mapper.Map(item.ToUser, typeof (User), typeof (FriendShipRequestViewModel));
+                                temp.Message = item.Message;
+                                temp.RequestDate = item.RequestDate;
+                                return temp;
+                            }).ToPagedList(currentPageIndex, DefaultPageSize);
                     break;
                 default:
                     friendShips = friendshipRepository.GetFriends(CurrentUser).ToList();
                     friendShipRequestViewModel = friendShips.Select(
                         item => (FriendShipRequestViewModel)
-                            mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel)))
-                        .ToPagedList(currentPageIndex, DefaultPageSize);
+                                mapper.Map(item.FromUser, typeof (User), typeof (FriendShipRequestViewModel)))
+                                                            .ToPagedList(currentPageIndex, DefaultPageSize);
                     break;
             }
 
@@ -297,6 +296,27 @@ namespace SocialNetwork.Web.Controllers
 
             if (Request.UrlReferrer != null) return Redirect(Request.UrlReferrer.PathAndQuery);
             return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        ///     Получение количества новых сообщений и входящих запросов на дружбу
+        /// </summary>
+        /// <returns>Json results</returns>
+        public JsonResult GetNewMsgRequests()
+        {
+            var friendshipRepository = DependencyResolver.Current.GetService<IFriendShipRepository>();
+            var messageRepository = DependencyResolver.Current.GetService<IMessageRepository>();
+
+            int countNewRequestsInbox = friendshipRepository.GetInboxRequests(CurrentUser).Count();
+            int countNewMsgInbox = messageRepository.GetInbox(CurrentUser).Count(item => !item.IsRead);
+
+            var data = new Dictionary<string, int>
+                {
+                    {"countNewMessages", countNewMsgInbox},
+                    {"countNewRequests", countNewRequestsInbox}
+                };
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

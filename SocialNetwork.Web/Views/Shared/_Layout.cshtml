@@ -27,8 +27,8 @@
                                 @if (Request.IsAuthenticated)
                                 {
                                     @Html.ActionMenuItem(@Resources.MyPage, "Index", "User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
-                                    @Html.ActionMenuItem(@Resources.Friends, "Friends", "User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
-                                    @Html.ActionMenuItem(@Resources.Messages, "Messages", "User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
+                                    @Html.Raw(HttpUtility.HtmlDecode(Html.ActionMenuItem(@Resources.Friends, "Friends", "User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string, 0, "countNewRequests").ToHtmlString()))
+                                    @Html.Raw(HttpUtility.HtmlDecode(Html.ActionMenuItem(@Resources.Messages, "Messages", "User", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string, 0, "countNewMessages").ToHtmlString()))
                                 }
                                 @Html.ActionMenuItem(@Resources.Overview,"Index","Overview", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string)
                             </ul>
@@ -49,6 +49,8 @@
             </div>
         </footer>
 
+
+        @Scripts.Render("~/Scripts/site")
         @Scripts.Render("~/Scripts/bootstrap")
         @RenderSection("scripts", false)
     </body>

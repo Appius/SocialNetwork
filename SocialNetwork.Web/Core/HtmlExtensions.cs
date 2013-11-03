@@ -26,11 +26,14 @@ namespace SocialNetwork.Web.Core
         /// <param name="controllerName">Контроллер, куда попадем</param>
         /// <param name="currentController">Текущий контроллер</param>
         /// <param name="currentAction">Текущее действие</param>
-        /// <param name="area">Зона</param>
+        /// <param name="newNumber">Число, которое будет отображаться справа от названия</param>
+        /// <param name="id">Атрибут id</param>
         public static MvcHtmlString ActionMenuItem(this HtmlHelper helper, string linkText,
-            string actionName, string controllerName, string currentController, string currentAction, string area = "")
+            string actionName, string controllerName, string currentController, string currentAction, int newNumber = 0,string id = "")
         {
             var tag = new TagBuilder("li");
+
+
 
             if (String.Compare(controllerName, currentController, StringComparison.OrdinalIgnoreCase) == 0
                 && String.Compare(actionName, currentAction, StringComparison.OrdinalIgnoreCase) == 0)
@@ -38,9 +41,19 @@ namespace SocialNetwork.Web.Core
                 tag.AddCssClass("active");
             }
 
-            tag.InnerHtml = string.IsNullOrWhiteSpace(area)
-                ? helper.ActionLink(linkText, actionName, controllerName).ToString()
-                : helper.ActionLink(linkText, actionName, controllerName, new {Area = area}, new {}).ToString();
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var spanTag = new TagBuilder("span");
+                spanTag.MergeAttribute("id", id);
+                spanTag.AddCssClass("badge pull-right");
+                if (newNumber != 0)
+                    spanTag.InnerHtml = newNumber.ToString(CultureInfo.InvariantCulture);
+                else
+                    spanTag.MergeAttribute("style", "display: none;");
+                linkText = linkText + " " + spanTag;
+            }
+
+            tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }
@@ -55,8 +68,7 @@ namespace SocialNetwork.Web.Core
         /// <param name="controllerName">Имя контроллера</param>
         /// <param name="newNumber">Число, которое будет отображаться справа от названия</param>
         /// <param name="actionName">Имя метода</param>
-        /// <param name="area">Зона</param>
-        public static MvcHtmlString MenuItem(this HtmlHelper helper, string linkText, string act, string currentAct, string actionName, string controllerName, int newNumber = 0, string area = "")
+        public static MvcHtmlString MenuItem(this HtmlHelper helper, string linkText, string act, string currentAct, string actionName, string controllerName, int newNumber = 0)
         {
             var tag = new TagBuilder("li");
 
@@ -72,9 +84,7 @@ namespace SocialNetwork.Web.Core
                 linkText = linkText + spanTag;
             }
 
-            tag.InnerHtml = string.IsNullOrWhiteSpace(area)
-                                ? helper.ActionLink(linkText, actionName, controllerName, new {act}, null).ToString()
-                                : helper.ActionLink(linkText, actionName, controllerName, new {Area = area, act}, null).ToString();
+            tag.InnerHtml = helper.ActionLink(linkText, actionName, controllerName, new {act}, null).ToString();
 
             return MvcHtmlString.Create(tag.ToString());
         }
