@@ -24,9 +24,6 @@ namespace SocialNetwork.Web
             bundles.Add(new ScriptBundle("~/Scripts/site").Include(
                 "~/Scripts/site*"));
 
-            /*bundles.Add(new ScriptBundle("~/Scripts/markdown").Include(
-                "~/Scripts/MarkdownDeepLib*"));*/
-
             bundles.Add(new ScriptBundle("~/Scripts/bootstrap-datepicker").Include(
                 "~/Scripts/bootstrap-datepicker*"));
 
@@ -36,17 +33,15 @@ namespace SocialNetwork.Web
 
 //            Style bundles
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap/bootstrap.css",
-                "~/Content/bootstrap/bootstrap-responsive.css",
                 "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css-admin").Include(
+            bundles.Add(new StyleBundle("~/Content/bootstrap/bootstrap").Include(
                 "~/Content/bootstrap/bootstrap.css",
-                "~/Content/bootstrap/bootstrap-responsive.css",
+                "~/Content/bootstrap/bootstrap-responsive.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css-admin").Include(
                 "~/Areas/admin/Content/admin.css"));
 
-
-            /*bundles.Add(new StyleBundle("~/Content/MarkdownDeepStyle").Include("~/Scripts/mdd_styles.css"));*/
             bundles.Add(new StyleBundle("~/Content/datepicker").Include("~/Content/datepicker.css"));
         }
     }
