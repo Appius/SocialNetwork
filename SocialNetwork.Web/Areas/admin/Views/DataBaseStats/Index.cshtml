@@ -1,6 +1,68 @@
-﻿@{
+﻿@model SocialNetwork.Core.Models.DbUsage
+@{
     ViewBag.Title = "Статистика базы данных";
     Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Статсистика базы данных</h2>
+<h2>Статистика базы данных</h2>
+
+<table class="table table-bordered table-responsive">
+    <tbody>
+        <tr>
+            <td>
+                Имя текущей базы данных
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.database_name</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Размер текущей базы данных в мегабайтах. <br />Значение database_size включает как файлы данных, так и файлы журналов.
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.database_size</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Общий объем пространства, зарезервированный для объектов в базе данных, но пока не используемый
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.unallocated_space</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Общий объем пространства, выделенный объектам в базе данных
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.reserved</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Общий объем пространства, используемый данными
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.data</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Общий объем пространства, используемый индексами
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.index_size</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Место в базе данных, не зарезервированное для объектов базы данных
+            </td>
+            <td style="text-align: center;">
+                <strong>@Model.unused</strong>
+            </td>
+        </tr>
+    </tbody>
+</table>

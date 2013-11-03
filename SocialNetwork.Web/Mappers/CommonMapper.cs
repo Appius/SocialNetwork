@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-// TODO: Move to Core?
 using SocialNetwork.Core.Models;
 using SocialNetwork.Web.ViewModels;
 

@@ -74,11 +74,13 @@
       <DependentUpon>201310311947410_db_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Abstract\IDatabaseStatsRepository.cs" />
     <Compile Include="Models\Abstract\IFriendShipRepository.cs" />
     <Compile Include="Models\Abstract\IMessageRepository.cs" />
     <Compile Include="Models\Abstract\IRoleRepository.cs" />
     <Compile Include="Models\Abstract\IUserRepository.cs" />
     <Compile Include="Models\Abstract\IUserRoleRepository.cs" />
+    <Compile Include="Models\DbUsage.cs" />
     <Compile Include="Models\FriendShip.cs" />
     <Compile Include="Models\Mapping\FriendShipMap.cs" />
     <Compile Include="Models\Mapping\MessageMap.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\Mapping\UserRoleMap.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Repos\DatabaseStatsRepository.cs" />
     <Compile Include="Models\Repos\FriendShipRepository.cs" />
     <Compile Include="Models\Repos\MessageRepository.cs" />
     <Compile Include="Models\Repos\RepositoryBase.cs" />

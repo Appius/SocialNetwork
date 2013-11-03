@@ -25,6 +25,7 @@ namespace SocialNetwork.Web
             builder.RegisterType<MessageRepository>().As<IMessageRepository>().InstancePerHttpRequest();
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerHttpRequest();
             builder.RegisterType<UserRoleRepository>().As<IUserRoleRepository>().InstancePerHttpRequest();
+            builder.RegisterType<DatabaseStatsRepository>().As<IDatabaseStatsRepository>().InstancePerHttpRequest();
             builder.RegisterType<CustomAuthentication>().As<IAuthentication>().InstancePerHttpRequest();
             builder.RegisterType<CommonMapper>().As<IMapper>().InstancePerHttpRequest();
             IContainer container = builder.Build();
