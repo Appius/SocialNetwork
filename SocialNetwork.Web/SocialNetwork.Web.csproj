@@ -191,6 +191,7 @@
     <Compile Include="Controllers\OverviewController.cs" />
     <Compile Include="Controllers\PictureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Core\AssemblyInfo.cs" />
     <Compile Include="Core\HtmlExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
