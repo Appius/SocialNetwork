@@ -111,8 +111,8 @@ namespace SocialNetwork.Core.Models.Repos
         public bool IsFriends(User user1, User user2)
         {
             return (Db.FriendShips.FirstOrDefault(item =>
-                (item.User1Id == user1.Id && item.User2Id == user2.Id) ||
-                (item.User2Id == user1.Id && item.User1Id == user2.Id)) != null);
+                (item.User1Id == user1.Id && item.User2Id == user2.Id && item.IsConfirmed) ||
+                (item.User2Id == user1.Id && item.User1Id == user2.Id && item.IsConfirmed)) != null);
         }
     }
 }

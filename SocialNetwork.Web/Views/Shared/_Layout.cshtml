@@ -49,9 +49,17 @@
             </div>
         </footer>
 
-
         @Scripts.Render("~/Scripts/site")
         @Scripts.Render("~/Scripts/bootstrap")
+        @if (Request.IsAuthenticated)
+        {
+            <script language="javascript" type="text/javascript">
+                $(document).ready(function() {
+                    LoadCountNewNumbers();
+                    setTimeout(LoadCountNewNumbers, 30000);
+                });
+            </script>
+        }
         @RenderSection("scripts", false)
     </body>
 </html>

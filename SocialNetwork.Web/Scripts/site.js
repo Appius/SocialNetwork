@@ -4,7 +4,6 @@
             switch (key) {
             case 'countNewMessages':
                 if (val != 0) {
-                    alert(val);
                     $('#countNewMessages').html(val);
                     $('#countNewMessages').show();
                 } else {

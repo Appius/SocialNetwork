@@ -15,13 +15,13 @@ using SocialNetwork.Web.ViewModels;
 
 namespace SocialNetwork.Web.Controllers
 {
+    [Authorize]
     public class UserController : BaseController
     {
         /// <summary>
         ///     Главная страница просмотра информации о пользователе
         /// </summary>
         /// <param name="id">Уникальный идентификатор пользователя (0 - твоя страница)</param>
-        [Authorize]
         public ActionResult Index(int? id)
         {
             if (id == null) id = CurrentUser.Id;
@@ -43,7 +43,6 @@ namespace SocialNetwork.Web.Controllers
         /// </summary>
         /// <param name="page">Номер страницы</param>
         /// <param name="act">Категория</param>
-        [Authorize]
         public ActionResult Messages(int? page, string act = "")
         {
             var mapper = DependencyResolver.Current.GetService<IMapper>();
@@ -76,7 +75,6 @@ namespace SocialNetwork.Web.Controllers
         ///     Создание нового сообщения
         /// </summary>
         [HttpPost]
-        [Authorize]
         public ActionResult NewMessagePartial(NewMessageViewModel model)
         {
             if (ModelState.IsValid)
@@ -103,7 +101,6 @@ namespace SocialNetwork.Web.Controllers
         /// </summary>
         /// <param name="id">Уникальный идентификатор сообщения</param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public ActionResult ViewMessage(int? id)
         {
@@ -138,7 +135,6 @@ namespace SocialNetwork.Web.Controllers
         /// <param name="title">Заголовок</param>
         /// <param name="msgText">Тело письма</param>
         [HttpPost]
-        [Authorize]
         public ActionResult QuickAnswer(int? idToUser, string title, string msgText)
         {
             if (ModelState.IsValid && idToUser != null)
@@ -164,7 +160,6 @@ namespace SocialNetwork.Web.Controllers
         ///     Удаление сообщения
         /// </summary>
         /// <param name="id">Идентификатор сообщения</param>
-        [Authorize]
         public ActionResult RemoveMessage(int? id)
         {
             if (id != null)
@@ -182,7 +177,6 @@ namespace SocialNetwork.Web.Controllers
         /// </summary>
         /// <param name="model">Кому предназначается</param>
         [HttpPost]
-        [Authorize]
         public ActionResult AddFriendPartial(AddFriendViewModel model)
         {
             if (ModelState.IsValid)
