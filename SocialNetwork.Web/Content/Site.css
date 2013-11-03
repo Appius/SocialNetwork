@@ -1,13 +1,28 @@
-﻿.navbar-static-top {
-  margin-bottom: 19px;
+﻿html, body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+}
+
+#main {
+    overflow:auto;
+    padding-bottom:20px;
+}
+
+footer {
+    position: relative;
+    margin-top: -25px;
+    height: 25px;
+    clear:both;
+    border: none;
+    border-top: 1px #ccc solid;
+    padding-top: 1px;
 }
 
 .navbar-collapse {
     padding-right: 0;
-}
-
-.copyright {
-    margin: 5px 0;
 }
 
 .checkbox {

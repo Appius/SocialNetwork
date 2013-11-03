@@ -178,22 +178,40 @@ namespace SocialNetwork.Web.Core
         }
 
         /// <summary>
+        /// Получения любого атрибута из свойств сборки
+        /// </summary>
+        /// <typeparam name="T">Атрибут</typeparam>
+        /// <param name="value">Значение</param>
+        private static string GetAssemblyAttribute<T>(Func<T, string> value)
+            where T : Attribute
+        {
+            if (typeof(T).Name == "AssemblyVersionAttribute")
+            {
+                var asm = Assembly.GetExecutingAssembly();
+                var version = asm.GetName().Version;
+                var product = asm.GetCustomAttributes(typeof (AssemblyProductAttribute), true).FirstOrDefault() as
+                    AssemblyProductAttribute;
+
+                if (version != null && product != null)
+                    return string.Format("<span>v{0}.{1}.{2}.{3}</span>", version.Major, version.Minor, version.Build,
+                                         version.Revision);
+                return string.Empty;
+            }
+            T attribute = (T) Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof (T));
+            return value.Invoke(attribute);
+        }
+
+        /// <summary>
         ///     Получение номера версии приложения
         /// </summary>
         /// <param name="helper">HtmlHelper</param>
-        public static HtmlString ApplicationVersion(this HtmlHelper helper)
+        public static HtmlString GetCopyrightText(this HtmlHelper helper)
         {
-            var asm = Assembly.GetExecutingAssembly();
-            var version = asm.GetName().Version;
-            var product =
-                asm.GetCustomAttributes(typeof (AssemblyProductAttribute), true).FirstOrDefault() as
-                    AssemblyProductAttribute;
+            string copyright = GetAssemblyAttribute<AssemblyCopyrightAttribute>(a => a.Copyright);
+            string version = GetAssemblyAttribute<AssemblyVersionAttribute>(a => a.Version);
+            string company = GetAssemblyAttribute<AssemblyCompanyAttribute>(a => a.Company);
 
-            if (version != null && product != null)
-                return
-                    new HtmlString(string.Format("<span>v{0}.{1}.{2}.{3}</span>", version.Major,
-                        version.Minor, version.Build, version.Revision));
-            return new HtmlString("");
+            return new HtmlString(string.Format("{0} {1} | Version: {2}", copyright, company, version));
         }
     }
 }

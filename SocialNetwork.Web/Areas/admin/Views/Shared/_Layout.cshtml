@@ -6,6 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <title>@ViewBag.Title</title>
         @Styles.Render("~/Content/bootstrap/bootstrap")
         @Styles.Render("~/Content/css-admin")
@@ -15,8 +16,8 @@
         @Scripts.Render("~/Scripts/modernizr")
     </head>
     <body>
-        <div class="container">
-            <div>
+        <div id="wrap">
+            <div id="main" class="container">
                 <h3 class="text-muted">
                     @Resources.MainName <small>[admin]</small>
                 </h3>
@@ -26,16 +27,13 @@
                     @Html.ActionMenuItem("Логи","Index","Elmah", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
                     @Html.ActionMenuItem("Статистика базы данных","Index","DatabaseStats", ViewContext.RouteData.Values["controller"] as string, ViewContext.RouteData.Values["action"] as string,"admin")
                 </ul>
+                @RenderBody()
             </div>
-
-            @RenderBody()
         </div>
 
-        <footer class="navbar-fixed-bottom row">
-            <div class="container">
-                <div class="copyright pull-right">
-                    Copyright &copy; AppiusCompany 2013 | Version: @Html.ApplicationVersion() @Html.GetRootLink()
-                </div>
+        <footer>
+            <div class="container text-center">
+                @Html.GetCopyrightText() @Html.GetRootLink()
             </div>
         </footer>
 

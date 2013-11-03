@@ -216,6 +216,7 @@
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="Pics\no-photo.bmp" />
     <Content Include="Areas\admin\Content\admin.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
