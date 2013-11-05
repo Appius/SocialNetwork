@@ -5,8 +5,7 @@
     @using (Html.BeginForm("SaveGeneralInfo", "Account", FormMethod.Post, new {enctype = "multipart/form-data", @class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
         <fieldset>
-            @Html.HiddenFor(m=>m.Id);
-            @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
+            @Html.HiddenFor(m=>m.Id)
 
             <div class="form-group">
                 @Html.LabelFor(m => m.FirstName, new {@class = "control-label"})

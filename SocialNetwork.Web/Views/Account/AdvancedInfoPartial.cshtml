@@ -5,8 +5,6 @@
     @using (Html.BeginForm("SaveAdvancedInfo", "Account", FormMethod.Post, new {@class = "form-horizontal", @onsubmit = "$(this).find('input[type=\"submit\"]').attr('disabled', 'disabled');"}))
     {
         <fieldset>
-            @Html.ValidationSummary("", new {@class = "bs-callout-danger"})
-
             <div class="form-group">
                 @Html.LabelFor(m => m.Activies, new {@class = "control-label"})
                 

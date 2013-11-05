@@ -211,6 +211,10 @@ footer {
 
 /* Styles for edit user information
 -----------------------------------------------------------*/
+.form-edit {
+    margin-bottom: 10px;
+}
+
 .form-edit .form-horizontal .form-group{
     margin-left: 0;
     margin-right: 0;
