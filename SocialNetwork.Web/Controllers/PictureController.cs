@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Web.Mvc;
 using SocialNetwork.Core.Helpers;
+using SocialNetwork.Web.App_GlobalResources;
 
 #endregion
 
@@ -23,7 +24,7 @@ namespace SocialNetwork.Web.Controllers
             var user = UserRepository.Get(id);
             if (user == null || user.Avatar == null)
             {
-                Image image = Image.FromFile(Server.MapPath("~/Pics/no-photo.bmp"));
+                Image image = Image.FromFile(Server.MapPath("~/Resources/NoPhoto.bmp"));
                 return File(image.ToByteArray(), "image/jpeg");
             }
             return File(user.Avatar, "image/jpeg");
