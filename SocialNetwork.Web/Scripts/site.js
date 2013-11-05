@@ -7,6 +7,7 @@
                     $('#countNewMessages').html(val);
                     $('#countNewMessages').show();
                 } else {
+                    $('#countNewMessages').empty();
                     $('#countNewMessages').hide();
                 }
                 break;
@@ -16,6 +17,7 @@
                     $('#countNewRequests').show();
                     ;
                 } else {
+                    $('#countNewRequests').empty();
                     $('#countNewRequests').hide();
                 }
                 break;

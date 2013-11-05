@@ -16,11 +16,6 @@ namespace SocialNetwork.Web.Auth
     /// </summary>
     public class UserProvider : IPrincipal
     {
-        /// <summary>
-        ///     Репозиторий ролей
-        /// </summary>
-        private readonly IRoleRepository _roleRepository;
-
         #region IPrincipal Members
 
         /// <summary>
@@ -55,10 +50,8 @@ namespace SocialNetwork.Web.Auth
         /// </summary>
         /// <param name="name">Имя</param>
         /// <param name="repository">Репозитория пользователей</param>
-        /// <param name="roleRepository">Репозиторий ролей</param>
-        public UserProvider(string name, IUserRepository repository, IRoleRepository roleRepository)
+        public UserProvider(string name, IUserRepository repository)
         {
-            _roleRepository = roleRepository;
             UserIdentity = new UserIndentity();
             UserIdentity.Init(name, repository);
         }
