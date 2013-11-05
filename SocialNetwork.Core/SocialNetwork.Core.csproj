@@ -69,9 +69,9 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\StreamHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Migrations\201310311947410_db_migration.cs" />
-    <Compile Include="Migrations\201310311947410_db_migration.Designer.cs">
-      <DependentUpon>201310311947410_db_migration.cs</DependentUpon>
+    <Compile Include="Migrations\201311040834410_db_migration.cs" />
+    <Compile Include="Migrations\201311040834410_db_migration.Designer.cs">
+      <DependentUpon>201311040834410_db_migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Abstract\IDatabaseStatsRepository.cs" />
@@ -134,8 +134,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310311947410_db_migration.resx">
-      <DependentUpon>201310311947410_db_migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201311040834410_db_migration.resx">
+      <DependentUpon>201311040834410_db_migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -49,6 +49,7 @@ namespace SocialNetwork.Core.Migrations
                         FavoriteGames = c.String(maxLength: 1000),
                         FavoriteQuotes = c.String(maxLength: 1000),
                         AboutMe = c.String(maxLength: 1000),
+                        IsBlocked = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -93,6 +94,7 @@ namespace SocialNetwork.Core.Migrations
                         Description = c.String(maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()

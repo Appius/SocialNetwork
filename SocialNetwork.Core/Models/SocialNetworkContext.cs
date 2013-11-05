@@ -16,7 +16,7 @@ namespace SocialNetwork.Core.Models
         }
 
         public SocialNetworkContext()
-            : base("Name=SmarterASP.NETContext")
+            : base("Name=SocialNetworkContext")
         {
         }
 

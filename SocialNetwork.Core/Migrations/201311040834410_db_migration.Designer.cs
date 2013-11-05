@@ -11,7 +11,7 @@ namespace SocialNetwork.Core.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201310311947410_db_migration"; }
+            get { return "201311040834410_db_migration"; }
         }
         
         string IMigrationMetadata.Source
