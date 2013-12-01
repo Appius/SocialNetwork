@@ -82,17 +82,16 @@ namespace SocialNetwork.Web.Auth
                         var ticket = FormsAuthentication.Decrypt(authCookie.Value);
                         if (ticket != null)
                         {
-                            var roleRepository = DependencyResolver.Current.GetService<IRoleRepository>();
-                            _currentUser = new UserProvider(ticket.Name, UserRepository, roleRepository);
+                            _currentUser = new UserProvider(ticket.Name, UserRepository);
                         }
                     }
                     else
-                        _currentUser = new UserProvider(null, null, null);
+                        _currentUser = new UserProvider(null, null);
                 }
                 catch (Exception)
                 {
 //                        logger.Error("Failed authentication: " + ex.Message);
-                    _currentUser = new UserProvider(null, null, null);
+                    _currentUser = new UserProvider(null, null);
                 }
                 return _currentUser;
             }
