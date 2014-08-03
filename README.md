@@ -5,5 +5,6 @@ SocialNetwork
 
 Default login/pass
 ------------------
+[Demo site](http://sn1.azurewebsites.net/)<br />
 **Login**: admin<br/ >
 **Pass**: admin
