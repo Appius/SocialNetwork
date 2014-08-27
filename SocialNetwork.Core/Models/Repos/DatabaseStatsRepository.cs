@@ -27,8 +27,18 @@ namespace SocialNetwork.Core.Models.Repos
             var dataset = new DataSet();
 
             if (sqlConn != null) sqlConn.Open();
-            adp.Fill(dataset);
-            if (sqlConn != null) sqlConn.Close();
+            try
+            {
+                adp.Fill(dataset);
+            }
+            catch (SqlException ex)
+            {
+                return null;
+            }
+            finally
+            {
+                if (sqlConn != null) sqlConn.Close();
+            }
 
             var dbUsage = new DbUsage
                 {

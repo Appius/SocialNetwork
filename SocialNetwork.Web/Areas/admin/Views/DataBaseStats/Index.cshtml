@@ -1,9 +1,17 @@
 ﻿@model SocialNetwork.Core.Models.DbUsage
 @{
     ViewBag.Title = "Статистика базы данных";
-    Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/areas/admin/Views/Shared/_Layout.cshtml";    
 }
 
+@if(Model==null){
+<h2>Нет данных</h2>
+<p>
+    Текущая база данных не предусматривает предоставление статистики использования, пожалуйста, обратитесь к системному администратору для предоставления данных.
+</p>
+}
+else
+{
 <h2>Статистика базы данных</h2>
 
 <table class="table table-bordered table-responsive">
@@ -66,3 +74,4 @@
         </tr>
     </tbody>
 </table>
+}

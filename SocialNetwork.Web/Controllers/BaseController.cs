@@ -10,7 +10,7 @@ using SocialNetwork.Web.Auth;
 
 namespace SocialNetwork.Web.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         /// <summary>
         ///     Дефолтное количество пользователей на странице
